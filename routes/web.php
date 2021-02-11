@@ -13,58 +13,63 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('/');
+
+
 
 Auth::routes();
 Route::middleware(['auth'])->group(function() {
-Route::resource('/clients','ClientController');
-Route::get('clients/destroy/{id}', 'ClientController@destroy');
+  Route::resource('/clients','ClientController');
+  Route::get('clients/destroy/{id}', 'ClientController@destroy');
 
-Route::resource('/banks','BankController');
-Route::get('banks/destroy/{id}', 'BankController@destroy');
+  Route::resource('/banks','BankController');
+  Route::get('banks/destroy/{id}', 'BankController@destroy');
 
-Route::resource('/vendors','VendorController');
-Route::get('vendors/destroy/{id}', 'VendorController@destroy');
+  Route::resource('/vendors','VendorController');
+  Route::get('vendors/destroy/{id}', 'VendorController@destroy');
 
-Route::resource('/companies','CompanyController');
-Route::get('companies/destroy/{id}', 'CompanyController@destroy');
+  Route::resource('/companies','CompanyController');
+  Route::get('companies/destroy/{id}', 'CompanyController@destroy');
 
-Route::resource('/invoices','InvoiceController');
-Route::get('/invoices/{invoice}/print','InvoiceController@print')->name('invoices.print');
-Route::get('invoices/destroy/{id}', 'InvoiceController@destroy');
-Route::get('invoices/{invoice}/add_items','InvoiceController@add_item')->name('invoices.add_items');
-Route::post('invoices/{invoice}/add_items','InvoiceController@store_item')->name('invoices.add_items');
-Route::post('invoices/{invoice}/{item}/update_item','InvoiceController@update_item')->name('invoices.update_item');
-Route::get('invoices/{invoice}/{item}/delete_item','InvoiceController@delete_item')->name('invoices.delete_item');
-Route::get('invoices/{invoice}/{item}/edit_item','InvoiceController@edit_item')->name('invoices.edit_item');
+  Route::resource('/invoices','InvoiceController');
+  Route::get('/invoices/{invoice}/print','InvoiceController@print')->name('invoices.print');
+  Route::get('invoices/destroy/{id}', 'InvoiceController@destroy');
+  Route::get('invoices/{invoice}/add_items','InvoiceController@add_item')->name('invoices.add_items');
+  Route::post('invoices/{invoice}/add_items','InvoiceController@store_item')->name('invoices.add_items');
+  Route::post('invoices/{invoice}/{item}/update_item','InvoiceController@update_item')->name('invoices.update_item');
+  Route::get('invoices/{invoice}/{item}/delete_item','InvoiceController@delete_item')->name('invoices.delete_item');
+  Route::get('invoices/{invoice}/{item}/edit_item','InvoiceController@edit_item')->name('invoices.edit_item');
 
-Route::resource('/vinvoices','VInvoiceController');
-Route::get('/vinvoices/{vinvoice}/print','VInvoiceController@print')->name('vinvoices.print');
-Route::get('vinvoices/destroy/{id}', 'VInvoiceController@destroy');
-Route::get('vinvoices/{vinvoice}/add_items','VInvoiceController@add_item')->name('vinvoices.add_items');
-Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.add_items');
-Route::post('vinvoices/{vinvoice}/{item}/update_item','VInvoiceController@update_item')->name('vinvoices.update_item');
-Route::get('vinvoices/{vinvoice}/{item}/delete_item','VInvoiceController@delete_item')->name('vinvoices.delete_item');
-Route::get('vinvoices/{vinvoice}/{item}/edit_item','VInvoiceController@edit_item')->name('vinvoices.edit_item');
+  Route::resource('/vinvoices','VInvoiceController');
+  Route::get('/vinvoices/{vinvoice}/print','VInvoiceController@print')->name('vinvoices.print');
+  Route::get('vinvoices/destroy/{id}', 'VInvoiceController@destroy');
+  Route::get('vinvoices/{vinvoice}/add_items','VInvoiceController@add_item')->name('vinvoices.add_items');
+  Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.add_items');
+  Route::post('vinvoices/{vinvoice}/{item}/update_item','VInvoiceController@update_item')->name('vinvoices.update_item');
+  Route::get('vinvoices/{vinvoice}/{item}/delete_item','VInvoiceController@delete_item')->name('vinvoices.delete_item');
+  Route::get('vinvoices/{vinvoice}/{item}/edit_item','VInvoiceController@edit_item')->name('vinvoices.edit_item');
 
-Route::resource('/items','ItemController');
-Route::get('items/destroy/{id}', 'ItemController@destroy');
+  Route::resource('/items','ItemController');
+  Route::get('items/destroy/{id}', 'ItemController@destroy');
 
-Route::resource('/vitems','VItemController');
-Route::get('vitems/destroy/{id}', 'VItemController@destroy');
+  Route::resource('/vitems','VItemController');
+  Route::get('vitems/destroy/{id}', 'VItemController@destroy');
 
-Route::resource('/pitems','PaymentItemController');
-Route::get('pitems/destroy/{id}', 'PaymentItemController@destroy');
+  Route::resource('/pitems','PaymentItemController');
+  Route::get('pitems/destroy/{id}', 'PaymentItemController@destroy');
 
-Route::resource('/ritems','ReceiveItemController');
-Route::get('ritems/destroy/{id}', 'ReceiveItemController@destroy');
+  Route::resource('/ritems','ReceiveItemController');
+  Route::get('ritems/destroy/{id}', 'ReceiveItemController@destroy');
 
-Route::resource('/payment_p','PaymentPItemController');
-Route::get('payment_p/destroy/{id}', 'PaymentPItemController@destroy');
+  Route::resource('/payment_p','PaymentPItemController');
+  Route::get('payment_p/destroy/{id}', 'PaymentPItemController@destroy');
 
-Route::resource('/payment_r','PaymentRItemController');
-Route::get('payment_r/destroy/{id}', 'PaymentRItemController@destroy');
+  Route::resource('/payment_r','PaymentRItemController');
+  Route::get('payment_r/destroy/{id}', 'PaymentRItemController@destroy');
 
-Route::resource('/models','ModelController');
+  Route::resource('/models','ModelController');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
