@@ -52,7 +52,8 @@ class ItemController extends Controller
     {
         $rules = array(
             'name'    =>  'required',
-            'description'     =>  'required'
+            'description'     =>  'required',
+            'rate'     =>  'required',
         );
 
         $error = Validator::make($request->all(), $rules);

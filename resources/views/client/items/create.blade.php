@@ -21,6 +21,10 @@
                 <label for="item">Item Description:</label>
                 <input type="text" name="description" class="form-control" id="email">
               </div>
+              <div class="form-group">
+                <label for="item">Item Rate:</label>
+                <input type="text" name="rate" class="form-control" id="email">
+              </div>
             </div>
 
             <div class="card-footer">
