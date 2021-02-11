@@ -75,7 +75,7 @@ class CompanyController extends Controller
 
         Company::create($form_data);
 
-        return redirect(route('Companys.index'));
+        return redirect(route('companies.index'));
 
     }
 
@@ -136,7 +136,7 @@ class CompanyController extends Controller
 
         $Company->update($form_data);
 
-        return redirect(route('Companys.edit',$Company));
+        return redirect(route('companies.edit',$Company));
 
     }
 
