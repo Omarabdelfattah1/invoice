@@ -23,8 +23,8 @@
                 <input type="text" name="description" class="form-control" id="description" value="{{$item->description}}">
               </div>
               <div class="form-group">
-                <label for="description">Item Description:</label>
-                <input type="text" name="rate" class="form-control" id="description" value="{{$item->description}}">
+                <label for="description">Item Rate:</label>
+                <input type="text" name="rate" class="form-control" id="description" value="{{$item->rate}}">
               </div>
              </div> 
             <div class="card-footer">
