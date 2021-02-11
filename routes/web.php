@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Auth::routes();
+Route::middleware(['auth'])->group(function() {
 Route::resource('/clients','ClientController');
 Route::get('clients/destroy/{id}', 'ClientController@destroy');
 
@@ -63,6 +66,5 @@ Route::get('payment_r/destroy/{id}', 'PaymentRItemController@destroy');
 
 Route::resource('/models','ModelController');
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
