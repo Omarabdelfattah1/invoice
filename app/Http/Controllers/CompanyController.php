@@ -29,7 +29,7 @@ class CompanyController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('Company.index');
+        return view('company.index');
     }
 
     /**
@@ -39,7 +39,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('Company.create');
+        return view('company.create');
     }
 
     /**
@@ -99,7 +99,7 @@ class CompanyController extends Controller
     public function edit(Company $Company)
     {
 
-        return view('Company.edit')->with('Company',$Company);
+        return view('company.edit')->with('Company',$Company);
     }
 
     /**

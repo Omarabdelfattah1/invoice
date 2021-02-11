@@ -29,7 +29,7 @@ class VendorController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('Vendor.index');
+        return view('vendor.index');
     }
 
     /**
@@ -39,7 +39,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('Vendor.create');
+        return view('vendor.create');
     }
 
     /**
@@ -99,7 +99,7 @@ class VendorController extends Controller
     public function edit(Vendor $vendor)
     {
 
-        return view('Vendor.edit')->with('Vendor',$vendor);
+        return view('vendor.edit')->with('Vendor',$vendor);
     }
 
     /**
