@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12">
         
-        <form action="{{route('vinvoices.add_items',$vinvoice)}}" method="post">
+        <form action="{{route('vinvoices.store_items',$vinvoice)}}" method="post">
           
           @csrf
           <br>
@@ -77,8 +77,8 @@
                 <td align="center">{{$item->quantity}}</td>
                 <td align="right">{{$item->price}}</td>
                 <td align="right">{{$item->quantity*$item->price}}</td>
-                <td><a href="{{url('invoices/'.$vinvoice->id.'/'.$item->id.'/edit_item')}}"><i class="fas fa-edit"></i></a></td>
-                <td><a href="{{url('invoices/'.$vinvoice->id.'/'.$item->id.'/delete_item')}}"><i class="fas fa-trash"></i></a></td>
+                <td><a href="{{url('vinvoices/'.$vinvoice->id.'/'.$item->id.'/edit_item')}}"><i class="fas fa-edit"></i></a></td>
+                <td><a href="{{url('vinvoices/'.$vinvoice->id.'/'.$item->id.'/delete_item')}}"><i class="fas fa-trash"></i></a></td>
                 <?php $total+=$item->quantity*$item->price;?>
               </tr>
               @endforeach

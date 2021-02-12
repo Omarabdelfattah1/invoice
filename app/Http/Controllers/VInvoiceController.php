@@ -86,11 +86,7 @@ class VInvoiceController extends Controller
             'amount'         =>  0,
         );
         $vinvoice=VInvoic::create($form_data);
-        return view('vendor.invoice.add_items')
-        ->with('vinvoice',$vinvoice)
-        ->with('clients',Vendor::all())
-        ->with('items',VItem::all())
-        ->with('companies',Company::all());
+        return redirect(route('vinvoices.add_items',$vinvoice));
 
     }
     public function print(VInvoic $vinvoice){
@@ -159,9 +155,9 @@ class VInvoiceController extends Controller
     {
         return view('vendor.invoice.add_items')
         ->with('vinvoice',$vinvoice)
-        ->with('clients',Vendor::all())
         ->with('items',VItem::all())
-        ->with('companies',Company::all());
+        ->with('companies',Company::all())
+        ->with('clients',Vendor::all());;
     }
     public function store_item(VInvoic $vinvoice,VItem $item,Request $request)
     {
@@ -171,11 +167,7 @@ class VInvoiceController extends Controller
             'price'=>$request->price,
             'v_item_id'=>$request->item_id
         ]);
-        return view('vendor.invoice.add_items')
-        ->with('vinvoice',$vinvoice)
-        ->with('clients',Vendor::all())
-        ->with('items',VItem::all())
-        ->with('companies',Company::all());
+        return redirect(route('vinvoices.add_items',$vinvoice));
     }
     
     public function edit_item(VInvoic $vinvoice,VInvoicItem $item,Request $request)

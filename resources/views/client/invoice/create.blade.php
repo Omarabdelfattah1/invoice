@@ -1,4 +1,5 @@
 @extends('layouts.home')
+
 @section('content')
 <div class="card">
   <div class="card-header">
@@ -40,19 +41,19 @@
               <tr>
                 <th align="left">Invoice Date</th>
                 <td>
-                  <input type="datetime-local" class="form-control" name="invoice_date" placeholder="Select Invoice date" required="">
+                  <input type="datetime-local" class="form-control" name="invoice_date" placeholder="Select Invoice date">
                 </td>
               </tr>
               <tr> 
                 <th align="left">From Date :</th>
                 <td>
-                  <input class="form-control " type="datetime-local"  name="from_date" placeholder="Select From date" required="">
+                  <input class="form-control" type="datetime-local"  name="from_date" placeholder="Select From date">
                 </td>
               </tr>
               <tr> 
                 <th align="left">To Date :</th>
                 <td>
-                  <input class="form-control" type="datetime-local" name="to_date" placeholder="Select to date" required="">
+                  <input class="form-control" type="datetime-local" name="to_date" placeholder="Select to date">
                 </td>
               </tr>
                   

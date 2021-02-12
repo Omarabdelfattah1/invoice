@@ -61,24 +61,24 @@
                   <th>Item Name</th>
                   <th>Description</th>
                   <th>Quantity</th>
-                  <th>Rate</th>
+                  <th>Price</th>
                   <th>Amount</th>
                   <th>-</th>
                   <th>-</th>
                 </tr>
             </thead>
             <tbody>
-            <?php $total=0;?>
+              <?php $total=0;?>
               @foreach($vinvoice->invoice_items as $item)
               <tr>
                 <td>{{$item->item->id}}</td>
                 <td>{{$item->item->name}}</td>
                 <td>{{$item->item->description}}</td>
                 <td align="center">{{$item->quantity}}</td>
-                <td align="right">{{$item->item->rate}}</td>
-                <td align="right">{{$item->quantity*$item->item->rate}}</td>
-                <td><a href="{{url('invoices/'.$vinvoice->id.'/'.$item->id.'/edit_item')}}"><i class="fas fa-trash"></i></a></td>
-                <td><a href="{{url('invoices/'.$vinvoice->id.'/'.$item->id.'/delete_item')}}"><i class="fas fa-edit"></i></a></td>
+                <td align="right">{{$item->price}}</td>
+                <td align="right">{{$item->quantity*$item->price}}</td>
+                <td><a href="{{url('vinvoices/'.$vinvoice->id.'/'.$item->id.'/edit_item')}}"><i class="fas fa-trash"></i></a></td>
+                <td><a href="{{url('vinvoices/'.$vinvoice->id.'/'.$item->id.'/delete_item')}}"><i class="fas fa-edit"></i></a></td>
                 <?php $total+=$item->quantity*$item->item->rate;?>
               </tr>
               @endforeach
@@ -93,7 +93,7 @@
             </tfoot>
           </table>
           </form>
-          <form method="post" action="{{url('invoices/'.$vinvoice->id.'/'.$item->id.'/update_item')}}">
+          <form method="post" action="{{url('vinvoices/'.$vinvoice->id.'/'.$item->id.'/update_item')}}">
             @csrf
           <table border="0">
             <tbody>
@@ -110,6 +110,10 @@
               <tr>
                   <th align="left">Quantity</th>
                   <td><input class="form-control" type="text" value='{{$item1->quantity}}' name="quantity" required></td>
+              </tr>
+              <tr>
+                  <th align="left">Price</th>
+                  <td><input class="form-control" type="text" value='{{$item1->price}}' name="price" required></td>
               </tr>
               <tr>
                 <th colspan="2">

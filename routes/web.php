@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function() {
   Route::get('/invoices/{invoice}/print','InvoiceController@print')->name('invoices.print');
   Route::get('invoices/destroy/{id}', 'InvoiceController@destroy');
   Route::get('invoices/{invoice}/add_items','InvoiceController@add_item')->name('invoices.add_items');
-  Route::post('invoices/{invoice}/add_items','InvoiceController@store_item')->name('invoices.add_items');
+  Route::post('invoices/{invoice}/add_items','InvoiceController@store_item')->name('invoices.store_items');
   Route::post('invoices/{invoice}/{item}/update_item','InvoiceController@update_item')->name('invoices.update_item');
   Route::get('invoices/{invoice}/{item}/delete_item','InvoiceController@delete_item')->name('invoices.delete_item');
   Route::get('invoices/{invoice}/{item}/edit_item','InvoiceController@edit_item')->name('invoices.edit_item');
@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function() {
   Route::get('/vinvoices/{vinvoice}/print','VInvoiceController@print')->name('vinvoices.print');
   Route::get('vinvoices/destroy/{id}', 'VInvoiceController@destroy');
   Route::get('vinvoices/{vinvoice}/add_items','VInvoiceController@add_item')->name('vinvoices.add_items');
-  Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.add_items');
+  Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.store_items');
   Route::post('vinvoices/{vinvoice}/{item}/update_item','VInvoiceController@update_item')->name('vinvoices.update_item');
   Route::get('vinvoices/{vinvoice}/{item}/delete_item','VInvoiceController@delete_item')->name('vinvoices.delete_item');
   Route::get('vinvoices/{vinvoice}/{item}/edit_item','VInvoiceController@edit_item')->name('vinvoices.edit_item');

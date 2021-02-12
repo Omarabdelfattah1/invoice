@@ -93,7 +93,7 @@
             </tfoot>
           </table>
         </form>
-        <form method="post" action="{{route('invoices.add_items',$invoice)}}">
+        <form method="post" action="{{route('invoices.store_items',$invoice)}}">
             @csrf
           <table border="0">
             <tbody>

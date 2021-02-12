@@ -17,6 +17,7 @@
               <tr role="row">
                 <th >#</th>
                 <th >Name</th>
+                <th >Rate</th>
                 <th >Description</th>
                 <th ></th>
               </tr>
@@ -62,6 +63,7 @@ $(document).ready(function(){
       "columns": [
           { "data": "id" },
           { "data": "name" },
+          { "data": "rate" },
           { "data": "description"} ,
           { "data": "action",
           "orderable":false },
