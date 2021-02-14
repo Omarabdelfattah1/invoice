@@ -15,9 +15,9 @@ class CreateVInvoicsTable extends Migration
     {
         Schema::create('v_invoics', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('invoice_date');
-            $table->dateTime('from_date');
-            $table->dateTime('to_date');
+            $table->string('invoice_date');
+            $table->string('from_date');
+            $table->string('to_date');
             $table->integer('amount');
             $table->unsignedBigInteger('v_model_id');
             $table->unsignedBigInteger('vendor_id');

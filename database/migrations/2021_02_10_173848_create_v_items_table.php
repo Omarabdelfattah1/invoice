@@ -17,6 +17,7 @@ class CreateVItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->double('rate', 10, 5);
             $table->timestamps();
         });
     }

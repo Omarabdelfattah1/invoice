@@ -2,11 +2,11 @@
 @section('style')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 @endsection
-@section('header','Client Form')
+@section('header','Bank Form')
 @section('content')
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">DataTable with default features</h3>
+    <a type="button" href="{{route('banks.create')}}" class="btn btn-block bg-gradient-success">Add New Bank</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -16,12 +16,18 @@
           <table id="datatable" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
             <thead>
               <tr role="row">
-                <th >#</th>
-                <th >Name</th>
-                <th >Country</th>
-                <th >Address</th>
-                <th >Email</th>
-                <th >Phone</th>
+              <th>Id</th>
+              <th>Date</th>
+
+              <th>Bank Name</th>
+
+              <th>Amount</th>
+              <th>Exchange Rate</th>
+              <th>Exchange Amount</th>
+              <th>Local Amount</th>
+              <th>Currency</th>
+              <th>Comment</th>
+              <th></th>
               </tr>
             </thead>
             <tbody>
@@ -42,14 +48,19 @@ $(document).ready( function () {
     $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('clients.api') }}",
+      "ajax": "{{ route('banks.index') }}",
       "columns": [
           { "data": "id" },
           { "data": "name" },
-          { "data": "Country" },
-          { "data": "address" },
-          { "data": "email" },
-          { "data": "tel" },
+          { "data": "update_date" },
+          { "data": "amount" },
+          { "data": "exchange_rate" },
+          { "data": "exchange_amount" },
+          { "data": "local_amount" },
+          { "data": "comment" },
+          { "data": "image" },
+          { "data": "action",
+          "orderable":false },
       ]
     });
 } );

@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->float('rate');
+            $table->double('rate', 10, 5);
             $table->timestamps();
         });
     }

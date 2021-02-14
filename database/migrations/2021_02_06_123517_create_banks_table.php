@@ -16,13 +16,13 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('update_date');
-            $table->integer('amount');
-            $table->integer('exchange_rate');
-            $table->integer('exchange_amount');
-            $table->integer('local_amount');
-            $table->text('comment');
-            $table->string('image');
+            $table->string('update_date');
+            $table->integer('amount')->nullable();
+            $table->integer('exchange_rate')->nullable();
+            $table->integer('exchange_amount')->nullable();
+            $table->integer('local_amount')->nullable();
+            $table->text('comment')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

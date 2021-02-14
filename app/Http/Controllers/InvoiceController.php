@@ -86,69 +86,12 @@ class InvoiceController extends Controller
             'amount'         =>  0,
         );
         $invoice=Invoice::create($form_data);
-        return view('client.invoice.add_items')
-        ->with('invoice',$invoice)
-        ->with('clients',Client::all())
-        ->with('items',Item::all())
-        ->with('companies',Company::all());
+        return redirect(route('invoices.add_items' ,$invoice));
 
     }
     public function print(Invoice $invoice){
         return view('client.invoice.print')->with('invoice',$invoice);
     }
-    // public function print(Invoice $invoice){
-    //     $client = new Party([
-    //         'name'          => $invoice->client->name,
-    //         'phone'         => $invoice->client->phone
-    //     ]);
-
-    //     $customer = new Party([
-    //         'name'          => $invoice->company->name,
-    //         'address'       => $invoice->company->address
-    //     ]);
-
-    //     $items = [];
-    //     foreach($invoice->invoice_items as $item)
-    //     {
-    //         array_push($items ,(new PInvoiceItem())
-    //         ->title($item->item->name)
-    //         ->pricePerUnit($item->item->rate)
-    //         ->quantity($item->quantity));
-    //     }
-    //     $notes = [
-    //         'your multiline',
-    //         'additional notes',
-    //         'in regards of delivery or something else',
-    //     ];
-    //     $notes = implode("<br>", $notes);
-
-    //     $pinvoice = PInvoice::make('receipt')
-    //         ->series('BIG')
-    //         ->sequence(667)
-    //         ->seller($client)
-    //         ->buyer($customer)
-    //         ->date(now()->subWeeks(3))
-    //         ->dateFormat('m/d/Y')
-    //         ->payUntilDays(14)
-    //         ->currencySymbol('$')
-    //         ->currencyCode('USD')
-    //         ->currencyFormat(1.1)
-    //         ->currencyThousandsSeparator('.')
-    //         ->currencyDecimalPoint(',')
-    //         ->filename($client->name . ' ' . $customer->name)
-    //         ->addItems($items)
-    //         ->notes($notes)
-    //         ->logo(public_path('/imgs/logo1.png'))
-    //         // You can additionally save generated invoice to configured disk
-    //         ->save('public');
-
-    //     $link = $pinvoice->url();
-    //     // Then send email to party with link
-
-    //     // And return invoice itself to browser or have a different view
-    //     return $pinvoice->stream();
-
-    // }
     /**
      * Display the specified resource.
      *
@@ -170,11 +113,7 @@ class InvoiceController extends Controller
             'quantity'=>$request->quantity,
             'item_id'=>$request->item_id
         ]);
-        return view('client.invoice.add_items')
-        ->with('invoice',$invoice)
-        ->with('clients',Client::all())
-        ->with('items',Item::all())
-        ->with('companies',Company::all());
+        return redirect(route('invoices.add_items' ,$invoice));
     }
     
     public function edit_item(Invoice $invoice,InvoiceItem $item,Request $request)

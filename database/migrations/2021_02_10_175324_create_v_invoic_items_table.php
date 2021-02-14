@@ -16,7 +16,6 @@ class CreateVInvoicItemsTable extends Migration
         Schema::create('v_invoic_items', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->integer('price');
             $table->unsignedBigInteger('v_invoic_id');
             $table->unsignedBigInteger('v_item_id');
             $table->foreign('v_invoic_id')->references('id')->on('v_invoics');

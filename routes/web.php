@@ -69,7 +69,6 @@ Route::middleware(['auth'])->group(function() {
   Route::resource('/payment_r','PaymentRItemController');
   Route::get('payment_r/destroy/{id}', 'PaymentRItemController@destroy');
 
-  Route::resource('/models','ModelController');
 
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
