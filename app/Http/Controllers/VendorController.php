@@ -52,10 +52,7 @@ class VendorController extends Controller
     {
         $rules = array(
             'name'    =>  'required',
-            'country'     =>  'required',
-            'address'     =>  'required',
-            'tel'     =>  'required',
-            'email'     =>  'required'
+            'country'     =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -113,10 +110,7 @@ class VendorController extends Controller
     {
         $rules = array(
             'name'    =>  'required',
-            'country'     =>  'required',
-            'address'     =>  'required',
-            'tel'     =>  'required',
-            'email'     =>  'required'
+            'country'     =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
