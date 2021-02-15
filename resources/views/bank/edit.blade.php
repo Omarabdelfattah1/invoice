@@ -10,9 +10,9 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-sm-12">
-          <form method="post" enctype="multipart/form-data">
-
-            
+          <form method="post" action="{{route('banks.update',$bank)}}" enctype="multipart/form-data" method="post">
+            @method('put')
+            @csrf
             <table border="0">
               <tbody>
                 <tr> 
@@ -25,7 +25,7 @@
                 <tr>
                   <th align="left">Bank Name</th>
                   <td>
-                    <textarea value="{{$bank->name}}"  class="form-control" name="bank_name"></textarea>
+                    <input value="{{$bank->name}}"  class="form-control" name="bank_name">
                     </td>
                 </tr>
                 <tr>
@@ -38,9 +38,9 @@
                   <th align="left">Exchange Rate</th>
                   <td class="row">
                     <input value="{{$bank->exchange_rate}}" class="col-6 form-control" id="exrate" type="text" name="exchange_rate" value="">Select Currency
-                    <select class="col-3 form-control" name="id_curr">
+                    <select class="col-3 form-control" name="currency_id">
                       @foreach($currencies as $currency)
-                        <option value="{{$currency->id}}" {{$currency->id==$bank->$caurrency_id?'selected':''}}>{{$currency->ref}}</option>
+                        <option value="{{$currency->id}}" {{$currency->id==$bank->currency_id?'selected':''}}>{{$currency->ref}}</option>
                       @endforeach
                     </select>
                   </td>
@@ -54,7 +54,7 @@
                 <tr>
                   <th align="left">Local Amount</th>
                   <td>
-                    <input value="{{$bank->}}" type="text" class="form-control" name="local_amount" value="">
+                    <input value="{{$bank->local_amount}}" type="text" class="form-control" name="local_amount" value="">
                   </td>
                 </tr>
                 <tr>

@@ -23,6 +23,8 @@ class CreateBanksTable extends Migration
             $table->integer('local_amount')->nullable();
             $table->text('comment')->nullable();
             $table->string('image')->nullable();
+            $table->integer('currency_id')->nullable();
+            
             $table->timestamps();
         });
     }

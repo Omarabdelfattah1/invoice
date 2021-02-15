@@ -18,7 +18,8 @@
                 <th >#</th>
                 <th >vendor_id</th>
                 <th > Company_id</th>
-                <th >Invoice Deate</th>
+                <th > INV_Number</th>
+                <th >Invoice Date</th>
                 <th >Date from</th>
                 <th >Date to</th>
                 <th >Amount</th>
@@ -65,6 +66,7 @@ $(document).ready(function(){
           { "data": "id" },
           { "data": "vendor_id" },
           { "data": "company_id" },
+          { "data": "inv_number" },
           { "data": "invoice_date" },
           { "data": "from_date" },
           { "data": "to_date" },

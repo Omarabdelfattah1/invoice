@@ -18,6 +18,7 @@
                 <th >#</th>
                 <th >Name</th>
                 <th >Description</th>
+                <th >Rate</th>
                 <th ></th>
               </tr>
             </thead>
@@ -63,6 +64,7 @@ $(document).ready(function(){
           { "data": "id" },
           { "data": "name" },
           { "data": "description"} ,
+          { "data": "rate"} ,
           { "data": "action",
           "orderable":false },
       ]

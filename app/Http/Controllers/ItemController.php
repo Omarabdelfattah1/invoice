@@ -50,19 +50,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required',
-            'rate'     =>  'required',
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
+        
         $form_data = array(
             'name'        =>  $request->name,
             'description'         =>  $request->description,
@@ -107,18 +95,6 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
         $form_data = array(
             'name'        =>  $request->name,
             'description'         =>  $request->description,

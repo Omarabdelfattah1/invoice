@@ -15,6 +15,7 @@ class Bank extends Model
         'exchange_rate',
         'exchange_amount',
         'local_amount',
+        'currency_id',
         'comment',
         'image',
     ];

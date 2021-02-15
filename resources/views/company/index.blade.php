@@ -65,7 +65,7 @@ $(document).ready(function(){
       "columns": [
           { "data": "id" },
           { "data": "name" },
-          { "data": "Country" },
+          { "data": "country" },
           { "data": "address" },
           { "data": "email" },
           { "data": "tel" },

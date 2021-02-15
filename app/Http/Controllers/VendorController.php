@@ -50,17 +50,7 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'country'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
+       
 
         $form_data = array(
             'name'        =>  $request->name,
@@ -108,17 +98,7 @@ class VendorController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'country'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
+       
 
         $form_data = array(
             'name'        =>  $request->name,

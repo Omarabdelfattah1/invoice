@@ -61,25 +61,12 @@ class VInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'company_id'    =>  'required',
-            'client_id'     =>  'required',
-            'invoice_date'     =>  'required',
-            'from_date'     =>  'required',
-            'to_date'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
+        
         $form_data = array(
             'company_id'        =>  $request->company_id,
             'vendor_id'         =>  $request->client_id,
             'invoice_date'         =>  $request->invoice_date,
+            'inv_number'         => 'Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1] ,
             'from_date'         =>  $request->from_date,
             'to_date'         =>  $request->to_date,
             'v_model_id'         =>  0,
@@ -92,65 +79,7 @@ class VInvoiceController extends Controller
     public function print(VInvoic $vinvoice){
         return view('vendor.invoice.print')->with('vinvoice',$vinvoice);
     }
-    // public function print(VInvoic $vinvoice){
-    //     $client = new Party([
-    //         'name'          => $vinvoice->client->name,
-    //         'phone'         => $vinvoice->client->phone
-    //     ]);
-
-    //     $customer = new Party([
-    //         'name'          => $vinvoice->company->name,
-    //         'address'       => $vinvoice->company->address
-    //     ]);
-
-    //     $items = [];
-    //     foreach($vinvoice->invoice_items as $item)
-    //     {
-    //         array_push($items ,(new PInvoiceItem())
-    //         ->title($item->item->name)
-    //         ->pricePerUnit($item->item->rate)
-    //         ->quantity($item->quantity));
-    //     }
-    //     $notes = [
-    //         'your multiline',
-    //         'additional notes',
-    //         'in regards of delivery or something else',
-    //     ];
-    //     $notes = implode("<br>", $notes);
-
-    //     $pinvoice = PVInvoic::make('receipt')
-    //         ->series('BIG')
-    //         ->sequence(667)
-    //         ->seller($client)
-    //         ->buyer($customer)
-    //         ->date(now()->subWeeks(3))
-    //         ->dateFormat('m/d/Y')
-    //         ->payUntilDays(14)
-    //         ->currencySymbol('$')
-    //         ->currencyCode('USD')
-    //         ->currencyFormat(1.1)
-    //         ->currencyThousandsSeparator('.')
-    //         ->currencyDecimalPoint(',')
-    //         ->filename($client->name . ' ' . $customer->name)
-    //         ->addItems($items)
-    //         ->notes($notes)
-    //         ->logo(public_path('/imgs/logo1.png'))
-    //         // You can additionally save generated invoice to configured disk
-    //         ->save('public');
-
-    //     $link = $pinvoice->url();
-    //     // Then send email to party with link
-
-    //     // And return invoice itself to browser or have a different view
-    //     return $pinvoice->stream();
-
-    // }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Sample_data  $vinvoice
-     * @return \Illuminate\Http\Response
-     */
+    
     public function add_item(VInvoic $vinvoice,Request $request)
     {
         return view('vendor.invoice.add_items')
@@ -219,18 +148,6 @@ class VInvoiceController extends Controller
      */
     public function update(Request $request, VInvoic $vinvoice)
     {
-        // dd($request);
-        $rules = array(
-            'company_id'    =>  'required',
-            'client_id'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
 
         $form_data = array(
             'company_id'        =>  $request->company_id,

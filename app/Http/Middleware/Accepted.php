@@ -19,10 +19,10 @@ class Accepted
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::user()->role_id == 1 && Auth::user()->role == 1 ){
-            return redirect(RouteServiceProvider::GUEST);
+        if(Auth::user()->role_id == 1 && Auth::user()->role == 1 ){
+            return $next($request);
         }
+        return redirect(RouteServiceProvider::GUEST);
         
-        return $next($request);
     }
 }

@@ -52,19 +52,14 @@ class VItemController extends Controller
     {
         $rules = array(
             'name'    =>  'required',
-            'description'     =>  'required'
+            'description'     =>  'required',
         );
 
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
 
         $form_data = array(
             'name'        =>  $request->name,
-            'description'         =>  $request->description
+            'description'         =>  $request->description,
+            'rate'         =>  $request->rate,
         );
 
         VItem::create($form_data);
@@ -110,16 +105,11 @@ class VItemController extends Controller
             'description'     =>  'required'
         );
 
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
 
         $form_data = array(
             'name'        =>  $request->name,
-            'description'         =>  $request->description
+            'description'         =>  $request->description,
+            'rate'         =>  $request->rate,
         );
 
         $vitem->update($form_data);

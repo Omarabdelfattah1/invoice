@@ -61,25 +61,11 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'company_id'    =>  'required',
-            'client_id'     =>  'required',
-            'invoice_date'     =>  'required',
-            'from_date'     =>  'required',
-            'to_date'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
         $form_data = array(
             'company_id'        =>  $request->company_id,
             'client_id'         =>  $request->client_id,
             'invoice_date'         =>  $request->invoice_date,
+            'inv_number'         => 'Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1] ,
             'from_date'         =>  $request->from_date,
             'to_date'         =>  $request->to_date,
             'model_id'         =>  0,
@@ -164,18 +150,6 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        // dd($request);
-        $rules = array(
-            'company_id'    =>  'required',
-            'client_id'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
 
         $form_data = array(
             'company_id'        =>  $request->company_id,

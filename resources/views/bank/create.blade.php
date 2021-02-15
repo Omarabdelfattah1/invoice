@@ -1,5 +1,4 @@
 @extends('layouts.home')
-@section('header','Client Form')
 @section('content')
 <div class="card">
   <div class="card-header">
@@ -10,8 +9,8 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-sm-12">
-          <form method="post" enctype="multipart/form-data">
-
+          <form method="post" enctype="multipart/form-data" metho="post" action="{{route('banks.store')}}">
+            @csrf
             
             <table border="0">
               <tbody>
@@ -38,11 +37,12 @@
                   <th align="left">Exchange Rate</th>
                   <td class="row">
                     <input class="col-6 form-control" id="exrate" type="text" name="exchange_rate" value="">Select Currency
-                    <select class="col-3 form-control" name="id_curr">
+                    <select class="col-3 form-control" name="currency_id">
                       @foreach($currencies as $currency)
                         <option value="{{$currency->id}}">{{$currency->ref}}</option>
                       @endforeach
                     </select>
+                    <a href="{{route('currencies.index')}}">....</a>
                   </td>
                 </tr>
                 <tr>

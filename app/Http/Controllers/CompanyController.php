@@ -50,18 +50,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'country'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
+       
         $form_data = array(
             'name'        =>  $request->name,
             'country'         =>  $request->country,
@@ -108,18 +97,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $Company)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'country'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
+       
         $form_data = array(
             'name'        =>  $request->name,
             'country'         =>  $request->country,

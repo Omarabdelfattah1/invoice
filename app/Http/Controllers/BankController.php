@@ -40,7 +40,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('bank.curr')->with('currencies',Currency::all());
+        return view('bank.create')->with('currencies',Currency::all());
     }
     
     /**
@@ -51,27 +51,18 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'country'     =>  'required',
-            'address'     =>  'required',
-            'tel'     =>  'required',
-            'email'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
+       
 
         $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
+            'name'=>$request->bank_name,
+            'update_date'=>$request->update_date,
+            'amount'=>$request->amount,
+            'exchange_rate'=>$request->exchange_rate,
+            'exchange_amount'=>$request->exchange_amount,
+            'local_amount'=>$request->local_amount,
+            'comment'=>$request->comment,
+            'image'=>$request->image,
+            'currency_id'=>$request->currency_id,
         );
 
         Bank::create($form_data);
@@ -100,7 +91,9 @@ class BankController extends Controller
     public function edit(Bank $bank)
     {
 
-        return view('bank.edit')->with('bank',$bank);
+        return view('bank.edit')
+        ->with('currencies',Currency::all())
+        ->with('bank',$bank);
     }
 
     /**
@@ -112,32 +105,21 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'country'     =>  'required',
-            'address'     =>  'required',
-            'tel'     =>  'required',
-            'email'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
+       
         $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
+            'name'=>$request->bank_name,
+            'update_date'=>$request->update_date,
+            'amount'=>$request->amount,
+            'exchange_rate'=>$request->exchange_rate,
+            'exchange_amount'=>$request->exchange_amount,
+            'local_amount'=>$request->local_amount,
+            'comment'=>$request->comment,
+            'image'=>$request->image,
+            'currency_id'=>$request->currency_id,
         );
-
         $bank->update($form_data);
 
-        return redirect(route('banks.edit',$bank));
+        return redirect(route('banks.index',$bank));
 
     }
 
@@ -154,14 +136,20 @@ class BankController extends Controller
     }
 
 
+
+#===============================================================
     public function index_currency()
     {
         return view('bank.curr')->with('currencies',Currency::all());
     }
-    public function store_currency(Request $reauest)
+    public function store_currency(Request $request)
     {
         Currency::create(['ref'=>$request->ref]);
         return redirect(route('currencies.index'));
+    }
+    public function edit_currency(Currency $currency)
+    {
+        return view('currencies.index')->with('currency',$currency);
     }
     public function update_currency(Request $reauest)
     {

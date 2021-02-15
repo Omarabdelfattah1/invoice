@@ -28,6 +28,7 @@
               <th>Currency</th>
               <th>Comment</th>
               <th></th>
+              <th></th>
               </tr>
             </thead>
             <tbody>
@@ -57,6 +58,7 @@ $(document).ready( function () {
           { "data": "exchange_rate" },
           { "data": "exchange_amount" },
           { "data": "local_amount" },
+          { "data": "currency_id" },
           { "data": "comment" },
           { "data": "image" },
           { "data": "action",

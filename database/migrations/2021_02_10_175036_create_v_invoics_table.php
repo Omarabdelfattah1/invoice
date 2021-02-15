@@ -17,6 +17,7 @@ class CreateVInvoicsTable extends Migration
             $table->id();
             $table->string('invoice_date');
             $table->string('from_date');
+            $table->string('inv_number');
             $table->string('to_date');
             $table->integer('amount');
             $table->unsignedBigInteger('v_model_id');
