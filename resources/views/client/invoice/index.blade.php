@@ -16,8 +16,6 @@
             <thead>
               <tr role="row">
                 <th >#</th>
-                <th >Client_id</th>
-                <th > Company_id</th>
                 <th > INV_Number</th>
                 <th >Invoice Deate</th>
                 <th >Date from</th>
@@ -64,8 +62,6 @@ $(document).ready(function(){
       "ajax": "{{ route('invoices.index') }}",
       "columns": [
           { "data": "id" },
-          { "data": "client_id" },
-          { "data": "company_id" },
           { "data": "inv_number" },
           { "data": "invoice_date" },
           { "data": "from_date" },
