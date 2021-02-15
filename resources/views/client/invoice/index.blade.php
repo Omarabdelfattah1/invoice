@@ -17,7 +17,7 @@
               <tr role="row">
                 <th >#</th>
                 <th > INV_Number</th>
-                <th >Invoice Deate</th>
+                <th >Invoice Date</th>
                 <th >Date from</th>
                 <th >Date to</th>
                 <th >Amount</th>
