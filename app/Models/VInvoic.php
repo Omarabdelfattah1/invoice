@@ -9,7 +9,7 @@ class VInvoic extends Model
 {
     use HasFactory;
     protected $fillable=['amount','inv_number','v_model_id','invoice_date','from_date','to_date','vendor_id','company_id'];
-    protected $dates = ['invoice_date','from_date','to_date'];
+    
     public function invoice_items(){
         return $this->hasMany(VInvoicItem::class);
     }

@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         
         if($request->ajax())
         {
-            $data = Invoice::latest()->get();
+            $data = Invoice::query();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
                         $button = '<a type="button" target="_blank" name="print" href="'.route('invoices.print',$data->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-file-pdf"></i></a>';
@@ -35,7 +35,7 @@ class InvoiceController extends Controller
                         return $button;
                     })
                     ->rawColumns(['action'])
-                    ->make(true);
+                    ->toJson();
         }
         return view('client.invoice.index');
     }
@@ -71,7 +71,9 @@ class InvoiceController extends Controller
             'model_id'         =>  0,
             'amount'         =>  0,
         );
+        // dd($form_data);
         $invoice=Invoice::create($form_data);
+        // dd($invoice);
         return redirect(route('invoices.add_items' ,$invoice));
 
     }

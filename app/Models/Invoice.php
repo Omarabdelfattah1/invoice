@@ -9,7 +9,6 @@ class Invoice extends Model
 {
     use HasFactory;
     protected $fillable=['amount','model_id','inv_number','invoice_date','from_date','to_date','client_id','company_id'];
-    protected $dates = ['invoice_date','from_date','to_date'];
     public function invoice_items(){
         return $this->hasMany(InvoiceItem::class);
     }

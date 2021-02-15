@@ -16,19 +16,17 @@
           <table id="datatable" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
             <thead>
               <tr role="row">
-              <th>Id</th>
-              <th>Date</th>
-
-              <th>Bank Name</th>
-
-              <th>Amount</th>
-              <th>Exchange Rate</th>
-              <th>Exchange Amount</th>
-              <th>Local Amount</th>
-              <th>Currency</th>
-              <th>Comment</th>
-              <th></th>
-              <th></th>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Bank Name</th>
+                <th>Amount</th>
+                <th>Exchange Rate</th>
+                <th>Exchange Amount</th>
+                <th>Local Amount</th>
+                <th>Currency</th>
+                <th>Comment</th>
+                <th>Image</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -66,6 +64,9 @@ $(document).ready( function () {
       ]
     });
 } );
+
+
+
 </script>
 @endsection
 @endsection
