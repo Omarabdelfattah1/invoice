@@ -99,6 +99,22 @@
             }
         );
     });
+    $(document).ready(function(){
+    
+    $("#exrate,#amount").on('keyup',function(){
+
+        document.getElementById("examount").value = '';
+        var price = document.getElementById("amount").value
+        var amount = document.getElementById("exrate").value
+        var val = price * amount;
+        
+      if(price &&amount) {
+       document.getElementById("examount").value = val;
+      }
+       
+    });
+
+});
 </script>
 @endsection
 @endsection

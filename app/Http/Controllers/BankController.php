@@ -64,7 +64,7 @@ class BankController extends Controller
             'image'=>$request->image,
             'currency_id'=>$request->currency_id,
         );
-
+       
         Bank::create($form_data);
 
         return redirect(route('banks.index'));
@@ -119,7 +119,7 @@ class BankController extends Controller
         );
         $bank->update($form_data);
 
-        return redirect(route('banks.index',$bank));
+        return redirect(route('banks.index'));
 
     }
 

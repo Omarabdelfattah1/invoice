@@ -10,7 +10,7 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-sm-12">
-          <form method="post" action="{{route('banks.update',$bank)}}" enctype="multipart/form-data" method="post">
+          <form method="post" action="{{route('banks.update',$bank)}}" enctype="multipart/form-data">
             @method('put')
             @csrf
             <table border="0">
@@ -18,7 +18,7 @@
                 <tr> 
                   <th align="left">Update Date :</th>
                   <td>
-                    <input value="{{$bank->upate_date}}" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0" name="update_date" placeholder="Select to date" required="">
+                    <input value="{{$bank->update_date}}" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0" name="update_date" placeholder="Select to date" required="">
                     
                   </td>
                 </tr>
@@ -60,7 +60,7 @@
                 <tr>
                   <th align="left">Comment</th>
                   <td>
-                    <textarea value="{{$bank->coment}}" class="form-control" name="comment"></textarea>
+                    <textarea value="{{$bank->comment}}" class="form-control" name="comment">{{$bank->comment}}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -101,5 +101,21 @@
             }
         );
     });
+    $(document).ready(function(){
+    
+      $("#exrate,#amount").on('keyup',function(){
+
+          document.getElementById("examount").value = '';
+          var price = document.getElementById("amount").value
+          var amount = document.getElementById("exrate").value
+          var val = price * amount;
+          
+        if(price &&amount) {
+        document.getElementById("examount").value = val;
+        }
+        
+      });
+
+  });
 </script>
 @endsection
