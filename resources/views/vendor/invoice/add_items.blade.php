@@ -112,10 +112,6 @@
                   <td><input class="form-control" type="text" name="quantity" required></td>
               </tr>
               <tr>
-                  <th align="left">Price</th>
-                  <td><input class="form-control" type="text" name="price" required></td>
-              </tr>
-              <tr>
                 <th colspan="2">
                   <input class="btn btn-primary" class="btn btn-primary" type="submit" value="Add Item" name="saveitem">
                 </th>

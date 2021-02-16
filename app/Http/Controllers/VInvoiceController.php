@@ -88,14 +88,16 @@ class VInvoiceController extends Controller
         ->with('companies',Company::all())
         ->with('clients',Vendor::all());;
     }
-    public function store_item(VInvoic $vinvoice,VItem $item,Request $request)
+    public function store_item(VInvoic $vinvoice,Request $request)
     {
         VInvoicItem::create([
             'v_invoic_id'=>$vinvoice->id,
             'quantity'=>$request->quantity,
-            'price'=>$request->price,
             'v_item_id'=>$request->item_id
         ]);
+        $item=VItem::findOrFail($request->item_id);
+        $vinvoice->amount=$vinvoice->amount+$request->quantity*$item->rate;
+        $vinvoice->save();
         return redirect(route('vinvoices.add_items',$vinvoice));
     }
     
@@ -111,16 +113,23 @@ class VInvoiceController extends Controller
     public function delete_item(VInvoic $vinvoice,VInvoicItem $item,Request $request)
     {
         $item->delete();
+        $vinvoice->amount-=$item->quantity*$item->item->rate;
+        $vinvoice->save();
         return redirect(route('vinvoices.add_items',$vinvoice));
     }
     public function update_item(VInvoic $vinvoice,VInvoicItem $item,Request $request)
     {
+        $old_item=$item->item;
+        $new_item=VItem::findOrFail($request->item_id);
+        $vinvoice->amount-=$item->quantity*$item->item->rate;
+
         $item->update([
-            'v_invoic_id'=>$vinvoice->id,
+            'invoice_id'=>$vinvoice->id,
             'quantity'=>$request->quantity,
-            'price'=>$request->price,
-            'v_item_id'=>$request->item_id
+            'item_id'=>$request->item_id
         ]);
+        $vinvoice->amount+=$item->quantity*$item->item->rate;
+        $vinvoice->save();
         return redirect(route('vinvoices.add_items',$vinvoice));
     }
 

@@ -94,13 +94,16 @@ class InvoiceController extends Controller
         ->with('items',Item::all())
         ->with('companies',Company::all());
     }
-    public function store_item(Invoice $invoice,Item $item,Request $request)
+    public function store_item(Invoice $invoice,Request $request)
     {
         InvoiceItem::create([
             'invoice_id'=>$invoice->id,
             'quantity'=>$request->quantity,
             'item_id'=>$request->item_id
         ]);
+        $item=Item::findOrFail($request->item_id);
+        $invoice->amount=$invoice->amount+$request->quantity*$item->rate;
+        $invoice->save();
         return redirect(route('invoices.add_items' ,$invoice));
     }
     
@@ -116,15 +119,24 @@ class InvoiceController extends Controller
     public function delete_item(Invoice $invoice,InvoiceItem $item,Request $request)
     {
         $item->delete();
+
+        $invoice->amount-=$item->quantity*$item->item->rate;
+        $invoice->save();
         return redirect(route('invoices.add_items',$invoice));
     }
     public function update_item(Invoice $invoice,InvoiceItem $item,Request $request)
     {
+        $old_item=$item->item;
+        $new_item=Item::findOrFail($request->item_id);
+        $invoice->amount-=$item->quantity*$item->item->rate;
+
         $item->update([
             'invoice_id'=>$invoice->id,
             'quantity'=>$request->quantity,
             'item_id'=>$request->item_id
         ]);
+        $invoice->amount+=$item->quantity*$item->item->rate;
+        $invoice->save();
         return redirect(route('invoices.add_items',$invoice));
     }
 
