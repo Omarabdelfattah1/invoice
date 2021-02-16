@@ -70,16 +70,26 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <?php $total=0;?>
                     @foreach($invoice->invoice_items as $item)
+
                     <tr>
                       <td>{{$item->item->name}}</td>
                       <td>{{$item->item->description}}</td>
                       <td>{{$item->quantity}}</td>
                       <td>{{$item->item->rate}}</td>
                       <td>{{$item->item->rate*$item->quantity}}</td>
+                      <?php $total+=$item->item->rate*$item->quantity?>
                     </tr>
                     @endforeach
                     </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="5" align="center">Total</td>
+                        <td align="right"><?php echo $total;?></td>
+                        <td></td>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
                 <!-- /.col -->
