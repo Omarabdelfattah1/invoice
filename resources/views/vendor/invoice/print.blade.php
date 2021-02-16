@@ -1,9 +1,6 @@
 @extends('layouts.home')
 @section('content')
 <div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Add new Invoice</h3>
-  </div>
   <!-- /.card-header -->
   <div class="card-body">
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
