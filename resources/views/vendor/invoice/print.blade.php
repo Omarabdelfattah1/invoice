@@ -78,8 +78,8 @@
                       <td>{{$item->item->name}}</td>
                       <td>{{$item->item->description}}</td>
                       <td>{{$item->quantity}}</td>
-                      <td>{{$item->rate}}</td>
-                      <td>{{$item->rate*$item->quantity}}</td>
+                      <td>{{$item->item->rate}}</td>
+                      <td>{{$item->item->rate*$item->quantity}}</td>
                     </tr>
                     @endforeach
                     </tbody>
