@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CModel;
+use App\Models\VModel;
+use App\Models\Invoice;
 use DataTables;
 use Validator;
 
 
-class ModelController extends Controller
+class VModelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,17 +20,17 @@ class ModelController extends Controller
     {
         if($request->ajax())
         {
-            $data = CModel::latest()->get();
+            $data = VModel::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<a type="button" name="edit" href="'.route('models.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button = '<a type="button" name="edit" href="'.route('vmodels.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('client.models.index');
+        return view('vendor.models.index');
     }
 
     /**
@@ -39,7 +40,7 @@ class ModelController extends Controller
      */
     public function create()
     {
-        return view('client.models.create');
+        return view('vendor.models.create');
     }
 
     /**
@@ -50,18 +51,20 @@ class ModelController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->except("_token"));
+        VModel::create($request->except("_token"));
 
-        return redirect(route('models.index'));
+        return redirect(route('vmodels.index'));
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sample_data  $model
+     * @param  \App\Sample_data  $vmodel
      * @return \Illuminate\Http\Response
      */
-    public function show(Model $model)
+    public function show(VModel $vmodel)
     {
         //
     }
@@ -69,40 +72,45 @@ class ModelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model  $model
+     * @param  \App\Model  $vmodel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Model $model)
+    public function edit(VModel $vmodel)
     {
-
-        return view('model.edit')->with('Model',$model);
+        // dd($vmodel);
+        return view('vendor.models.edit')->with('vmodel',$vmodel);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model  $model
+     * @param  \App\Model  $vmodel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Model $model)
+    public function update(Request $request, VModel $vmodel)
     {
+        // dd($request->all());
+        $vmodel->update($request->except("_token"));
 
-        $model->update($request->all());
-
-        return redirect(route('models.edit',$model));
+        return redirect(route('vmodels.edit',$vmodel));
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sample_data  $model
+     * @param  \App\Sample_data  $vmodel
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = CModel::findOrFail($id);
+        $invoices=VInvoice::where('model_id','=',$id)->get();
+        foreach($invoices as $invoice){
+            $invoice->model_id=0;
+            $invoice->save();
+        }
+        $data = VModel::findOrFail($id);
         $data->delete();
     }
 }

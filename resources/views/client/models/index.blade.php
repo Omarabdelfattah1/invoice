@@ -2,11 +2,10 @@
 @section('style')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 @endsection
-@section('header','Client Form')
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('models.create')}}" class="btn btn-block bg-gradient-success">Add New Client</a>
+    <a type="button" href="{{route('cmodels.create')}}" class="btn btn-block bg-gradient-success">Add New Model</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -58,7 +57,7 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('models.index') }}",
+      "ajax": "{{ route('cmodels.index') }}",
       "columns": [
           { "data": "id" },
           { "data": "name" },
@@ -77,7 +76,7 @@ $(document).ready(function(){
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"models/destroy/"+user_id,
+   url:"cmodels/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },

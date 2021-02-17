@@ -1,5 +1,50 @@
+<?php
+$spc=$model->sp_note_footer;
+$nbb='<tr><td ></td></tr>';
+$nbspc='';
+for ($sp=1;$sp<=$spc;$sp++)
+{
+	$nbspc=$nbspc.$nbb;
+};
+
+//---------spc notes--------//
+$spc2=$model->sp_gt_note;
+$nbb2='<br>';
+$nbspc2='';
+for ($sp=1;$sp<=$spc2;$sp++)
+{
+	$nbspc2=$nbspc2.$nbb2;
+};
+//--------------------------//
+//---------spc title--------//
+$spc3=$model->title_sp;
+$nbb3='<br>';
+$nbspc3='';
+for ($sp=1;$sp<=$spc3;$sp++)
+{
+	$nbspc3=$nbspc3.$nbb3;
+};
+$cm0='#0695AD';
+$cm1='#CCFFFF';
+$cm2='#FFFFFF';
+$cm3='#00CCCC';
+
+?>
+
 @extends('layouts.home')
 @section('content')
+<form action="{{route('invoices.change-model',$invoice)}}" method="post">
+  @csrf
+  @method('put')
+  <label for="mmm">Choose Model</label>
+  <input type="hidden" name="model" value="1">
+  <select name="model_id" id="mmm">
+    @foreach($models as $model1)
+    <option value="{{$model1->id}}">{{$model1->name}}</option>
+    @endforeach
+  </select>
+  <button type="submit" class="btn btn-primary">Change</button>
+</form>
 <div class="card">
   <!-- /.card-header -->
   <div class="card-body">
@@ -20,77 +65,99 @@
               <!-- info row -->
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
-                  <h4><b>From:</b></h4>
+                  <h4><b>{{$model->wfrom_company}}</b></h4>
+
                   <address>
-                    <strong>{{$invoice->client->name}}</strong><br>
-                    {{$invoice->client->country}}<br>
+                    <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->name}}</strong><br>
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->country}}<br>
                     @if($invoice->client->address)
-                    {{$invoice->client->address}}<br>
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->address}}<br>
                     @endif
                     @if($invoice->client->phone)
-                    Phone: {{$invoice->client->phone}}<br>
+                    Phone: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->phone}}<br>
                     @endif
                     @if($invoice->client->email)
-                    Email: {{$invoice->client->email}}
+                    Email: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->email}}
                     @endif
                   </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <h4><b>To:</b></h4>
+                  <h4><b>{{$model->wto_client}}</b></h4>
 
                   <address>
-                    <strong>{{$invoice->company->name}}</strong><br>
-                    {{$invoice->company->country}}<br>
+                    <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->name}}</strong><br>
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->country}}<br>
                     @if($invoice->company->address)
-                    {{$invoice->company->address}}<br>
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->address}}<br>
                     @endif
                     @if($invoice->company->phone)
-                    Phone: {{$invoice->company->phone}}<br>
+                    Phone: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->phone}}<br>
                     @endif
                     @if($invoice->company->email)
-                    Email: {{$invoice->company->email}}
+                    Email: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->email}}
                     @endif
                   </address>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                   <p ><b >INV #: </b>{{$invoice->inv_number}}</p>
+                   <p ><b >{{$model->winvoice_number}}</b>{{$invoice->inv_number}}</p>
+                   <p ><b >{{$model->wfrom_date}}</b>{{$invoice->from_date}}</p>
+                   <p ><b >{{$model->wto_date}} </b>Due on Receipt</p>
                 </div>
               </div>
+              <p style="text-align:center;">{{$model->text1}} From Mon {{$invoice->invoice_date}} till Sun {{$invoice->to_date}}</p>
               <div class="row">
                 <div class="col-12 table-responsive">
                   <table class="table table-striped">
                     <thead>
-                    <tr>
-                      <th>Item Code</th>
-                      <th>Description</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Amount</th>
-                    </tr>
+                    <tr style="background-color:{{$cm0}};color:{{$cm2}};text-align:center;">
+                      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->witem_code}}</th>
+                      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wdescription}}</th>
+                      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wquantity}}</th>
+                      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wprice}}</th>
+                      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wamount}}</th>
+                    </tr>		
                     </thead>
                     <tbody>
-                    <?php $total=0;?>
+                    <?php $total=0;$q=0;?>
                     @foreach($invoice->invoice_items as $item)
 
                     <tr>
-                      <td>{{$item->item->name}}</td>
-                      <td>{{$item->item->description}}</td>
-                      <td>{{$item->quantity}}</td>
-                      <td>{{$item->item->rate}}</td>
-                      <td>{{$item->item->rate*$item->quantity}}</td>
-                      <?php $total+=$item->item->rate*$item->quantity?>
+                      <td align="left">{{$item->item->name}}</td>
+                      <td align="center">{{$item->item->description}}</td>
+                      <td align="left">{{$item->quantity}}</td>
+                      <td align="center">{{$item->item->rate}}</td>
+                      <td align="left">{{$item->item->rate*$item->quantity}}</td>
+                      <?php $total+=$item->item->rate*$item->quantity;$q+=$item->quantity;?>
                     </tr>
                     @endforeach
                     </tbody>
                     <tfoot>
                       <tr>
-                        <td colspan="5" align="center">Total</td>
-                        <td align="right"><?php echo $total;?></td>
                         <td></td>
+                        <td></td>
+                        <td>{{$q}}</td>
+                        <td align="center">Total</td>
+                        <td ><?php echo $total;?></td>
                       </tr>
                     </tfoot>
                   </table>
+                  <?php echo str_repeat('<br>',$model->sp_gt_note)?>
+                  <p style="text-align:center;border-bottom:2px solid #00CCCC;">{!!$model->wnote!!}</p>
+   
+ 
+                  <table Style="background-color:#FFFFFF;" border=0>
+                  
+                  
+                  <tr><td> {!!$model->note1!!} </td></tr>
+                  <tr><td> {!!$model->note2!!} </td></tr>
+                  <tr><td> {!!$model->note3!!} </td></tr>
+                  <tr><td> {!!$model->note4!!} </td></tr> 
+                    </table>
+                    <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer)?>
+                  
+                  <table>
+                  <p style="text-align:center;border-top:2px solid #00CCCC;"><h5>{{$model->footer}}</h5> </p>
                 </div>
                 <!-- /.col -->
               </div>

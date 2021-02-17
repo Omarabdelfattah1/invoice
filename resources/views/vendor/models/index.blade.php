@@ -6,7 +6,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('models.create')}}" class="btn btn-block bg-gradient-success">Add New Client</a>
+    <a type="button" href="{{route('vmodels.create')}}" class="btn btn-block bg-gradient-success">Add New Model</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -58,7 +58,7 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('models.index') }}",
+      "ajax": "{{ route('vmodels.index') }}",
       "columns": [
           { "data": "id" },
           { "data": "name" },
@@ -77,7 +77,7 @@ $(document).ready(function(){
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"models/destroy/"+user_id,
+   url:"vmodels/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },

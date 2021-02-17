@@ -41,6 +41,12 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/vendors','VendorController');
   Route::get('vendors/destroy/{id}', 'VendorController@destroy');
+
+  Route::resource('/cmodels','CModelController');
+  Route::get('cmodels/destroy/{id}', 'CModelController@destroy');
+
+  Route::resource('/vmodels','VModelController');
+  Route::get('vmodels/destroy/{id}', 'VModelController@destroy');
  #========================================
 
   Route::resource('/companies','CompanyController');
@@ -49,6 +55,7 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/invoices','InvoiceController');
   Route::get('/invoices/{invoice}/print','InvoiceController@print')->name('invoices.print');
+  Route::put('/invoices/{invoice}/change-model','InvoiceController@change_model')->name('invoices.change-model');
   Route::get('invoices/destroy/{id}', 'InvoiceController@destroy');
   Route::get('invoices/{invoice}/add_items','InvoiceController@add_item')->name('invoices.add_items');
   Route::post('invoices/{invoice}/add_items','InvoiceController@store_item')->name('invoices.store_items');

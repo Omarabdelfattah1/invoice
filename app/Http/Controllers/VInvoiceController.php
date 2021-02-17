@@ -7,6 +7,7 @@ use App\Models\VInvoic;
 use App\Models\Company;
 use App\Models\Vendor;
 use App\Models\VItem;
+use App\Models\VModel;
 use App\Models\VInvoicItem;
 use DataTables;
 use Validator;
@@ -77,7 +78,14 @@ class VInvoiceController extends Controller
 
     }
     public function print(VInvoic $vinvoice){
-        return view('vendor.invoice.print')->with('vinvoice',$vinvoice);
+        $model=VModel::first();
+        if($vinvoice->model_id){
+            $model=VModel::findOrFail($vinvoice->model_id);
+        }
+        return view('vendor.invoice.print')
+            ->with('vinvoice',$vinvoice)
+            ->with('models',VModel::all())
+            ->with('model',$model);
     }
     
     public function add_item(VInvoic $vinvoice,Request $request)
@@ -148,13 +156,18 @@ class VInvoiceController extends Controller
         ->with('clients',Vendor::all());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $vinvoice
-     * @return \Illuminate\Http\Response
-     */
+    public function change_model(Request $request, VInvoice $vinvoice)
+    {
+
+        $form_data = array(
+            'model_id'        =>  $request->model_id,
+            );
+        
+        $vinvoice->update($form_data);
+
+        return redirect(route('invoices.print',$vinvoice));
+
+    }
     public function update(Request $request, VInvoic $vinvoice)
     {
 

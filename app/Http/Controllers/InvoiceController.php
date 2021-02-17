@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Company;
+use App\Models\CModel;
 use App\Models\Client;
 use App\Models\Item;
 use App\Models\InvoiceItem;
@@ -78,7 +79,14 @@ class InvoiceController extends Controller
 
     }
     public function print(Invoice $invoice){
-        return view('client.invoice.print')->with('invoice',$invoice);
+        $model=CModel::first();
+        if($invoice->model_id){
+            $model=CModel::findOrFail($invoice->model_id);
+        }
+        return view('client.invoice.print')
+            ->with('invoice',$invoice)
+            ->with('models',CModel::all())
+            ->with('model',$model);
     }
     /**
      * Display the specified resource.
@@ -162,6 +170,18 @@ class InvoiceController extends Controller
      * @param  \App\Client  $invoice
      * @return \Illuminate\Http\Response
      */
+    public function change_model(Request $request, Invoice $invoice)
+    {
+
+        $form_data = array(
+            'model_id'        =>  $request->model_id,
+            );
+        
+        $invoice->update($form_data);
+
+        return redirect(route('invoices.print',$invoice));
+
+    }
     public function update(Request $request, Invoice $invoice)
     {
 
