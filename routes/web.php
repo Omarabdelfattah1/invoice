@@ -66,6 +66,8 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/vinvoices','VInvoiceController');
   Route::get('/vinvoices/{vinvoice}/print','VInvoiceController@print')->name('vinvoices.print');
+  Route::put('/vinvoices/{vinvoice}/change-model','VInvoiceController@change_model')->name('vinvoices.change-model');
+  
   Route::get('vinvoices/destroy/{id}', 'VInvoiceController@destroy');
   Route::get('vinvoices/{vinvoice}/add_items','VInvoiceController@add_item')->name('vinvoices.add_items');
   Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.store_items');
