@@ -96,6 +96,20 @@ $(document).ready(function(){
    }
   })
  });
+ function lock(id){
+    $.ajax({
+    url:"invoices/lock/"+id,
+    success:function(data)
+    {
+      setTimeout(function(){
+        $('#datatable').DataTable().ajax.reload();
+      }, 2000);
+    }
+  });
+ }
+ 
+
+ 
 
 </script>
 

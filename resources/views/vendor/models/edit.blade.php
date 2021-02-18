@@ -162,7 +162,7 @@
                     </tr>
                     <tr>
                       <th align="left">From Date :<br>
-                        <input  name="wfrom_date" type="text">
+                        <input  name="wfrom_date" value="{{$vmodel->wfrom_date}}" type="text">
                         <select name="from_date_v">
                             <option value="1"{{$vmodel->from_date_v==1?'selected':''}}>Show</option>
                                   <option value="0" {{$vmodel->from_date_v==0?'selected':''}}>Hide</option>						
@@ -171,7 +171,7 @@
                     </tr>
                     <tr>
                       <th align="left">To Date :<br>
-                        <input value="{{$vmodel->title_sp}}"  name="wto_date" type="text">
+                        <input value="{{$vmodel->wto_date}}"  name="wto_date" type="text">
                         <select name="to_date_v">
                             <option value="1"{{$vmodel->to_date_v==1?'selected':''}}>Show</option>
                                   <option value="0" {{$vmodel->to_date_v==0?'selected':''}}>Hide</option>						

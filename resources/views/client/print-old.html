@@ -1,4 +1,29 @@
 <?php
+$spc=$model->sp_note_footer;
+$nbb='<tr><td ></td></tr>';
+$nbspc='';
+for ($sp=1;$sp<=$spc;$sp++)
+{
+	$nbspc=$nbspc.$nbb;
+};
+
+//---------spc notes--------//
+$spc2=$model->sp_gt_note;
+$nbb2='<br>';
+$nbspc2='';
+for ($sp=1;$sp<=$spc2;$sp++)
+{
+	$nbspc2=$nbspc2.$nbb2;
+};
+//--------------------------//
+//---------spc title--------//
+$spc3=$model->title_sp;
+$nbb3='<br>';
+$nbspc3='';
+for ($sp=1;$sp<=$spc3;$sp++)
+{
+	$nbspc3=$nbspc3.$nbb3;
+};
 $cm0='#0695AD';
 $cm1='#CCFFFF';
 $cm2='#FFFFFF';
@@ -8,7 +33,7 @@ $cm3='#00CCCC';
 
 @extends('layouts.home')
 @section('content')
-<form action="{{route('vinvoices.change-model',$vinvoice)}}" method="post">
+<form action="{{route('invoices.change-model',$vinvoice)}}" method="post">
   @csrf
   @method('put')
   <label for="mmm">Choose Model</label>
@@ -35,7 +60,7 @@ $cm3='#00CCCC';
               <!-- info row -->
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
-                  <h4>{{$model->wfrom_company}}</h4>
+                  <h4><b>{{$model->wfrom_company}}</b></h4>
 
                   <address>
                     <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->name}}</strong><br>
@@ -50,7 +75,6 @@ $cm3='#00CCCC';
                     Email: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->email}}
                     @endif
                   </address>
-                  <h4>{{$model->wto_client}}</h4>
 
                   <address>
                     <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->name}}</strong><br>
@@ -67,22 +91,21 @@ $cm3='#00CCCC';
                   </address>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                  <?php echo str_repeat('<br>',$model->title_sp);?>{!!$model->invoice_title!!}
+                  {!!$model->invoice_title!!}
                   </div>
                   <div class="col-sm-4 invoice-col">
                   <h4>
                     <img src="{{asset('imgs/logo1.png')}}"  width="350" height="200" alt="">
                   </h4>
-                  <table border="0">
-                    <tr><td>{{$model->winvoice_number}}</td><td>{{$vinvoice->inv_number}}</td></tr>
-                    <tr><td>{{$model->wfrom_date}}</td><td>{{$vinvoice->from_date}}</td></tr>
-                    <tr><td>{{$model->wto_date}}</td><td>Due on Receipt</td></tr>
-                  </table>
+                   <p ><b >{{$model->winvoice_number}}</b>{{$vinvoice->inv_number}}</p>
+                   <p ><b >{{$model->wfrom_date}}</b>{{$vinvoice->from_date}}</p>
+                   <p ><b >{{$model->wto_date}} </b>Due on Receipt</p>
                 </div>
-              </div><br><br><br>
+              </div>
               <p style="text-align:center;">{{$model->text1}} From Mon {{$vinvoice->invoice_date}} till Sun {{$vinvoice->to_date}}</p>
               <div class="row">
-                  <table class="table table-striped" border="0" cellspacing="2" cellpadding="2">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
                     <thead>
                     <tr style="background-color:{{$cm0}};color:{{$cm2}};text-align:center;">
                       <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->witem_code}}</th>
@@ -123,20 +146,21 @@ $cm3='#00CCCC';
                   <table Style="background-color:#FFFFFF;" border=0>
                   
                   
-                    <tr><td> {!!$model->note1!!} </td></tr>
-                    <tr><td> {!!$model->note2!!} </td></tr>
-                    <tr><td> {!!$model->note3!!} </td></tr>
-                    <tr><td> {!!$model->note4!!} </td></tr> 
-                  </table>
+                  <tr><td> {!!$model->note1!!} </td></tr>
+                  <tr><td> {!!$model->note2!!} </td></tr>
+                  <tr><td> {!!$model->note3!!} </td></tr>
+                  <tr><td> {!!$model->note4!!} </td></tr> 
+                    </table>
                     <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer)?>
                   
+                  <table>
                   <p style="text-align:center;border-top:2px solid #00CCCC;"><h5>{{$model->footer}}</h5> </p>
                 </div>
                 <!-- /.col -->
               </div>
               <div class="row no-print">
                 <div class="col-12">
-                <a href="{{route('vinvoices.download',$vinvoice)}}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Download</a>
+                <button onclick="window.print()" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
                 </div>
               </div>
             </div>

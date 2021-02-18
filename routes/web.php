@@ -55,8 +55,10 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/invoices','InvoiceController');
   Route::get('/invoices/{invoice}/print','InvoiceController@print')->name('invoices.print');
+  Route::get('/invoices/{invoice}/download','InvoiceController@download')->name('invoices.download');
   Route::put('/invoices/{invoice}/change-model','InvoiceController@change_model')->name('invoices.change-model');
   Route::get('invoices/destroy/{id}', 'InvoiceController@destroy');
+  Route::get('invoices/lock/{id}', 'InvoiceController@lock');
   Route::get('invoices/{invoice}/add_items','InvoiceController@add_item')->name('invoices.add_items');
   Route::post('invoices/{invoice}/add_items','InvoiceController@store_item')->name('invoices.store_items');
   Route::post('invoices/{invoice}/{item}/update_item','InvoiceController@update_item')->name('invoices.update_item');
@@ -66,9 +68,11 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/vinvoices','VInvoiceController');
   Route::get('/vinvoices/{vinvoice}/print','VInvoiceController@print')->name('vinvoices.print');
+  Route::get('/vinvoices/{vinvoice}/download','VInvoiceController@download')->name('vinvoices.download');
   Route::put('/vinvoices/{vinvoice}/change-model','VInvoiceController@change_model')->name('vinvoices.change-model');
   
   Route::get('vinvoices/destroy/{id}', 'VInvoiceController@destroy');
+  Route::get('vinvoices/lock/{id}', 'VInvoiceController@lock');
   Route::get('vinvoices/{vinvoice}/add_items','VInvoiceController@add_item')->name('vinvoices.add_items');
   Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.store_items');
   Route::post('vinvoices/{vinvoice}/{item}/update_item','VInvoiceController@update_item')->name('vinvoices.update_item');

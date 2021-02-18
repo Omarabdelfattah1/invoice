@@ -1,29 +1,5 @@
 <?php
-$spc=$model->sp_note_footer;
-$nbb='<tr><td ></td></tr>';
-$nbspc='';
-for ($sp=1;$sp<=$spc;$sp++)
-{
-	$nbspc=$nbspc.$nbb;
-};
 
-//---------spc notes--------//
-$spc2=$model->sp_gt_note;
-$nbb2='<br>';
-$nbspc2='';
-for ($sp=1;$sp<=$spc2;$sp++)
-{
-	$nbspc2=$nbspc2.$nbb2;
-};
-//--------------------------//
-//---------spc title--------//
-$spc3=$model->title_sp;
-$nbb3='<br>';
-$nbspc3='';
-for ($sp=1;$sp<=$spc3;$sp++)
-{
-	$nbspc3=$nbspc3.$nbb3;
-};
 $cm0='#0695AD';
 $cm1='#CCFFFF';
 $cm2='#FFFFFF';
@@ -54,18 +30,28 @@ $cm3='#00CCCC';
         <div class="invoice p-3 mb-3">
               <!-- title row -->
               <div class="row">
-                <div class="col-12">
-                  <h4>
-                    <img src="{{asset('imgs/logo1.png')}}" height="240" width="240" alt="">
-                    <small class="float-right">Inv Date:{{$invoice->invoice_date}}</small><br>
-                  </h4>
-                </div>
+                
                 <!-- /.col -->
               </div>
               <!-- info row -->
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                   <h4><b>{{$model->wfrom_company}}</b></h4>
+
+                  <address>
+                    <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->name}}</strong><br>
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->country}}<br>
+                    @if($invoice->company->address)
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->address}}<br>
+                    @endif
+                    @if($invoice->company->phone)
+                    Phone: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->phone}}<br>
+                    @endif
+                    @if($invoice->company->email)
+                    Email: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->email}}
+                    @endif
+                  </address><br><br><br><br>
+                  <h4><b>{{$model->wto_client}}</b></h4>
 
                   <address>
                     <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->name}}</strong><br>
@@ -81,28 +67,18 @@ $cm3='#00CCCC';
                     @endif
                   </address>
                 </div>
-                <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <h4><b>{{$model->wto_client}}</b></h4>
-
-                  <address>
-                    <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->name}}</strong><br>
-                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->country}}<br>
-                    @if($invoice->company->address)
-                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->address}}<br>
-                    @endif
-                    @if($invoice->company->phone)
-                    Phone: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->phone}}<br>
-                    @endif
-                    @if($invoice->company->email)
-                    Email: <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->email}}
-                    @endif
-                  </address>
-                </div>
-                <div class="col-sm-4 invoice-col">
-                   <p ><b >{{$model->winvoice_number}}</b>{{$invoice->inv_number}}</p>
-                   <p ><b >{{$model->wfrom_date}}</b>{{$invoice->from_date}}</p>
-                   <p ><b >{{$model->wto_date}} </b>Due on Receipt</p>
+                  {!!$model->invoice_title!!}
+                  </div>
+                  <div class="col-sm-4 invoice-col">
+                  <h4>
+                    <img src="{{asset('imgs/logo1.png')}}"  width="350" height="200" alt="">
+                  </h4>
+                  <table border="0">
+                    <tr><td>{{$model->winvoice_number}}</td><td>{{$invoice->inv_number}}</td></tr>
+                    <tr><td>{{$model->wfrom_date}}</td><td>{{$invoice->from_date}}</td></tr>
+                    <tr><td>{{$model->wto_date}}</td><td>Due on Receipt</td></tr>
+                  </table>
                 </div>
               </div>
               <p style="text-align:center;">{{$model->text1}} From Mon {{$invoice->invoice_date}} till Sun {{$invoice->to_date}}</p>

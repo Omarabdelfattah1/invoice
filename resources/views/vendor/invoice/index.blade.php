@@ -96,7 +96,19 @@ $(document).ready(function(){
    }
   })
  });
-
+function lock(id){
+   $('#delete'+id).click(function(){
+    $.ajax({
+    url:"vinvoices/lock/"+id,
+    success:function(data)
+    {
+      setTimeout(function(){
+        $('#datatable').DataTable().ajax.reload();
+      }, 2000);
+    }
+    })
+  });
+ }
 </script>
 
 @endsection

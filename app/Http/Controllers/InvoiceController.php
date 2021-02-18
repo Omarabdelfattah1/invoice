@@ -11,6 +11,8 @@ use App\Models\Item;
 use App\Models\InvoiceItem;
 use DataTables;
 use Validator;
+use View;
+use PDF;
 use LaravelDaily\Invoices\Invoice as PInvoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem as PInvoiceItem;
@@ -27,12 +29,17 @@ class InvoiceController extends Controller
         
         if($request->ajax())
         {
-            $data = Invoice::query();
-            return DataTables::of($data)
-                    ->addColumn('action', function($data){
-                        $button = '<a type="button" target="_blank" name="print" href="'.route('invoices.print',$data->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-file-pdf"></i></a>';
-                        $button .= '<a type="button" name="edit" href="'.route('invoices.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
-                        $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
+            $invoice = Invoice::query();
+            return DataTables::of($invoice)
+                    ->addColumn('action', function($invoice){
+                        $button='';
+                        if(!$invoice->locked){
+                            $button = '<a type="button"  name="edit" href="'.route('invoices.edit',$invoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
+                            $button .= '<button  type="button" name="edit" id="'.$invoice->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
+                            $button .= '<a type="button" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
+                        }
+                        $button .= '<a type="button" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                        $button .= '<button id="delete'.$invoice->id.'" onclick="lock('.$invoice->id.')" type="button" name="edit"class="btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -87,6 +94,23 @@ class InvoiceController extends Controller
             ->with('invoice',$invoice)
             ->with('models',CModel::all())
             ->with('model',$model);
+    }
+    public function download(Invoice $invoice){
+        $model=CModel::first();
+        if($invoice->model_id){
+            $model=CModel::findOrFail($invoice->model_id);
+        }
+        $view=View::make('client.invoice.download',[
+                                            'invoice' => $invoice,
+                                            'model'=>$model
+                                        ]);
+        $html_content=$view->render();
+        PDF::SetTitle('Invoice');
+        PDF::AddPage();
+        PDF::writeHTML($html_content,true,false,true,false,'');
+        PDF::Output($invoice->company->name.$invoice->inv_number.'.pdf','D');
+        // return $html_content;
+        
     }
     /**
      * Display the specified resource.
@@ -205,12 +229,19 @@ class InvoiceController extends Controller
      * @param  \App\Sample_data  $invoice
      * @return \Illuminate\Http\Response
      */
+    public function lock($id)
+    {
+
+        $invoice = Invoice::findOrFail($id);
+        $invoice->locked=1;
+        $invoice->save();
+    }
     public function destroy($id)
     {
 
-        $data = Invoice::findOrFail($id);
-        $data->invoice_items()->delete();
-        $data->delete();
+        $invoice = Invoice::findOrFail($id);
+        $invoice->invoice_items()->delete();
+        $invoice->delete();
     }
 }
 

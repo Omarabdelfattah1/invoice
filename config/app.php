@@ -174,7 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Elibyy\TCPDF\ServiceProvider::class,
     ],
 
     /*
@@ -227,6 +227,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => yajra\DataTables\Facades\DataTables::class,
+        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class
     ],
 
 ];

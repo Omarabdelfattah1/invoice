@@ -11,6 +11,8 @@ use App\Models\VModel;
 use App\Models\VInvoicItem;
 use DataTables;
 use Validator;
+use View;
+use PDF;
 use LaravelDaily\Invoices\Invoice as PInvoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem as PInvoiceItem;
@@ -27,12 +29,17 @@ class VInvoiceController extends Controller
         
         if($request->ajax())
         {
-            $data = VInvoic::latest()->get();
-            return DataTables::of($data)
-                    ->addColumn('action', function($data){
-                        $button = '<a type="button" target="_blank" name="print" href="'.route('vinvoices.print',$data->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-file-pdf"></i></a>';
-                        $button .= '<a type="button" name="edit" href="'.route('vinvoices.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
-                        $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
+            $vinvoice = VInvoic::latest()->get();
+            return DataTables::of($vinvoice)
+                    ->addColumn('action', function($vinvoice){
+                        $button='';
+                        if(!$vinvoice->locked){
+                            $button = '<a type="button" id="edit{{$vinvoice->id}}" name="edit" href="'.route('vinvoices.edit',$vinvoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
+                            $button .= '<button id="delete{{$vinvoice->id}}" type="button" name="edit" id="'.$vinvoice->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
+                            $button .= '<a type="button" name="download" href="'.route('vinvoices.download',$vinvoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                        }
+                        $button .= '<a type="button" id="download{{$vinvoice->id}}"  target="_blank" name="print" href="'.route('vinvoices.print',$vinvoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button .= '<button id="delete'.$vinvoice->id.'" id="delete{{$vinvoice->id}}" type="button" name="edit" id="'.$vinvoice->id.'" class="delete btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -76,6 +83,23 @@ class VInvoiceController extends Controller
         $vinvoice=VInvoic::create($form_data);
         return redirect(route('vinvoices.add_items',$vinvoice));
 
+    }
+    public function download(VInvoic $vinvoice){
+        $model=VModel::first();
+        if($vinvoice->model_id){
+            $model=VModel::findOrFail($vinvoice->model_id);
+        }
+        $view=View::make('vendor.invoice.download',[
+                                            'vinvoice' => $vinvoice,
+                                            'model'=>$model
+                                        ]);
+        $html_content=$view->render();
+        PDF::SetTitle('Invoice');
+        PDF::AddPage();
+        PDF::writeHTML($html_content,true,false,true,false,'');
+        PDF::Output($vinvoice->company->name.$vinvoice->inv_number.'.pdf','D');
+        return $html_content;
+        
     }
     public function print(VInvoic $vinvoice){
         $model=VModel::first();
@@ -165,7 +189,7 @@ class VInvoiceController extends Controller
         
         $vinvoice->update($form_data);
 
-        return redirect(route('invoices.print',$vinvoice));
+        return redirect(route('vinvoices.print',$vinvoice));
 
     }
     public function update(Request $request, VInvoic $vinvoice)
@@ -191,12 +215,19 @@ class VInvoiceController extends Controller
      * @param  \App\Sample_data  $vinvoice
      * @return \Illuminate\Http\Response
      */
+    public function lock($id)
+    {
+
+        $vinvoice = VInvoic::findOrFail($id);
+        $vinvoice->locked=1;
+        $vinvoice->save();
+    }
     public function destroy($id)
     {
 
-        $data = VInvoic::findOrFail($id);
-        $data->invoice_items()->delete();
-        $data->delete();
+        $vinvoice = VInvoic::findOrFail($id);
+        $vinvoice->invoice_items()->delete();
+        $vinvoice->delete();
     }
 }
 
