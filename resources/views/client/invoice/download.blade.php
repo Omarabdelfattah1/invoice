@@ -88,7 +88,7 @@
 
   </tr>
 </table>
-<p style="text-align:center;">{{$model->text1}} From Mon {{$invoice->invoice_date}} till Sun {{$invoice->to_date}}</p>
+<p style="text-align:center;">{{$model->text1}} From Mon {{$invoice->from_date}} till Sun {{$invoice->to_date}}</p>
 
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
