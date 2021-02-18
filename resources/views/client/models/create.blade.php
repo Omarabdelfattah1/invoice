@@ -157,7 +157,7 @@
                     </tr>
                     <tr>
                       <th align="left">From Date :<br>
-                        <input  name="wfrom_date" type="datetime-local">
+                        <input  name="wfrom_date" type="text">
                         <select name="from_date_v">";
                           <option value="1">Show</option>
                           <option value="0">Hide</option>							
@@ -166,10 +166,11 @@
                     </tr>
                     <tr>
                       <th align="left">To Date :<br>
-                        <input  name="wto_date" type="datetime-local">
+                        <input  name="wto_date" type="text">
                         <select name="to_date_v">";
                           <option value="1">Show</option>
-                                <option value="0">Hide</option>							</select>
+                          <option value="0">Hide</option>							
+                        </select>
                       </th>
                     </tr>
 

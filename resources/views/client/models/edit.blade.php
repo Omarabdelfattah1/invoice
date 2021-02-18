@@ -162,16 +162,16 @@
                     </tr>
                     <tr>
                       <th align="left">From Date :<br>
-                        <input  name="wfrom_date" type="text">
+                        <input  name="wfrom_date" type="text" value="{{$cmodel->wfrom_date}}">
                         <select name="from_date_v">
                             <option value="1"{{$cmodel->from_date_v==1?'selected':''}}>Show</option>
-                                  <option value="0" {{$cmodel->from_date_v==0?'selected':''}}>Hide</option>						
+                            <option value="0" {{$cmodel->from_date_v==0?'selected':''}}>Hide</option>						
                         </select>
                       </th>
                     </tr>
                     <tr>
                       <th align="left">To Date :<br>
-                        <input value="{{$cmodel->title_sp}}"  name="wto_date" type="text">
+                        <input value="{{$cmodel->wto_date}}"  name="wto_date" type="text">
                         <select name="to_date_v">
                             <option value="1"{{$cmodel->to_date_v==1?'selected':''}}>Show</option>
                                   <option value="0" {{$cmodel->to_date_v==0?'selected':''}}>Hide</option>						
@@ -191,7 +191,7 @@
                         <textarea  rows="1" cols="60" name="text1">{{$cmodel->text1}} </textarea>
                         <select name="text1_v">
                             <option value="1"{{$cmodel->text1_v==1?'selected':''}}>Show</option>
-                                  <option value="0" {{$cmodel->text1_v==0?'selected':''}}>Hide</option>						
+                            <option value="0" {{$cmodel->text1_v==0?'selected':''}}>Hide</option>						
                         </select>
                       </td>
                     </tr>
