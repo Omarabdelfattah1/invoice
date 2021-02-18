@@ -108,7 +108,7 @@ class InvoiceController extends Controller
         PDF::SetTitle('Invoice');
         PDF::AddPage();
         PDF::writeHTML($html_content,true,false,true,false,'');
-        PDF::Output($invoice->company->name.$invoice->inv_number.'.pdf','D');
+        PDF::Output($invoice->client->name.$invoice->inv_number.'.pdf','D');
         // return $html_content;
         
     }
