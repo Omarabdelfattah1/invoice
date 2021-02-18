@@ -80,7 +80,7 @@ $cm3='#00CCCC';
                   </table>
                 </div>
               </div><br><br><br>
-              <p style="text-align:center;">{{$model->text1}} From Mon {{$vinvoice->invoice_date}} till Sun {{$vinvoice->to_date}}</p>
+              <p style="text-align:center;">{{$model->text1}} From Mon {{$vinvoice->from_date}} till Sun {{$vinvoice->to_date}}</p>
               <div class="row">
                   <table class="table table-striped" border="0" cellspacing="2" cellpadding="2">
                     <thead>
