@@ -162,10 +162,10 @@
                     </tr>
                     <tr>
                       <th align="left">From Date :<br>
-                        <input  name="wfrom_date" value="{{$vmodel->wfrom_date}}" type="text">
+                        <input  name="wfrom_date" type="text" value="{{$vmodel->wfrom_date}}">
                         <select name="from_date_v">
                             <option value="1"{{$vmodel->from_date_v==1?'selected':''}}>Show</option>
-                                  <option value="0" {{$vmodel->from_date_v==0?'selected':''}}>Hide</option>						
+                            <option value="0" {{$vmodel->from_date_v==0?'selected':''}}>Hide</option>						
                         </select>
                       </th>
                     </tr>
@@ -191,7 +191,7 @@
                         <textarea  rows="1" cols="60" name="text1">{{$vmodel->text1}} </textarea>
                         <select name="text1_v">
                             <option value="1"{{$vmodel->text1_v==1?'selected':''}}>Show</option>
-                                  <option value="0" {{$vmodel->text1_v==0?'selected':''}}>Hide</option>						
+                            <option value="0" {{$vmodel->text1_v==0?'selected':''}}>Hide</option>						
                         </select>
                       </td>
                     </tr>
@@ -330,14 +330,26 @@
                       <tr>
                         <td colspan="4" align="right"><b>Outstanding :<br>
                         <textarea  rows="1" name="woutstanding">{{$vmodel->woutstanding}} </textarea></b></td>
-                        <td></td>
+                        <td>
+                          <select name="wtotal_alignment" id="">
+                            <option value="center" {{$vmodel->wtotal_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->wtotal_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right" {{$vmodel->wtotal_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
                           
                           
                       </tr>
                       <tr>
                         <td colspan="4" align="right"><b>Grand total :<br>
                         <textarea  rows="1" name="wgrandtotal">{{$vmodel->wgrandtotal}} </textarea></b></td>
-                        <td></td>
+                        <td>
+                        <select name="total_alignment" id="">
+                            <option value="center" {{$vmodel->total_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->total_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right" {{$vmodel->wtotal_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
                             
                       </tr>
                     </tfoot>

@@ -330,14 +330,26 @@
                       <tr>
                         <td colspan="4" align="right"><b>Outstanding :<br>
                         <textarea  rows="1" name="woutstanding">{{$cmodel->woutstanding}} </textarea></b></td>
-                        <td></td>
+                        <td>
+                          <select name="wtotal_alignment" id="">
+                            <option value="center" {{$cmodel->wtotal_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->wtotal_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right" {{$cmodel->wtotal_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
                           
                           
                       </tr>
                       <tr>
                         <td colspan="4" align="right"><b>Grand total :<br>
                         <textarea  rows="1" name="wgrandtotal">{{$cmodel->wgrandtotal}} </textarea></b></td>
-                        <td></td>
+                        <td>
+                        <select name="total_alignment" id="">
+                            <option value="center" {{$cmodel->total_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->total_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right" {{$cmodel->wtotal_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
                             
                       </tr>
                     </tfoot>

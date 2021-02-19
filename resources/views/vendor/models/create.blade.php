@@ -140,60 +140,58 @@
                       </tr>
                     </tbody>
                   </table>
-
                   <table border="0">
                     <tbody>
                       <tr>
                         <th align="left">Invoice Title :<br>
                           <textarea name="invoice_title" class="textarea" placeholder="Place some text here"
                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                        
                         </th>
                       </tr>
                       <tr>
                       <td><b>Title spaces</b>
                         <input  type="text" name="title_sp" value="" size="2">
                       </td>
-                    </tr>
-                    <tr>
-                      <th align="left">From Date :<br>
-                        <input  name="wfrom_date" type="datetime-local">
-                        <select name="from_date_v">";
-                          <option value="1">Show</option>
-                          <option value="0">Hide</option>							
-                        </select>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th align="left">To Date :<br>
-                        <input  name="wto_date" type="datetime-local">
-                        <select name="to_date_v">";
-                          <option value="1">Show</option>
-                                <option value="0">Hide</option>							</select>
-                      </th>
-                    </tr>
+                      </tr>
+                      <tr>
+                        <th align="left">From Date :<br>
+                          <input  name="wfrom_date" type="text">
+                          <select name="from_date_v">";
+                            <option value="1">Show</option>
+                            <option value="0">Hide</option>							
+                          </select>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th align="left">To Date :<br>
+                          <input  name="wto_date" type="text">
+                          <select name="to_date_v">";
+                            <option value="1">Show</option>
+                            <option value="0">Hide</option>							
+                          </select>
+                        </th>
+                      </tr>
 
-                    <tr>
-                      <th align="left">Invoice Number :<br>
-                        <textarea  rows="1" name="winvoice_number"></textarea>
-                      </th>
-                      <td></td>
-                    </tr>
+                      <tr>
+                        <th align="left">Invoice Number :<br>
+                          <textarea  rows="1" name="winvoice_number"></textarea>
+                        </th>
+                        <td></td>
+                      </tr>
 
-                    <tr>
-                      <td colspan="2"><b>Text :</b>(This invoice is for..)<br>
-                        <textarea  rows="1" cols="60" name="text1"></textarea>
-                        <select name="text1_v">";
-                          <option value="1">Show</option>
-                          <option value="0">Hide</option>							
-                        </select>
-                      </td>
-                    </tr>
+                      <tr>
+                        <td colspan="2"><b>Text :</b>(This invoice is for..)<br>
+                          <textarea  rows="1" cols="60" name="text1"></textarea>
+                          <select name="text1_v">";
+                            <option value="1">Show</option>
+                            <option value="0">Hide</option>							
+                          </select>
+                        </td>
+                      </tr>
 
                     </tbody>
                   </table>
                   <br>
-
                   <table border="0" align="center">
                     <thead>
                       <tr bgcolor="silver">
@@ -209,7 +207,87 @@
                         <th><textarea  rows="1" name="wquantity"></textarea></th>
                         <th><textarea  rows="1" name="wprice"></textarea></th>
                         <th><textarea  rows="1" name="wamount"></textarea></th>
-                        
+                      </tr>
+                      <tr>
+                        <td>
+                          <select name="item_code_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="description_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="quantity_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="price_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="amount_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr bgcolor="silver">
+                        <th>Item Code data</th>
+                        <th>Description data</th>
+                        <th>Quantity data</th>
+                        <th>Price data</th>
+                        <th>Amount data</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select name="item_code_alignment_d" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="description_alignment_d" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="quantity_alignment_d" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="price_alignment_d" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="amount_alignment_d" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
                       </tr>
                     </thead>
                     <tbody>
@@ -243,44 +321,61 @@
                       <tr>
                         <td colspan="4" align="right"><b>Outstanding :<br>
                         <textarea  rows="1" name="woutstanding"></textarea></b></td>
-                        <td></td>
+                        <td>
+                          <select name="wtotal_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
                           
                           
                       </tr>
                       <tr>
                         <td colspan="4" align="right"><b>Grand total :<br><textarea  rows="1" name="wgrandtotal"></textarea></b></td>
-                        <td></td>
+                        <td>
+                          <select name="total_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
                             
                       </tr>
                     </tfoot>
                   </table>
-
                   <table border="0">
                     <tbody>
-                    <tr>
-                      <td colspan="3" align="center">Notes :<br>
-                        <textarea  cols="30" rows="1" name="wnote"></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th align="left">Notes Text:<br>
-                      <textarea class="textarea"
-                       placeholder="Place some text here"
-                      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                      </th>
-                      <td>
-                        <select name="note1_v">
-                          <option value="1">Show</option>
-                          <option value="0">Hide</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th align="left">Footer:<br>
-                      <textarea  cols="90" rows="1" name="footer" >                                                  </textarea>
-                      </th>
-                    </tr>
-
+                      <tr>
+                        <td colspan="3" align="center">Notes :<br>
+                          <textarea  cols="30" rows="1" name="wnote"></textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th align="left">Notes Text:<br>
+                        <textarea class="textarea"
+                        placeholder="Place some text here"
+                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                        </th>
+                        <td>
+                          <select name="note1_v">
+                            <option value="1">Show</option>
+                            <option value="0">Hide</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th align="left">Footer:<br>
+                          <textarea  cols="90" rows="1" name="footer" ></textarea>
+                        </th>
+                        <th>
+                          <select name="footer_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </th>
+                      </tr>
                     </tbody>
                   </table>
                 </td>

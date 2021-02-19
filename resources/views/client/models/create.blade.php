@@ -321,13 +321,25 @@
                       <tr>
                         <td colspan="4" align="right"><b>Outstanding :<br>
                         <textarea  rows="1" name="woutstanding"></textarea></b></td>
-                        <td></td>
+                        <td>
+                          <select name="wtotal_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
                           
                           
                       </tr>
                       <tr>
                         <td colspan="4" align="right"><b>Grand total :<br><textarea  rows="1" name="wgrandtotal"></textarea></b></td>
-                        <td></td>
+                        <td>
+                          <select name="total_alignment" id="">
+                            <option value="center">center</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                          </select>
+                        </td>
                             
                       </tr>
                     </tfoot>

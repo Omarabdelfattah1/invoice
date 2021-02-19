@@ -119,8 +119,8 @@
     <tr style="border-top:solid 2px #0695AD;">
       <td colspan="2">&nbsp;</td>
       <td style="text-align:center">{{$model->wtotal_quantity}}</td>
-      <td style="text-align:right">Total : </td>
-      <td style="text-align:right">{{$total}}</td>
+      <td style="background-color:#0695AD;"align="{{$model->wtotal_alignment}}">Total : </td>
+      <td style="text-align:right" align="{{$model->total_alignment}}">{{$total}}</td>
     </tr>
     <tr>
       <td colspan="3">&nbsp;</td>
