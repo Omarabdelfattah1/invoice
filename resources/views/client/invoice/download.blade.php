@@ -93,11 +93,11 @@
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
     <tr style="background-color:#0695AD;color:#FFFFFF;text-align:center;">
-      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->witem_code}}</th>
-      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wdescription}}</th>
-      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wquantity}}</th>
-      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wprice}}</th>
-      <th align="center" style="border-bottom:solid 2px #ff0000;">{{$model->wamount}}</th>
+      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->witem_code}}</th>
+      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wdescription}}</th>
+      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wquantity}}</th>
+      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wprice}}</th>
+      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wamount}}</th>
     </tr>
   </thead>
   <tbody>
@@ -105,11 +105,11 @@
     <?php $total=0;$q=0;?>
     @foreach($invoice->invoice_items as $item)
       <tr>
-        <td align="left">{{$item->item->name}}</td>
-        <td align="center">{{$item->item->description}}</td>
-        <td align="left">{{$item->quantity}}</td>
-        <td align="center">{{$item->item->rate}}</td>
-        <td align="left">{{$item->item->rate*$item->quantity}}</td>
+        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:center}}">{{$item->item->name}}</td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:center}}">{{$item->item->description}}</td>
+        <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:center}}">{{$item->quantity}}</td>
+        <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:center}}">{{$item->item->rate}}</td>
+        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:center}}">{{$item->item->rate*$item->quantity}}</td>
         <?php $total+=$item->item->rate*$item->quantity;$q+=$item->quantity;?>
       </tr>
     @endforeach
@@ -147,5 +147,5 @@
 <table>
   <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>
 </table>
-<p style="text-align:center;border-top:2px solid #00CCCC;"><h5>{{$model->footer}}</h5> </p>
+<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid #00CCCC;"><h5>{{$model->footer}}</h5> </p>
           

@@ -64,5 +64,16 @@ class CModel extends Model
             'rgrandtotal',
             'spcr',
             'footer',
+            'item_code_alignment',
+            'description_alignment',
+            'quantity_alignment',
+            'price_alignment',
+            'amount_alignment',
+            'item_code_alignment_d',
+            'description_alignment_d',
+            'quantity_alignment_d',
+            'price_alignment_d',
+            'amount_alignment_d',
+            'footer_alignment',
     ];
 }

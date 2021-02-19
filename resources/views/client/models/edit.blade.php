@@ -217,6 +217,87 @@
                         <th><textarea  rows="1" name="wamount">{{$cmodel->wamount}} </textarea></th>
                         
                       </tr>
+                      <tr>
+                        <td>
+                          <select name="item_code_alignment" id="">
+                            <option value="center" {{$cmodel->item_code_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->item_code_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->item_code_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="description_alignment" id="">
+                            <option value="center" {{$cmodel->item_code_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->item_code_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->item_code_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="quantity_alignment" id="">
+                            <option value="center" {{$cmodel->quantity_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->quantity_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->quantity_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="price_alignment" id="">
+                            <option value="center" {{$cmodel->price_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->price_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->price_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="amount_alignment" id="">
+                            <option value="center" {{$cmodel->amount_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->amount_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->amount_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr bgcolor="silver">
+                        <th>Item Code data</th>
+                        <th>Description data</th>
+                        <th>Quantity data</th>
+                        <th>Price data</th>
+                        <th>Amount data</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select name="item_code_alignment_d" id="">
+                            <option value="center" {{$cmodel->item_code_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->item_code_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->item_code_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="description_alignment_d" id="">
+                            <option value="center" {{$cmodel->item_code_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->item_code_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->item_code_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="quantity_alignment_d" id="">
+                            <option value="center" {{$cmodel->quantity_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->quantity_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->quantity_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="price_alignment_d" id="">
+                            <option value="center" {{$cmodel->price_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->price_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->price_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="amount_alignment_d" id="">
+                            <option value="center" {{$cmodel->amount_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->amount_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->amount_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                      </tr>
                     </thead>
                     <tbody>
                       <tr>
@@ -284,6 +365,13 @@
                     <tr>
                         <th align="left">Footer:<br>
                         <textarea name="footer" cols="90" rows="1" name="footer">{{$cmodel->footer}} </textarea>
+                        </th>
+                        <th>
+                          <select name="footer_alignment" id="">
+                            <option value="center" {{$cmodel->footer_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$cmodel->footer_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$cmodel->footer_alignment=='right'?'selected':''}}>right</option>
+                          </select>
                         </th>
                       </tr>
 

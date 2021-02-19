@@ -217,6 +217,87 @@
                         <th><textarea  rows="1" name="wamount">{{$vmodel->wamount}} </textarea></th>
                         
                       </tr>
+                      <tr>
+                        <td>
+                          <select name="item_code_alignment" id="">
+                            <option value="center" {{$vmodel->item_code_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->item_code_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->item_code_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="description_alignment" id="">
+                            <option value="center" {{$vmodel->item_code_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->item_code_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->item_code_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="quantity_alignment" id="">
+                            <option value="center" {{$vmodel->quantity_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->quantity_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->quantity_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="price_alignment" id="">
+                            <option value="center" {{$vmodel->price_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->price_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->price_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="amount_alignment" id="">
+                            <option value="center" {{$vmodel->amount_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->amount_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->amount_alignment=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr bgcolor="silver">
+                        <th>Item Code data</th>
+                        <th>Description data</th>
+                        <th>Quantity data</th>
+                        <th>Price data</th>
+                        <th>Amount data</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select name="item_code_alignment_d" id="">
+                            <option value="center" {{$vmodel->item_code_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->item_code_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->item_code_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="description_alignment_d" id="">
+                            <option value="center" {{$vmodel->item_code_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->item_code_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->item_code_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="quantity_alignment_d" id="">
+                            <option value="center" {{$vmodel->quantity_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->quantity_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->quantity_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="price_alignment_d" id="">
+                            <option value="center" {{$vmodel->price_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->price_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->price_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="amount_alignment_d" id="">
+                            <option value="center" {{$vmodel->amount_alignment_d=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->amount_alignment_d=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->amount_alignment_d=='right'?'selected':''}}>right</option>
+                          </select>
+                        </td>
+                      </tr>
                     </thead>
                     <tbody>
                       <tr>
@@ -284,6 +365,13 @@
                     <tr>
                         <th align="left">Footer:<br>
                         <textarea name="footer" cols="90" rows="1" name="footer">{{$vmodel->footer}} </textarea>
+                        </th>
+                        <th>
+                          <select name="footer_alignment" id="">
+                            <option value="center" {{$vmodel->footer_alignment=='center'?'selected':''}}>center</option>
+                            <option value="left" {{$vmodel->footer_alignment=='left'?'selected':''}}>left</option>
+                            <option value="right"  {{$vmodel->footer_alignment=='right'?'selected':''}}>right</option>
+                          </select>
                         </th>
                       </tr>
 

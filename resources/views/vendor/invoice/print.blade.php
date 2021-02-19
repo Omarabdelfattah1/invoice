@@ -27,11 +27,7 @@ $cm3='#00CCCC';
     <div class="row">
         <div class="col-sm-12">
         <div class="invoice p-3 mb-3">
-              <!-- title row -->
-              <div class="row">
-                
-                <!-- /.col -->
-              </div>
+              
               <!-- info row -->
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
@@ -95,7 +91,6 @@ $cm3='#00CCCC';
                     <tbody>
                     <?php $total=0;$q=0;?>
                     @foreach($vinvoice->invoice_items as $item)
-
                     <tr>
                       <td align="left">{{$item->item->name}}</td>
                       <td align="center">{{$item->item->description}}</td>

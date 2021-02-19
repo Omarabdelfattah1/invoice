@@ -8,6 +8,9 @@ $cm3='#00CCCC';
 ?>
 
 @extends('layouts.home')
+@section('style')
+<link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+@endsection
 @section('content')
 <form action="{{route('invoices.change-model',$invoice)}}" method="post">
   @csrf
@@ -27,7 +30,7 @@ $cm3='#00CCCC';
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
     <div class="row">
         <div class="col-sm-12">
-        <div class="invoice p-3 mb-3">
+            <div class="invoice p-3 mb-3">
               <!-- title row -->
               <div class="row">
                 
@@ -139,7 +142,7 @@ $cm3='#00CCCC';
               </div>
               <div class="row no-print">
                 <div class="col-12">
-                <button onclick="window.print()" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+                <a href="{{route('invoices.download',$invoice)}}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                 </div>
               </div>
             </div>
@@ -150,5 +153,14 @@ $cm3='#00CCCC';
   </div>
 </div>
 <script>
+</script>
+@endsection
+@section('scripts')
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script>
+  $(function () {
+    // Summernote
+    $('.textarea').summernote()
+  })
 </script>
 @endsection
