@@ -92,12 +92,12 @@
 
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
-    <tr style="background-color:#0695AD;color:#FFFFFF;text-align:center;">
-      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->witem_code}}</th>
-      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wdescription}}</th>
-      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wquantity}}</th>
-      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wprice}}</th>
-      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:solid 2px #ff0000;">{{$model->wamount}}</th>
+    <tr style="border-bottom:solid 2px #ff0000;background-color:#0695AD;color:#FFFFFF;text-align:center;">
+      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->witem_code}}</th>
+      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wdescription}}</th>
+      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wquantity}}</th>
+      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wprice}}</th>
+      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wamount}}</th>
     </tr>
   </thead>
   <tbody>
@@ -114,6 +114,9 @@
       </tr>
     @endforeach
     <tr>
+      <td colspan="5" style="border-bottom:2px solid #00CCCC;">&nbsp;</td>
+    </tr>
+    <tr style="border-top:solid 2px #0695AD;">
       <td colspan="2">&nbsp;</td>
       <td style="text-align:center">{{$model->wtotal_quantity}}</td>
       <td style="text-align:right">Total : </td>

@@ -76,7 +76,7 @@ class InvoiceController extends Controller
         if  (count($n)>=10)
         {
 			$vdd=count($n);
-		}else{
+		}elseif(count($n)>=10 &&count($n)>0){
             $vdd='0'.count($n);
         }
         $inv_number=$inv_number.$vdd;	
