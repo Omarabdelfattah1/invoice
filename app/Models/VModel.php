@@ -75,5 +75,7 @@ class VModel extends Model
         'price_alignment_d',
         'amount_alignment_d',
         'footer_alignment',
+        'total_alignment',
+        'wtotal_alignment',
     ];
 }
