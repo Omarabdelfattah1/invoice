@@ -12,6 +12,7 @@ use App\Models\InvoiceItem;
 use DataTables;
 use Validator;
 use View;
+use DB;
 use PDF;
 use LaravelDaily\Invoices\Invoice as PInvoice;
 use LaravelDaily\Invoices\Classes\Party;
@@ -69,11 +70,21 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        $inv_number='Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1];
+        $vdd='01';
+        $n=DB::table('invoices')->select(DB::raw('lpad(substring(inv_number,10,2)+1,2,"0") as vdd'))->where(DB::raw('substring(inv_number,1,9)'),'=',$inv_number)->get();
+        if  (count($n)>=10)
+        {
+			$vdd=count($n);
+		}else{
+            $vdd='0'.count($n);
+        }
+        $inv_number=$inv_number.$vdd;	
         $form_data = array(
             'company_id'        =>  $request->company_id,
             'client_id'         =>  $request->client_id,
             'invoice_date'         =>  $request->invoice_date,
-            'inv_number'         => 'Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1] ,
+            'inv_number'         => $inv_number,
             'from_date'         =>  $request->from_date,
             'to_date'         =>  $request->to_date,
             'model_id'         =>  0,
