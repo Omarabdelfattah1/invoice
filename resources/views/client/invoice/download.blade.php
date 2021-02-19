@@ -5,7 +5,7 @@
       <table border="0">
         <tr>
           <td>              
-            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->country}}
+            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->name}}
           </td>
         </tr>
         @if($invoice->company->address)
@@ -42,7 +42,7 @@
       <table border="0">
         <tr>
           <td>              
-          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->country}}
+          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->name}}
           </td>
         </tr>
         @if($invoice->client->address)

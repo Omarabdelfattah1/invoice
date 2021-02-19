@@ -5,7 +5,7 @@
       <table border="0">
         <tr>
           <td>              
-            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->country}}
+            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->name}}
           </td>
         </tr>
         @if($vinvoice->vendor->address)
@@ -42,7 +42,7 @@
       <table border="0">
         <tr>
           <td>              
-          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->country}}
+          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->name}}
           </td>
         </tr>
         @if($vinvoice->company->address)
