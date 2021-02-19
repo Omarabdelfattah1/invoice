@@ -92,7 +92,7 @@
 
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
-    <tr style="border-top:solid 2px #ff0000;background-color:#0695AD;color:#FFFFFF;text-align:center;">
+    <tr style="border-top:solid 2px #ff0000;background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">
       <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->witem_code}}</th>
       <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wdescription}}</th>
       <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wquantity}}</th>
@@ -119,7 +119,7 @@
     <tr style="border-top:solid 2px #0695AD;">
       <td colspan="2">&nbsp;</td>
       <td style="text-align:center">{{$model->wtotal_quantity}}</td>
-      <td style="color:white;background-color:#0695AD;text-align:{{$model->wtotal_alignment}}">Total : </td>
+      <td style="color:white;background-color:{{$model->color_sheme}};text-align:{{$model->wtotal_alignment}}">Total : </td>
       <td style="text-align:{{$model->total_alignment}}">{{$total}}</td>
     </tr>
   </tbody>
