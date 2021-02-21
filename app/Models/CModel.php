@@ -79,6 +79,7 @@ class CModel extends Model
             'wtotal_alignment',
             'color_border',
             'color_heading',
+        'sp_note_top',
             
     ];
 }

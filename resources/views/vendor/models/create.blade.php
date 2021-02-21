@@ -382,9 +382,6 @@
               </tr>
             </tbody>
           </table>
-
-
-
           <table border="0" align="center">
             <tbody>
               <tr>
@@ -407,6 +404,10 @@
                 <td> Grand Total / Notes :</td>
                 <td>
                   <input  type="text" name="sp_gt_note" value="" size="2">
+                </td>
+                <td>notes margin top</td>
+                <td>
+                  <input  type="text" name="sp_note_top" value="" size="2">
                 </td>
                 <td>notes / Footer:</td>
                 <td>

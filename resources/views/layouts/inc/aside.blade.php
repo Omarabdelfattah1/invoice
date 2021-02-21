@@ -140,30 +140,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('payment_items.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Payment Items</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('receive_items.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Receive Items</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('payment_rs.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Receive</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('payment_ps.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pay</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="{{route('banks.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

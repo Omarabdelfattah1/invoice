@@ -414,6 +414,10 @@
                 <td>
                   <input  type="text" name="sp_gt_note" value="{{$vmodel->sp_gt_note}}" size="2">
                 </td>
+                <td>notes margin top</td>
+                <td>
+                  <input  type="text" name="sp_note_top" value="{{$vmodel->sp_note_top}}" size="2">
+                </td>
                 <td>notes / Footer:</td>
                 <td>
                   <input  type="text" name="sp_note_footer" value="{{$vmodel->sp_note_footer}}" size="2">

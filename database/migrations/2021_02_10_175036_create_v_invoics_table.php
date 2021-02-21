@@ -15,11 +15,11 @@ class CreateVInvoicsTable extends Migration
     {
         Schema::create('v_invoics', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_date');
-            $table->string('from_date');
-            $table->string('inv_number');
-            $table->string('to_date');
-            $table->integer('amount');
+            $table->string('invoice_date')->nullable();
+            $table->string('from_date')->nullable();
+            $table->string('inv_number')->nullable();
+            $table->string('to_date')->nullable();
+            $table->integer('amount')->nullable();
             $table->unsignedBigInteger('v_model_id');
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('company_id');

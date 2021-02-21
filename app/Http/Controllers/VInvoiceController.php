@@ -98,18 +98,16 @@ class VInvoiceController extends Controller
         if($vinvoice->model_id){
             $model=VModel::findOrFail($vinvoice->model_id);
         }
-        // $view=View::make('vendor.invoice.download',[
-        //                                     'vinvoice' => $vinvoice,
-        //                                     'model'=>$model
-        //                                 ]);
-        // $html_content=$view->render();
-        $html_content="<h1>Hello</h1>";
+        $view=View::make('vendor.invoice.download',[
+                                            'vinvoice' => $vinvoice,
+                                            'model'=>$model
+                                        ]);
+        $html_content=$view->render();
         PDF::SetTitle('Invoice');
         PDF::AddPage();
         PDF::writeHTML($html_content,true,false,true,false,'');
-        return PDF::Output('Sample.pdf');
-        // PDF::Output($vinvoice->company->name.$vinvoice->inv_number.'.pdf','D');
-        // return $html_content;
+        PDF::Output($vinvoice->company->name.$vinvoice->inv_number.'.pdf');
+        return $html_content;
         
     }
     public function print(VInvoic $vinvoice){

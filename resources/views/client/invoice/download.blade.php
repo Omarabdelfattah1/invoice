@@ -1,32 +1,35 @@
 
 <table border="0" cellpadding="2" cellspacing="2" >
   <tr>
-    <td>{{$model->wfrom_company}}
+    <td>{{$model->wfrom_company}} <br>
       <table border="0">
+        
+        @if($invoice->company->name && $model->c_name_v==1)
         <tr>
-          <td>              
+          <td> 
             <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->name}}
           </td>
         </tr>
-        @if($invoice->company->address)
+        @endif 
+        @if($invoice->company->address && $model->c_address_v==1)
         <tr>
           <td> 
             <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->address}}
           </td>
         </tr>
         @endif 
-        @if($invoice->company->phone)
+        @if($invoice->company->phone  && $model->c_phone_v==1)
         <tr>
           <td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->phone}}
           </td></tr>
         @endif 
-        @if($invoice->company->country)
+        @if($invoice->company->country  && $model->c_country_v==1)
         <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->country}}
         </td></tr>
         @endif 
-        @if($invoice->company->email)
+        @if($invoice->company->email  && $model->c_email_v==1)
         <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->company->email}}
         </td></tr>
@@ -38,42 +41,40 @@
     <td style="text-align:right"> <img alt="CompanyLogo" src="{{asset('imgs/logo1.png')}}" width="350px" height="200px" /> </td>
   </tr>
   <tr>
-    <td>{{$model->wto_client}}
-      <table border="0">
-        <tr>
-          <td>              
-          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->name}}
-          </td>
-        </tr>
-        @if($invoice->client->address)
+    <td>{{$model->wto_client}}<br>
+    <table border="0">
+        
+        @if($invoice->client->name && $model->cl_name_v==1)
         <tr>
           <td> 
-          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->address}}
+            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->name}}
           </td>
         </tr>
         @endif 
-        @if($invoice->client->phone)
+        @if($invoice->client->address && $model->cl_address_v==1)
+        <tr>
+          <td> 
+            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->address}}
+          </td>
+        </tr>
+        @endif 
+        @if($invoice->client->phone  && $model->cl_phone_v==1)
         <tr>
           <td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->phone}}
-          </td>
-        </tr>
+          </td></tr>
         @endif 
-        @if($invoice->client->country)
-        <tr>
-          <td> 
+        @if($invoice->client->country  && $model->cl_country_v==1)
+        <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->country}}
-          </td>
-        </tr>
+        </td></tr>
         @endif 
-        @if($invoice->client->email)
-        <tr>
-          <td> 
+        @if($invoice->client->email  && $model->cl_email_v==1)
+        <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$invoice->client->email}}
-          </td>
-        </tr>
+        </td></tr>
         @endif 
-      
+        
       </table>
     </td>
     <td>
@@ -135,12 +136,11 @@
 <?php echo str_repeat('<br>',$model->sp_gt_note)?>
 <p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
 
+<?php echo str_repeat('<br>',$model->sp_note_top)?>
 
 <table Style="background-color:#FFFFFF;" border=0>
-  <tr><td> {!!$model->note1!!} </td></tr>
-  <tr><td> {!!$model->note2!!} </td></tr>
-  <tr><td> {!!$model->note3!!} </td></tr>
-  <tr><td> {!!$model->note4!!} </td></tr> 
+
+  @if($model->note1_v==1)<tr><td> {!!$model->note1!!} </td></tr>@endif
 </table>
 <table>
   <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>

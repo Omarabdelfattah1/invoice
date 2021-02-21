@@ -408,6 +408,10 @@
                 <td>
                   <input  type="text" name="sp_gt_note" value="" size="2">
                 </td>
+                <td>notes margin top</td>
+                <td>
+                  <input  type="text" name="sp_note_top" value="" size="2">
+                </td>
                 <td>notes / Footer:</td>
                 <td>
                   <input  type="text" name="sp_note_footer" value="" size="2">

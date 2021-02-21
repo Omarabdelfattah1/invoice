@@ -1,32 +1,35 @@
 
 <table border="0" cellpadding="2" cellspacing="2" >
   <tr>
-    <td>{{$model->wfrom_company}}
+    <td>{{$model->wfrom_company}} <br>
       <table border="0">
+        
+        @if($vinvoice->vendor->name && $model->c_name_v==1)
         <tr>
-          <td>              
+          <td> 
             <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->name}}
           </td>
         </tr>
-        @if($vinvoice->vendor->address)
+        @endif 
+        @if($vinvoice->vendor->address && $model->c_address_v==1)
         <tr>
           <td> 
             <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->address}}
           </td>
         </tr>
         @endif 
-        @if($vinvoice->vendor->phone)
+        @if($vinvoice->vendor->phone  && $model->c_phone_v==1)
         <tr>
           <td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->phone}}
           </td></tr>
         @endif 
-        @if($vinvoice->vendor->country)
+        @if($vinvoice->vendor->country  && $model->c_country_v==1)
         <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->country}}
         </td></tr>
         @endif 
-        @if($vinvoice->vendor->email)
+        @if($vinvoice->vendor->email  && $model->c_email_v==1)
         <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->vendor->email}}
         </td></tr>
@@ -38,42 +41,40 @@
     <td style="text-align:right"> <img alt="CompanyLogo" src="{{asset('imgs/logo1.png')}}" width="350px" height="200px" /> </td>
   </tr>
   <tr>
-    <td>{{$model->wto_client}}
-      <table border="0">
-        <tr>
-          <td>              
-          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->name}}
-          </td>
-        </tr>
-        @if($vinvoice->company->address)
+    <td>{{$model->wto_client}}<br>
+    <table border="0">
+        
+        @if($vinvoice->company->name && $model->cl_name_v==1)
         <tr>
           <td> 
-          <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->address}}
+            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->name}}
           </td>
         </tr>
         @endif 
-        @if($vinvoice->company->phone)
+        @if($vinvoice->company->address && $model->cl_address_v==1)
+        <tr>
+          <td> 
+            <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->address}}
+          </td>
+        </tr>
+        @endif 
+        @if($vinvoice->company->phone  && $model->cl_phone_v==1)
         <tr>
           <td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->phone}}
-          </td>
-        </tr>
+          </td></tr>
         @endif 
-        @if($vinvoice->company->country)
-        <tr>
-          <td> 
+        @if($vinvoice->company->country  && $model->cl_country_v==1)
+        <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->country}}
-          </td>
-        </tr>
+        </td></tr>
         @endif 
-        @if($vinvoice->company->email)
-        <tr>
-          <td> 
+        @if($vinvoice->company->email  && $model->cl_email_v==1)
+        <tr><td> 
           <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->email}}
-          </td>
-        </tr>
+        </td></tr>
         @endif 
-      
+        
       </table>
     </td>
     <td>
@@ -88,6 +89,8 @@
 
   </tr>
 </table>
+<?php echo str_repeat('<br>',$model->sp_gt_note)?>
+
 <p style="text-align:center;">{{$model->text1}} From Mon {{$vinvoice->from_date}} till Sun {{$vinvoice->to_date}}</p>
 
 <table border="0" cellspacing="2" cellpadding="2">
@@ -114,7 +117,7 @@
       </tr>
     @endforeach
     <tr>
-      <td colspan="5" style="border-bottom:2px solid #00CCCC;">&nbsp;</td>
+      <td colspan="5" style="border-bottom:2px solid {{$model->color_border}};">&nbsp;</td>
     </tr>
     <tr style="border-top:solid 2px #0695AD;">
       <td colspan="2">&nbsp;</td>
@@ -125,18 +128,16 @@
   </tbody>
   
 </table>
-<?php echo str_repeat('<br>',$model->sp_gt_note)?>
-<p style="text-align:center;border-bottom:2px solid #00CCCC;">{!!$model->wnote!!}</p>
+<p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
+<?php echo str_repeat('<br>',$model->sp_note_top)?>
 
 
 <table Style="background-color:#FFFFFF;" border=0>
-  <tr><td> {!!$model->note1!!} </td></tr>
-  <tr><td> {!!$model->note2!!} </td></tr>
-  <tr><td> {!!$model->note3!!} </td></tr>
-  <tr><td> {!!$model->note4!!} </td></tr> 
+
+  @if($model->note1_v==1)<tr><td> {!!$model->note1!!} </td></tr>@endif
 </table>
 <table>
   <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>
 </table>
-<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid #00CCCC;"><h5>{{$model->footer}}</h5> </p>
+<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};"><h5>{{$model->footer}}</h5> </p>
           
