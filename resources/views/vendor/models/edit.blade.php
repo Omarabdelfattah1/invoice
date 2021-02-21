@@ -156,46 +156,43 @@
                         </th>
                       </tr>
                       <tr>
-                      <td><b>Title spaces</b>
-                        <input  type="text" name="title_sp" value="{{$vmodel->title_sp}}" size="2">
-                      </td>
-                    </tr>
-                    <tr>
-                      <th align="left">From Date :<br>
-                        <input  name="wfrom_date" type="text" value="{{$vmodel->wfrom_date}}">
-                        <select name="from_date_v">
-                            <option value="1"{{$vmodel->from_date_v==1?'selected':''}}>Show</option>
-                            <option value="0" {{$vmodel->from_date_v==0?'selected':''}}>Hide</option>						
-                        </select>
-                      </th>
-                    </tr>
-                    <tr>
-                      <th align="left">To Date :<br>
-                        <input value="{{$vmodel->wto_date}}"  name="wto_date" type="text">
-                        <select name="to_date_v">
-                            <option value="1"{{$vmodel->to_date_v==1?'selected':''}}>Show</option>
-                                  <option value="0" {{$vmodel->to_date_v==0?'selected':''}}>Hide</option>						
-                        </select>
-                      </th>
-                    </tr>
-
-                    <tr>
-                      <th align="left">Invoice Number :<br>
-                        <textarea  rows="1" name="winvoice_number">{{$vmodel->winvoice_number}} </textarea>
-                      </th>
-                      <td></td>
-                    </tr>
-
-                    <tr>
-                      <td colspan="2"><b>Text :</b>(This invoice is for..)<br>
-                        <textarea  rows="1" cols="60" name="text1">{{$vmodel->text1}} </textarea>
-                        <select name="text1_v">
-                            <option value="1"{{$vmodel->text1_v==1?'selected':''}}>Show</option>
-                            <option value="0" {{$vmodel->text1_v==0?'selected':''}}>Hide</option>						
-                        </select>
-                      </td>
-                    </tr>
-
+                        <td><b>Title spaces</b>
+                          <input  type="text" name="title_sp" value="{{$vmodel->title_sp}}" size="2">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th align="left">From Date :<br>
+                          <input  name="wfrom_date" type="text" value="{{$vmodel->wfrom_date}}">
+                          <select name="from_date_v">
+                              <option value="1"{{$vmodel->from_date_v==1?'selected':''}}>Show</option>
+                              <option value="0" {{$vmodel->from_date_v==0?'selected':''}}>Hide</option>						
+                          </select>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th align="left">To Date :<br>
+                          <input value="{{$vmodel->wto_date}}"  name="wto_date" type="text">
+                          <select name="to_date_v">
+                              <option value="1"{{$vmodel->to_date_v==1?'selected':''}}>Show</option>
+                                    <option value="0" {{$vmodel->to_date_v==0?'selected':''}}>Hide</option>						
+                          </select>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th align="left">Invoice Number :<br>
+                          <textarea  rows="1" name="winvoice_number">{{$vmodel->winvoice_number}} </textarea>
+                        </th>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><b>Text :</b>(This invoice is for..)<br>
+                          <textarea  rows="1" cols="60" name="text1">{{$vmodel->text1}} </textarea>
+                          <select name="text1_v">
+                              <option value="1"{{$vmodel->text1_v==1?'selected':''}}>Show</option>
+                              <option value="0" {{$vmodel->text1_v==0?'selected':''}}>Hide</option>						
+                          </select>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                   <br>
@@ -337,14 +334,12 @@
                             <option value="right" {{$vmodel->wtotal_alignment=='right'?'selected':''}}>right</option>
                           </select>
                         </td>
-                          
-                          
                       </tr>
                       <tr>
                         <td colspan="4" align="right"><b>Grand total :<br>
                         <textarea  rows="1" name="wgrandtotal">{{$vmodel->wgrandtotal}} </textarea></b></td>
                         <td>
-                        <select name="total_alignment" id="">
+                          <select name="total_alignment" id="">
                             <option value="center" {{$vmodel->total_alignment=='center'?'selected':''}}>center</option>
                             <option value="left" {{$vmodel->total_alignment=='left'?'selected':''}}>left</option>
                             <option value="right" {{$vmodel->wtotal_alignment=='right'?'selected':''}}>right</option>
@@ -427,6 +422,8 @@
             </tbody>
           </table>
           Color Scheme :  <input  type="color" name="color_sheme" value="{{$vmodel->color_sheme}}">
+          Color border :  <input  type="color" name="color_border" value="{{$vmodel->color_border}}">
+          Color Under Heading :  <input  type="color" name="color_heading" value="{{$vmodel->color_heading}}">
           <br>
           <input class="btn btn-primary" type="submit">
         </form>

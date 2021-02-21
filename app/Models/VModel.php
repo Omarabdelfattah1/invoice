@@ -77,5 +77,7 @@ class VModel extends Model
         'footer_alignment',
         'total_alignment',
         'wtotal_alignment',
+        'color_border',
+        'color_heading',
     ];
 }

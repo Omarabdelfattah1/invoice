@@ -427,6 +427,8 @@
             </tbody>
           </table>
           Color Scheme :  <input  type="color" name="color_sheme" value="{{$cmodel->color_sheme}}">
+          Color border :  <input  type="color" name="color_border" value="{{$cmodel->color_border}}">
+          Color Under Heading :  <input  type="color" name="color_heading" value="{{$cmodel->color_heading}}">
           <br>
           <input class="btn btn-primary" type="submit">
         </form>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('pitems.create')}}" class="btn btn-block bg-gradient-success">Add New Item</a>
+    <a type="button" href="{{route('payment_items.create')}}" class="btn btn-block bg-gradient-success">Add New Item</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -58,7 +58,7 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('pitems.index') }}",
+      "ajax": "{{ route('payment_items.index') }}",
       "columns": [
           { "data": "id" },
           { "data": "name" },

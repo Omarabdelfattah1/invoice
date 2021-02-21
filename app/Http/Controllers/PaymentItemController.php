@@ -22,7 +22,7 @@ class PaymentItemController extends Controller
             $data = PaymentItem::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<a type="button" name="edit" href="'.route('pitems.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button = '<a type="button" name="edit" href="'.route('payment_items.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
@@ -50,17 +50,6 @@ class PaymentItemController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
 
         $form_data = array(
             'name'        =>  $request->name,
@@ -69,53 +58,19 @@ class PaymentItemController extends Controller
 
         PaymentItem::create($form_data);
 
-        return redirect(route('pitems.index'));
+        return redirect(route('payment_items.index'));
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Sample_data  $pitem
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PaymentItem $pitem)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PaymentItem  $pitem
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(PaymentItem $pitem)
     {
 
         return view('payment.pitem.edit')->with('pitem',$pitem);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PaymentItem  $pitem
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, PaymentItem $pitem)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
 
         $form_data = array(
             'name'        =>  $request->name,
@@ -124,16 +79,10 @@ class PaymentItemController extends Controller
 
         $pitem->update($form_data);
 
-        return redirect(route('pitems.edit',$pitem));
+        return redirect(route('payment_items.edit',$pitem));
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Sample_data  $pitem
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $data = PaymentItem::findOrFail($id);

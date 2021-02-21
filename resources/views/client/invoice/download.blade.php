@@ -92,12 +92,18 @@
 
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
-    <tr style="border-bottom:solid 2px #ff0000;background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">
-      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->witem_code}}</th>
-      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wdescription}}</th>
-      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wquantity}}</th>
-      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wprice}}</th>
-      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:2px solid #ff0000;">{{$model->wamount}}</th>
+    <tr style="border-bottom:solid 2px 
+{{$model->color_heading}};background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">
+      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid 
+{{$model->color_heading}};">{{$model->witem_code}}</th>
+      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid 
+{{$model->color_heading}};">{{$model->wdescription}}</th>
+      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid 
+{{$model->color_heading}};">{{$model->wquantity}}</th>
+      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:2px solid 
+{{$model->color_heading}};">{{$model->wprice}}</th>
+      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:2px solid 
+{{$model->color_heading}};">{{$model->wamount}}</th>
     </tr>
   </thead>
   <tbody>
@@ -114,9 +120,9 @@
       </tr>
     @endforeach
     <tr>
-      <td colspan="5" style="border-bottom:2px solid #00CCCC;">&nbsp;</td>
+      <td colspan="5" style="border-bottom:2px solid {{$model->color_border}};">&nbsp;</td>
     </tr>
-    <tr style="border-top:solid 2px #0695AD;">
+    <tr>
       <td colspan="2">&nbsp;</td>
       <td style="text-align:center">{{$model->wtotal_quantity}}</td>
       <td style="color:white;background-color:{{$model->color_sheme}};" align="{{$model->wtotal_alignment}}">Total : </td>
@@ -127,7 +133,7 @@
   
 </table>
 <?php echo str_repeat('<br>',$model->sp_gt_note)?>
-<p style="text-align:center;border-bottom:2px solid #00CCCC;">{!!$model->wnote!!}</p>
+<p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
 
 
 <table Style="background-color:#FFFFFF;" border=0>
@@ -139,5 +145,5 @@
 <table>
   <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>
 </table>
-<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid #00CCCC;"><h5>{{$model->footer}}</h5> </p>
+<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};"><h5>{{$model->footer}}</h5> </p>
           

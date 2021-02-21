@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PaymentP;
-use App\Models\Client;
+use App\Models\Vendor;
 use App\Models\Bank;
-use App\Models\Item;
+use App\Models\PaymentItem;
 use DataTables;
 use Validator;
 
@@ -25,14 +25,14 @@ class PaymentPItemController extends Controller
             $data = PaymentP::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<a type="button" name="edit" href="'.route('payment_p.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button = '<a type="button" name="edit" href="'.route('payment_ps.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('payment.receive.index');
+        return view('payment.pay.index');
     }
 
     /**
@@ -42,10 +42,10 @@ class PaymentPItemController extends Controller
      */
     public function create()
     {
-        return view('payment.receive.create')
-        ->with('clients',Client::all())
+        return view('payment.pay.create')
+        ->with('vendors',Vendor::all())
         ->with('banks',Bank::all())
-        ->with('items',Item::all());
+        ->with('items',PaymentItem::all());
     }
 
     /**
@@ -56,26 +56,9 @@ class PaymentPItemController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
+        PaymentP::create($request->except("_token"));
 
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description
-        );
-
-        PaymentP::create($form_data);
-
-        return redirect(route('payment_p.index'));
+        return redirect(route('payment_ps.index'));
 
     }
 
@@ -99,7 +82,11 @@ class PaymentPItemController extends Controller
     public function edit(PaymentP $payment_p)
     {
 
-        return view('payment.receive.edit')->with('payment_p',$payment_p);
+        return view('payment.pay.edit')
+        ->with('vendors',Vendor::all())
+        ->with('banks',Bank::all())
+        ->with('items',PaymentItem::all())
+        ->with('payment_p',$payment_p);
     }
 
     /**
@@ -111,26 +98,10 @@ class PaymentPItemController extends Controller
      */
     public function update(Request $request, PaymentP $payment_p)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
+        
+        $payment_p->update($request->except("_token"));
 
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description
-        );
-
-        $payment_p->update($form_data);
-
-        return redirect(route('payment_p.edit',$payment_p));
+        return redirect(route('payment_ps.edit',$payment_p));
 
     }
 

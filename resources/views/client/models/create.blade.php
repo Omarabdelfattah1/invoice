@@ -416,6 +416,8 @@
             </tbody>
           </table>
           Color Scheme :  <input  type="color" name="color_sheme">
+          Color border :  <input  type="color" name="color_border">
+          Color Under Heading :  <input  type="color" name="color_heading">
           <br>
           <input class="btn btn-primary" type="submit">
         </form>

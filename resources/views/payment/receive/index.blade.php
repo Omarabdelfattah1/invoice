@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('payment_r.create')}}" class="btn btn-block bg-gradient-success">Add New Item</a>
+    <a type="button" href="{{route('payment_rs.create')}}" class="btn btn-block bg-gradient-success">Add New Item</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -58,7 +58,7 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('payment_r.index') }}",
+      "ajax": "{{ route('payment_rs.index') }}",
       "columns": [
           { "data": "id" },
           { "data": "name" },
@@ -78,7 +78,7 @@ $(document).ready(function(){
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"payment_r/destroy/"+user_id,
+   url:"payment_rs/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },

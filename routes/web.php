@@ -88,20 +88,20 @@ Route::middleware(['auth','accepted'])->group(function() {
   Route::get('vitems/destroy/{id}', 'VItemController@destroy');
  #========================================
 
-  Route::resource('/pitems','PaymentItemController');
-  Route::get('pitems/destroy/{id}', 'PaymentItemController@destroy');
+  Route::resource('/payment_items','PaymentItemController');
+  Route::get('payment_items/destroy/{id}', 'PaymentItemController@destroy');
  #========================================
 
-  Route::resource('/ritems','ReceiveItemController');
-  Route::get('ritems/destroy/{id}', 'ReceiveItemController@destroy');
+  Route::resource('/receive_items','ReceiveItemController');
+  Route::get('receive_items/destroy/{id}', 'ReceiveItemController@destroy');
  #========================================
 
-  Route::resource('/payment_p','PaymentPItemController');
-  Route::get('payment_p/destroy/{id}', 'PaymentPItemController@destroy');
+  Route::resource('/payment_ps','PaymentPItemController');
+  Route::get('payment_ps/destroy/{id}', 'PaymentPItemController@destroy');
  #========================================
 
-  Route::resource('/payment_r','PaymentRItemController');
-  Route::get('payment_r/destroy/{id}', 'PaymentRItemController@destroy');
+  Route::resource('/payment_rs','PaymentRItemController');
+  Route::get('payment_rs/destroy/{id}', 'PaymentRItemController@destroy');
 
  #========================================
 

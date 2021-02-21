@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PaymentR;
 use App\Models\Client;
 use App\Models\Bank;
-use App\Models\Item;
+use App\Models\ReceiveItem;
 use DataTables;
 use Validator;
 
@@ -25,7 +25,7 @@ class PaymentRItemController extends Controller
             $data = PaymentR::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<a type="button" name="edit" href="'.route('payment_r.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button = '<a type="button" name="edit" href="'.route('payment_rs.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
@@ -45,7 +45,7 @@ class PaymentRItemController extends Controller
         return view('payment.receive.create')
         ->with('clients',Client::all())
         ->with('banks',Bank::all())
-        ->with('items',Item::all());
+        ->with('items',ReceiveItem::all());
     }
 
     /**
@@ -56,50 +56,22 @@ class PaymentRItemController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
+        
+        PaymentR::create($request->except("_token"));
 
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description
-        );
-
-        PaymentR::create($form_data);
-
-        return redirect(route('payment_r.index'));
+        return redirect(route('payment_rs.index'));
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Sample_data  $payment_r
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PaymentR $payment_r)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PaymentR  $payment_r
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit(PaymentR $payment_r)
     {
 
-        return view('payment.receive.edit')->with('payment_r',$payment_r);
+        return view('payment.receive.edit')
+        ->with('clients',Client::all())
+        ->with('banks',Bank::all())
+        ->with('items',ReceiveItem::all())
+                ->with('payment_r',$payment_r);
     }
 
     /**
@@ -111,26 +83,10 @@ class PaymentRItemController extends Controller
      */
     public function update(Request $request, PaymentR $payment_r)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
 
-        $error = Validator::make($request->all(), $rules);
+        $payment_r->update($request->except("_token"));
 
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description
-        );
-
-        $payment_r->update($form_data);
-
-        return redirect(route('payment_r.edit',$payment_r));
+        return redirect(route('payment_rs.edit',$payment_r));
 
     }
 

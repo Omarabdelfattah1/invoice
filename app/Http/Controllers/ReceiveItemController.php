@@ -22,7 +22,7 @@ class ReceiveItemController extends Controller
             $data = ReceiveItem::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<a type="button" name="edit" href="'.route('ritems.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button = '<a type="button" name="edit" href="'.route('receive_items.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
@@ -69,7 +69,7 @@ class ReceiveItemController extends Controller
 
         ReceiveItem::create($form_data);
 
-        return redirect(route('ritems.index'));
+        return redirect(route('receive_items.index'));
 
     }
 
@@ -124,7 +124,7 @@ class ReceiveItemController extends Controller
 
         $ritem->update($form_data);
 
-        return redirect(route('ritems.edit',$ritem));
+        return redirect(route('receive_items.edit',$ritem));
 
     }
 

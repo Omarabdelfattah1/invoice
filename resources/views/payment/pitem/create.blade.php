@@ -9,7 +9,7 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
     <div class="row">
         <div class="col-sm-12">
-          <form action="{{route('pitems.store')}}" method="post">
+          <form action="{{route('payment_items.store')}}" method="post">
           @csrf
 
             <div class="card-body">
