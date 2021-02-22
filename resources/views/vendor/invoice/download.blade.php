@@ -90,6 +90,7 @@
   </tr>
 </table>
 <?php echo str_repeat('<br>',$model->sp_gt_note)?>
+@if($model->from_date_v==0 && $model->to_date_v==0)
 <p style="text-align:center;">
 {{$model->text1}} From 
     @if($vinvoice->type=='week')Mon {{$vinvoice->from_date}}
@@ -98,6 +99,7 @@
     <?php echo date('F-Y',strtotime($vinvoice->from_date));?> till  
     <?php echo date('F-Y',strtotime($vinvoice->to_date));?>
     @endif</p>
+@endif
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
     <tr style="border-top:solid 2px #ff0000;background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">

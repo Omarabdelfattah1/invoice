@@ -72,11 +72,12 @@ class VInvoiceController extends Controller
         $inv_number='Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1];
         $vdd='01';
         $n=DB::table('vinvoices')->select(DB::raw('lpad(substring(inv_number,10,2)+1,2,"0") as vdd'))->where(DB::raw('substring(inv_number,1,9)'),'=',$inv_number)->get();
-        if  (count($n)>=10)
+        $m=count($n)+1;
+        if  ($m>=9)
         {
-			$vdd=count($n);
-		}elseif(count($n)>=10 &&count($n)>0){
-            $vdd='0'.count($n);
+			$vdd=$m;
+		}elseif($m<9 &&$m>0){
+            $vdd='0'.$m;
         }
         $inv_number=$inv_number.$vdd;
         $form_data = array(
