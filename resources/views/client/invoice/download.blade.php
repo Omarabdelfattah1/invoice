@@ -80,7 +80,7 @@
     <td>
       <table border="0">
         <tr><td>{{$model->winvoice_number}}</td><td>{{$invoice->inv_number}}</td></tr>
-        <tr><td>{{$model->wfrom_date}}</td><td>{{$invoice->from_date}}</td></tr>
+        <tr><td>{{$model->wfrom_date}}</td><td>{{$invoice->invoice_date}}</td></tr>
         <tr><td>{{$model->wto_date}}</td><td>Due on Receipt</td></tr>
       </table>
 
