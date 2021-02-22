@@ -89,7 +89,7 @@
 
   </tr>
 </table>
-@if($model->from_date_v==0 && $model->to_date_v==0)
+@if($model->from_date_v==1 && $model->to_date_v==1)
 <p style="text-align:center;">
 {{$model->text1}} From 
     @if($invoice->type=='week')Mon {{$invoice->from_date}}
@@ -135,9 +135,10 @@
   </tbody>
   
 </table>
+@if($model->wnote)
 <?php echo str_repeat('<br>',$model->sp_gt_note)?>
 <p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
-
+@endif
 <?php echo str_repeat('<br>',$model->sp_note_top)?>
 
 <table Style="background-color:#FFFFFF;" border=0>
