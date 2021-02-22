@@ -93,18 +93,12 @@
 
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
-    <tr style="border-bottom:solid 2px 
-{{$model->color_heading}};background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">
-      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid 
-{{$model->color_heading}};">{{$model->witem_code}}</th>
-      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid 
-{{$model->color_heading}};">{{$model->wdescription}}</th>
-      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid 
-{{$model->color_heading}};">{{$model->wquantity}}</th>
-      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:2px solid 
-{{$model->color_heading}};">{{$model->wprice}}</th>
-      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:2px solid 
-{{$model->color_heading}};">{{$model->wamount}}</th>
+    <tr style="border-bottom:solid 2px {{$model->color_heading}};background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">
+      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->witem_code}}</th>
+      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wdescription}}</th>
+      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wquantity}}</th>
+      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wprice}}</th>
+      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wamount}}</th>
     </tr>
   </thead>
   <tbody>
