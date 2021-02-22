@@ -86,7 +86,8 @@ class VInvoiceController extends Controller
             'inv_number'         => $inv_number,
             'from_date'         =>  $request->from_date,
             'to_date'         =>  $request->to_date,
-            'v_model_id'         =>  0,
+            'type'         =>  $request->type,
+            'model_id'         =>  0,
             'amount'         =>  0,
         );
         $vinvoice=VInvoic::create($form_data);
@@ -203,16 +204,7 @@ class VInvoiceController extends Controller
     }
     public function update(Request $request, VInvoic $vinvoice)
     {
-
-        $form_data = array(
-            'company_id'        =>  $request->company_id,
-            'vendor_id'         =>  $request->client_id,
-            'invoice_date'         =>  !is_null($request->invoice_date)?$request->invoice_date:$vinvoice->invoice_date,
-            'from_date'         =>  !is_null($request->from_date)?$request->from_date:$vinvoice->from_date,
-            'to_date'         =>  !is_null($request->to_date)?$request->to_date:$vinvoice->to_date,
-        );
-
-        $vinvoice->update($form_data);
+        $vinvoice->update($request->except('_taken'));
 
         return redirect(route('vinvoices.add_items',$vinvoice));
 

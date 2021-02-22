@@ -89,7 +89,14 @@
 
   </tr>
 </table>
-<p style="text-align:center;">{{$model->text1}} From Mon {{$invoice->from_date}} till Sun {{$invoice->to_date}}</p>
+<p style="text-align:center;">
+{{$model->text1}} From 
+    @if($invoice->type=='week')Mon {{$invoice->from_date}}
+     till Sun {{$invoice->to_date}}
+    @else
+    <?php echo date('F-Y',strtotime($invoice->from_date));?> till  
+    <?php echo date('F-Y',strtotime($invoice->to_date));?>
+    @endif</p>
 
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>

@@ -87,6 +87,7 @@ class InvoiceController extends Controller
             'inv_number'         => $inv_number,
             'from_date'         =>  $request->from_date,
             'to_date'         =>  $request->to_date,
+            'type'         =>  $request->type,
             'model_id'         =>  0,
             'amount'         =>  0,
         );
@@ -221,15 +222,7 @@ class InvoiceController extends Controller
     public function update(Request $request, Invoice $invoice)
     {
 
-        $form_data = array(
-            'company_id'        =>  $request->company_id,
-            'client_id'         =>  $request->client_id,
-            'invoice_date'         =>  !is_null($request->invoice_date)?$request->invoice_date:$invoice->invoice_date,
-            'from_date'         =>  !is_null($request->from_date)?$request->from_date:$invoice->from_date,
-            'to_date'         =>  !is_null($request->to_date)?$request->to_date:$invoice->to_date,
-        );
-
-        $invoice->update($form_data);
+        $invoice->update($request->except('_token'));
 
         return redirect(route('invoices.add_items',$invoice));
 

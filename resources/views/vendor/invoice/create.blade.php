@@ -42,18 +42,37 @@
                   <input type="text" class="form-control datetimepicker" onchange="getDateData(1)" id="datetime1" name="invoice_date" placeholder="Select Invoice date">
                 </td>
               </tr>
-              <tr> 
+              <tr>
+                <th align="left">Invoice Type</th>
+                <td>
+                  <select name="type" id="inv_type">
+                    <option value="week">Weekly</option>
+                    <option value="month">Monthly</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="weekly" style="display:none;"> 
                 <th align="left">From Date :</th>
                 <td>
                   <input class="form-control datetimepicker" type="text" onchange="getDateData(0)" id="datetime0" name="from_date" placeholder="Select From date">
                 </td>
-              </tr>
-              <tr> 
+              
                 <th align="left">To Date :</th>
                 <td>
                   <input class="form-control datetimepicker" onchange="getDateData(2)" id="datetime2" type="text" name="to_date" placeholder="Select to date">
                 </td>
               </tr>
+              <tr id="monthly" style="display:none;"> 
+                <th align="left">From Date :</th>
+                <td>
+                  <input class="form-control" type="month" name="from_date" placeholder="Select From date">
+                </td>
+                <th align="left">To Date :</th>
+                <td>
+                  <input class="form-control" type="month" name="to_date" placeholder="Select to date">
+                </td>
+              </tr>
+              
               <tr>
                 <th colspan="2">
                   <input class="btn btn-primary" type="submit" value="Next" >
@@ -87,6 +106,16 @@
                 timeFormat: 'HH:mm:ss'
             }
         );
+    });
+    $('#inv_type').on('change', function() {
+      if(this.value=='week'){
+        $('#monthly').hide();
+        $('#weekly').show();
+      }
+      if(this.value=='month'){
+        $('#monthly').show();
+        $('#weekly').hide();
+      }
     });
 </script>
 @endsection

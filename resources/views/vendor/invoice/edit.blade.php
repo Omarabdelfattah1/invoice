@@ -43,18 +43,44 @@
                   <input type="text" value="{{$vinvoice->invoice_date}}" class="form-control datetimepicker" onchange="getDateData(0)" id="datetime0" name="invoice_date" placeholder="Select Invoice date">
                 </td>
               </tr>
-              <tr> 
-                <th align="left">From Date :</th>
+              <tr>
+                <th align="left">Invoice Type</th>
+                <td>
+                  <select name="type" id="inv_type">
+                    <option value="week" {{$vinvoice->type=='week'?'selected':''}}>Weekly</option>
+                    <option value="month" {{$vinvoice->type=='month'?'selected':''}}>Monthly</option>
+                  </select>
+                </td>
+              </tr>
+              @if($vinvoice->type=='week')
+              <tr id="weekly" > 
+              @else
+              <tr id="weekly" style="display:none;"> 
+              @endif  <th align="left">From Date :</th>
                 <td>
                   <input class="form-control datetimepicker" onchange="getDateData(2)" id="datetime2" value="{{$vinvoice->from_date}}" type="text"  name="from_date" placeholder="Select From date">
                 </td>
-              </tr>
-              <tr> 
+              
                 <th align="left">To Date :</th>
                 <td>
                   <input class="form-control  datetimepicker" onchange="getDateData(1)" id="datetime1" value="{{$vinvoice->to_date}}" type="text" name="to_date" placeholder="Select to date">
                 </td>
               </tr>
+              @if($vinvoice->type=='month')
+              <tr id="monthly" > 
+              @else
+              <tr id="monthly" style="display:none;"> 
+              @endif<th align="left">From Date :</th>
+                <td>
+                  <input class="form-control" value="{{$vinvoice->from_date}}" type="text"  name="from_date" placeholder="Select From date">
+                </td>
+              
+                <th align="left">To Date :</th>
+                <td>
+                  <input class="form-control" value="{{$vinvoice->to_date}}" type="text" name="to_date" placeholder="Select to date">
+                </td>
+              </tr>
+                  
                     
                 <tr>
                   <th colspan="2">
@@ -89,6 +115,16 @@
                 timeFormat: 'HH:mm:ss'
             }
         );
+    });
+    $('#inv_type').on('change', function() {
+      if(this.value=='week'){
+        $('#monthly').hide();
+        $('#weekly').show();
+      }
+      if(this.value=='month'){
+        $('#monthly').show();
+        $('#weekly').hide();
+      }
     });
 </script>
 @endsection
