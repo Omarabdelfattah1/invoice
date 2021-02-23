@@ -37,7 +37,7 @@ class InvoiceController extends Controller
                         if($invoice->model_id){
                             $model=CModel::findOrFail($invoice->model_id);
                         }
-                        $b= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'">'.$model->name.'</a>';
+                        $b= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('cmodels.edit',$model->id).'">'.$model->name.'</a>';
                         return $b;
                     })
                     ->addColumn('action', function($invoice){
