@@ -75,7 +75,7 @@
                                 <td>
                                 <select name="c_email_v">
                                   <option value="0" selected>Hide</option>
-                                  <option value="1" selected>Show</option>
+                                  <option value="1">Show</option>
                                 </select>
                                 </td>
                               </tr>
