@@ -72,12 +72,12 @@
               <tr id="monthly" style="display:none;"> 
               @endif<th align="left">From Date :</th>
                 <td>
-                  <input class="form-control" value="{{$invoice->from_date}}" type="text"  name="from_date" placeholder="Select From date">
+                  <input class="form-control" value="{{$invoice->from_date}}" type="month"  name="from_date" placeholder="Select From date">
                 </td>
               
                 <th align="left">To Date :</th>
                 <td>
-                  <input class="form-control" value="{{$invoice->to_date}}" type="text" name="to_date" placeholder="Select to date">
+                  <input class="form-control" value="{{$invoice->to_date}}" type="month" name="to_date" placeholder="Select to date">
                 </td>
               </tr>
                   

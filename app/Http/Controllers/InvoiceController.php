@@ -33,14 +33,15 @@ class InvoiceController extends Controller
             $invoice = Invoice::query();
             return DataTables::of($invoice)
                     ->addColumn('action', function($invoice){
-                        $button='';
+                        $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         if(!$invoice->locked){
-                            $button = '<a type="button"  name="edit" href="'.route('invoices.edit',$invoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
-                            $button .= '<button  type="button" name="edit" id="'.$invoice->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
-                            $button .= '<a type="button" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
+                            $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('invoices.edit',$invoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
+                            $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
                         }
-                        $button .= '<a type="button" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
-                        $button .= '<button id="delete'.$invoice->id.'" onclick="lock('.$invoice->id.')" type="button" name="edit"class="btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
+                        $button .= '<button title="Lock" id="delete'.$invoice->id.'" onclick="lock('.$invoice->id.')" type="button" name="edit"class="btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
+                        if(!$invoice->locked){
+                            $button .= '<button  type="button" title="Delete" name="edit" id="'.$invoice->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
+                        }
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -109,6 +110,7 @@ class InvoiceController extends Controller
             ->with('model',$model);
     }
     public function download(Invoice $invoice){
+        
         $model=CModel::first();
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);

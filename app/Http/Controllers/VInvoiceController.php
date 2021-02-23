@@ -32,14 +32,15 @@ class VInvoiceController extends Controller
             $vinvoice = VInvoic::latest()->get();
             return DataTables::of($vinvoice)
                     ->addColumn('action', function($vinvoice){
-                        $button='';
+                        $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$vinvoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         if(!$vinvoice->locked){
-                            $button = '<a type="button" id="edit{{$vinvoice->id}}" name="edit" href="'.route('vinvoices.edit',$vinvoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
-                            $button .= '<button id="delete{{$vinvoice->id}}" type="button" name="edit" id="'.$vinvoice->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
-                            $button .= '<a type="button" name="download" href="'.route('vinvoices.download',$vinvoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                            $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('invoices.edit',$vinvoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
+                            $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$vinvoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
                         }
-                        $button .= '<a type="button" id="download{{$vinvoice->id}}"  target="_blank" name="print" href="'.route('vinvoices.print',$vinvoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
-                        $button .= '<button id="delete'.$vinvoice->id.'" id="delete{{$vinvoice->id}}" type="button" name="edit" id="'.$vinvoice->id.'" class="delete btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
+                        $button .= '<button title="Lock" id="delete'.$vinvoice->id.'" onclick="lock('.$vinvoice->id.')" type="button" name="edit"class="btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
+                        if(!$vinvoice->locked){
+                            $button .= '<button  type="button" title="Delete" name="edit" id="'.$vinvoice->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
+                        }
                         return $button;
                     })
                     ->rawColumns(['action'])

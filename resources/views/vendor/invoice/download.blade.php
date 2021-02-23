@@ -140,8 +140,7 @@
 
 
 <table Style="background-color:#FFFFFF;" border=0>
-
-  @if($model->note1_v==1)<tr><td> {!!$model->note1!!} </td></tr>@endif
+@if($model->note1_v==1)<tr><td> <ul>{!!$model->note1!!}</ul> </td></tr>@endif
 </table>
 <table>
   <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>

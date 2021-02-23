@@ -101,12 +101,12 @@
 @endif
 <table border="0" cellspacing="2" cellpadding="2">
   <thead>
-    <tr style="border-bottom:solid 2px {{$model->color_heading}};background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:center;">
-      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->witem_code}}</th>
-      <th align="{{$model->description_alignment != null?$model->description_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wdescription}}</th>
-      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wquantity}}</th>
-      <th align="{{$model->price_alignment != null?$model->price_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wprice}}</th>
-      <th align="{{$model->amount_alignment != null?$model->amount_alignment:center}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wamount}}</th>
+    <tr style="border-bottom:solid 2px {{$model->color_heading}};background-color:{{$model->color_sheme}};color:#FFFFFF;text-align:'center';">
+      <th align="{{$model->item_code_alignment != null?$model->item_code_alignment:'center'}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->witem_code}}</th>
+      <th align="{{$model->description_alignment != null?$model->description_alignment:'center'}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wdescription}}</th>
+      <th align="{{$model->quantity_alignment != null?$model->quantity_alignment:'center'}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wquantity}}</th>
+      <th align="{{$model->price_alignment != null?$model->price_alignment:'center'}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wprice}}</th>
+      <th align="{{$model->amount_alignment != null?$model->amount_alignment:'center'}}" style="border-bottom:2px solid {{$model->color_heading}};">{{$model->wamount}}</th>
     </tr>
   </thead>
   <tbody>
@@ -114,11 +114,11 @@
     <?php $total=0;$q=0;?>
     @foreach($invoice->invoice_items as $item)
       <tr>
-        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:center}}">{{$item->item->name}}</td>
-        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:center}}">{{$item->item->description}}</td>
-        <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:center}}">{{$item->quantity}}</td>
-        <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:center}}">{{$item->item->rate}}</td>
-        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:center}}">{{$item->item->rate*$item->quantity}}</td>
+        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}">{{$item->item->name}}</td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}">{{$item->item->description}}</td>
+        <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}">{{$item->quantity}}</td>
+        <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}">{{$item->item->rate}}</td>
+        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}">{{$item->item->rate*$item->quantity}}</td>
         <?php $total+=$item->item->rate*$item->quantity;$q+=$item->quantity;?>
       </tr>
     @endforeach
@@ -127,7 +127,7 @@
     </tr>
     <tr>
       <td colspan="2">&nbsp;</td>
-      <td style="text-align:center">{{$model->wtotal_quantity}}</td>
+      <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>
       <td style="color:white;background-color:{{$model->color_sheme}};" align="{{$model->wtotal_alignment}}">Total : </td>
       <td align="{{$model->total_alignment}}">{{$total}}</td>
     </tr>
@@ -137,16 +137,16 @@
 </table>
 @if($model->wnote)
 <?php echo str_repeat('<br>',$model->sp_gt_note)?>
-<p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
+<p style="text-align:'center';border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
 @endif
 <?php echo str_repeat('<br>',$model->sp_note_top)?>
 
 <table Style="background-color:#FFFFFF;" border=0>
 
-  @if($model->note1_v==1)<tr><td> {!!$model->note1!!} </td></tr>@endif
+  @if($model->note1_v==1)<tr><td> <ul>{!!$model->note1!!}</ul> </td></tr>@endif
 </table>
 <table>
   <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>
 </table>
-<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};"><h5>{{$model->footer}}</h5> </p>
+<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};">{{$model->footer}}</p>
           
