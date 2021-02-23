@@ -32,7 +32,7 @@
                                 </td>
                               </tr>
                               <th colspan="2" align="left">From Company :<br>
-                                <textarea  rows="1" name="wfrom_company"></textarea>
+                                <textarea  rows="1" name="wfrom_company">From : </textarea>
                               </th>
                               </tr>
                               <tr>
@@ -40,7 +40,7 @@
                                 <th align="left"> Name :</th>
                                 <td>
                                 <select name="c_name_v">;
-                                  <option value="1">Show</option>
+                                  <option value="1" selected>Show</option>
                                   <option value="0">Hide</option>	
                                 </select>
                                 </td>
@@ -48,34 +48,34 @@
                               <tr>
                                 <th align="left"> Address :</th>
                                 <td>
-                                <select name="c_adress_v">";
-                                  <option value="1">Show</option>
+                                <select name="c_adress_v">
+                                  <option value="1" selected>Show</option>
                                   <option value="0">Hide</option>										</select>
                                 </td>
                               </tr>
                               <tr>
                                 <th align="left"> Country  :</th>
                                 <td>
-                                <select name="c_country_v">";
-                                  <option value="1">Show</option>
+                                <select name="c_country_v">
+                                  <option value="1" selected>Show</option>
                                   <option value="0">Hide</option>										</select>
                                 </td>
                               </tr>
                               <tr>
                                 <th align="left"> Tel  :</th>
                                 <td>
-                                <select name="c_tel_v">";
+                                <select name="c_tel_v">
+                                  <option value="0" selected>Hide</option>
                                   <option value="1">Show</option>
-                                  <option value="0">Hide</option>
                                 </select>
                                 </td>
                               </tr>
                               <tr>
                                 <th align="left"> Email  :</th>
                                 <td>
-                                <select name="c_email_v">";
-                                  <option value="1">Show</option>
-                                  <option value="0">Hide</option>	
+                                <select name="c_email_v">
+                                  <option value="0" selected>Hide</option>
+                                  <option value="1" selected>Show</option>
                                 </select>
                                 </td>
                               </tr>
@@ -87,13 +87,13 @@
                           <table border="0"> 
                             <tbody>
                               <tr>
-                                <th colspan="2" align="left">To Client :<br><textarea  rows="1" name="wto_client"> </textarea></th>
+                                <th colspan="2" align="left">To Client :<br><textarea  rows="1" name="wto_client">To : </textarea></th>
                               </tr>
                               <tr>
                                 <th align="left"> Name  :</th>
                                 <td>
-                                  <select name="cl_name_v">";
-                                    <option value="1">Show</option>
+                                  <select name="cl_name_v">
+                                    <option value="1" selected>Show</option>
                                     <option value="0">Hide</option>
                                   </select>
                                 </td>
@@ -101,8 +101,8 @@
                               <tr>
                                 <th align="left"> Address  :</th>
                                 <td>
-                                  <select name="cl_adress_v">";
-                                    <option value="1">Show</option>
+                                  <select name="cl_adress_v">
+                                    <option value="1" selected>Show</option>
                                     <option value="0">Hide</option>
                                   </select>
                                 </td>
@@ -110,8 +110,8 @@
                               <tr>
                                 <th align="left"> Country  :</th>
                                 <td>
-                                  <select name="cl_country_v">";
-                                    <option value="1">Show</option>
+                                  <select name="cl_country_v">
+                                    <option value="1" selected>Show</option>
                                     <option value="0">Hide</option>	
                                   </select>
                                 </td>
@@ -119,18 +119,18 @@
                               <tr>
                                 <th align="left"> Tel  :</th>
                                 <td>
-                                  <select name="cl_tel_v">";
+                                  <select name="cl_tel_v">
+                                    <option value="0" selected>Hide</option>
                                     <option value="1">Show</option>
-                                    <option value="0">Hide</option>
                                   </select>
                                 </td>
                               </tr>
                               <tr>
                                 <th align="left"> Email  :</th>
                                 <td>
-                                  <select name="cl_email_v">";
-                                    <option value="1">Show</option>
-                                    <option value="0">Hide</option>
+                                  <select name="cl_email_v">
+                                    <option value="0" selected>Hide</option>
+                                    <option value="1" >Show</option>
                                   </select>
                                 </td>
                               </tr>
@@ -145,28 +145,29 @@
                       <tr>
                         <th align="left">Invoice Title :<br>
                           <textarea name="invoice_title" class="textarea" placeholder="Place some text here"
-                                      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">Invoice</textarea>
                         </th>
                       </tr>
                       <tr>
-                      <td><b>Title spaces</b>
-                        <input  type="text" name="title_sp" value="" size="2">
-                      </td>
+                        <td>
+                          <b>Title spaces</b>
+                          <input  type="text" name="title_sp" value="" size="2">
+                        </td>
                       </tr>
                       <tr>
                         <th align="left">From Date :<br>
-                          <input  name="wfrom_date" type="text">
-                          <select name="from_date_v">";
-                            <option value="1">Show</option>
+                          <input  name="wfrom_date" type="text" value="Inv Date:">
+                          <select name="from_date_v">
+                            <option value="1" selected>Show</option>
                             <option value="0">Hide</option>							
                           </select>
                         </th>
                       </tr>
                       <tr>
                         <th align="left">To Date :<br>
-                          <input  name="wto_date" type="text">
-                          <select name="to_date_v">";
-                            <option value="1">Show</option>
+                          <input  name="wto_date" type="text" value="Due Date: ">
+                          <select name="to_date_v">
+                            <option value="1" selected>Show</option>
                             <option value="0">Hide</option>							
                           </select>
                         </th>
@@ -174,16 +175,16 @@
 
                       <tr>
                         <th align="left">Invoice Number :<br>
-                          <textarea  rows="1" name="winvoice_number"></textarea>
+                          <textarea  rows="1" name="winvoice_number">Inv # : </textarea>
                         </th>
                         <td></td>
                       </tr>
 
                       <tr>
                         <td colspan="2"><b>Text :</b>(This invoice is for..)<br>
-                          <textarea  rows="1" cols="60" name="text1"></textarea>
-                          <select name="text1_v">";
-                            <option value="1">Show</option>
+                          <textarea  rows="1" cols="60" name="text1">Billing Period is </textarea>
+                          <select name="text1_v">
+                            <option value="1" selected>Show</option>
                             <option value="0">Hide</option>							
                           </select>
                         </td>
@@ -202,11 +203,11 @@
                         <th>Amount</th>
                       </tr>
                       <tr>
-                        <th><textarea  rows="1" name="witem_code"></textarea></th>
-                        <th><textarea  rows="1" name="wdescription"></textarea></th>
-                        <th><textarea  rows="1" name="wquantity"></textarea></th>
-                        <th><textarea  rows="1" name="wprice"></textarea></th>
-                        <th><textarea  rows="1" name="wamount"></textarea></th>
+                        <th><textarea  rows="1" name="witem_code">Item Code</textarea></th>
+                        <th><textarea  rows="1" name="wdescription">Description</textarea></th>
+                        <th><textarea  rows="1" name="wquantity">Minutes</textarea></th>
+                        <th><textarea  rows="1" name="wprice">Price</textarea></th>
+                        <th><textarea  rows="1" name="wamount">Amount</textarea></th>
                       </tr>
                       <tr>
                         <td>
@@ -359,7 +360,7 @@
                         </th>
                         <td>
                           <select name="note1_v">
-                            <option value="1">Show</option>
+                            <option value="1" selected>Show</option>
                             <option value="0">Hide</option>
                           </select>
                         </td>
