@@ -32,6 +32,14 @@ class InvoiceController extends Controller
         {
             $invoice = Invoice::query();
             return DataTables::of($invoice)
+                    ->addColumn('model', function($invoice){
+                        $model=CModel::first();
+                        if($invoice->model_id){
+                            $model=CModel::findOrFail($invoice->model_id);
+                        }
+                        $b= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'">'.$model->name.'</a>';
+                        return $b;
+                    })
                     ->addColumn('action', function($invoice){
                         $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         if(!$invoice->locked){
@@ -44,7 +52,7 @@ class InvoiceController extends Controller
                         }
                         return $button;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['model','action'])
                     ->toJson();
         }
         return view('client.invoice.index');

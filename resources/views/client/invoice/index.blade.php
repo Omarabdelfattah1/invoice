@@ -21,6 +21,7 @@
                 <th >Date from</th>
                 <th >Date to</th>
                 <th >Amount</th>
+                <th >Model</th>
                 <th ></th>
               </tr>
             </thead>
@@ -67,6 +68,7 @@ $(document).ready(function(){
           { "data": "from_date" },
           { "data": "to_date" },
           { "data": "amount" },
+          { "data": "model" },
           { "data": "action",
           "orderable":false },
       ]
