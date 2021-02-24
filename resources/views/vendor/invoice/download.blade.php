@@ -90,7 +90,7 @@
   </tr>
 </table>
 <?php echo str_repeat('&nbsp;<br />',$model->sp_gt_note)?>
-@if($model->from_date_v==0 && $model->to_date_v==0)
+@if($model->from_date_v==0 && $model->to_date_v==0 && $model->text1_v==1)
 <p style="text-align:center;">
 {{$model->text1}} From 
     @if($vinvoice->type=='week')Mon {{$vinvoice->from_date}}

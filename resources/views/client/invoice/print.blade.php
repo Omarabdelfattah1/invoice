@@ -136,8 +136,10 @@ $cm3='#00CCCC';
                     
                   </table>
                     <?php echo str_repeat('&nbsp;<br>',$model->sp_gt_note)?>
-                    <p style="text-align:'center';border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
-                  
+                    @if($model->text1_v==1)
+                      <p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">
+                      {!!$model->wnote!!}</p>
+                    @endif
                   <?php echo str_repeat('&nbsp;<br>',$model->sp_note_top)?>
 
                   <table Style="background-color:#FFFFFF;" border=0>
