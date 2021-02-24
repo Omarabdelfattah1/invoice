@@ -32,7 +32,7 @@ class VInvoiceController extends Controller
             $vinvoice = VInvoic::latest()->get();
             return DataTables::of($vinvoice)
                     ->addColumn('action', function($vinvoice){
-                        $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$vinvoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                        $button= '<a type="button" target="_blank" title="Download" name="download" href="'.route('invoices.download',$vinvoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         if(!$vinvoice->locked){
                             $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('invoices.edit',$vinvoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
                             $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$vinvoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';

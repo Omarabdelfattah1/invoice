@@ -41,7 +41,7 @@ class InvoiceController extends Controller
                         return $b;
                     })
                     ->addColumn('action', function($invoice){
-                        $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                        $button= '<a type="button" title="Download" target="_blank" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         if(!$invoice->locked){
                             $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('invoices.edit',$invoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
                             $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
