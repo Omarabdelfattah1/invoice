@@ -1,6 +1,25 @@
 @extends('layouts.home')
 @section('style')
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+<script type="text/javascript">
+      _editor_url = "{{asset('htmlarea/')}}";
+      _editor_lang = "en";
+</script>
+<script type="text/javascript" src="{{asset('htmlarea/htmlarea.js')}}"></script>
+<script type="text/javascript">
+  HTMLArea.loadPlugin("ContextMenu");
+  HTMLArea.onload = function() {
+    var editor = new HTMLArea("editor");
+    editor.registerPlugin(ContextMenu);
+    editor.generate();
+  
+    var editor = new HTMLArea("editor1");
+        editor.registerPlugin(ContextMenu);
+        editor.generate();
+    
+  };
+  HTMLArea.init();
+</script>
 @endsection
 @section('content')
 <div class="card">
@@ -150,7 +169,7 @@
                     <tbody>
                       <tr>
                         <th align="left">Invoice Title :<br>
-                          <textarea name="invoice_title" class="textarea" placeholder="Place some text here"
+                          <textarea name="invoice_title" id="editor" placeholder="Place some text here"
                                       style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$cmodel->invoice_title}}</textarea>
                         
                         </th>
@@ -364,7 +383,7 @@
                     </tr>
                     <tr>
                       <th align="left">Notes Text:<br>
-                      <textarea name="note1" class="textarea" placeholder="Place some text here"
+                      <textarea name="note1" id="editor1"  placeholder="Place some text here"
                                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$cmodel->note1}} </textarea>
                       </th>
                       <td>
@@ -447,9 +466,9 @@
 @section('scripts')
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script>
-  $(function () {
-    // Summernote
-    $('.textarea').summernote()
-  })
+  // $(function () {
+  //   // Summernote
+  //   $('.textarea').summernote()
+  // })
 </script>
 @endsection
