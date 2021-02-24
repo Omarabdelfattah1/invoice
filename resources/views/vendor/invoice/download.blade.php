@@ -37,7 +37,7 @@
         
       </table>
     </td>
-    <td rowspan="2" style="font-size:200%;"><?php echo str_repeat('<br>',$model->title_sp);?>{!!$model->invoice_title!!}</td>
+    <td rowspan="2" style="font-size:200%;"><?php echo str_repeat('&nbsp;<br />',$model->title_sp);?>{!!$model->invoice_title!!}</td>
     <td style="text-align:right"> <img alt="CompanyLogo" src="{{asset('imgs/logo1.png')}}" width="350px" height="200px" /> </td>
   </tr>
   <tr>
@@ -89,7 +89,7 @@
 
   </tr>
 </table>
-<?php echo str_repeat('<br>',$model->sp_gt_note)?>
+<?php echo str_repeat('&nbsp;<br />',$model->sp_gt_note)?>
 @if($model->from_date_v==0 && $model->to_date_v==0)
 <p style="text-align:center;">
 {{$model->text1}} From 
@@ -136,7 +136,7 @@
   
 </table>
 <p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
-<?php echo str_repeat('<br>',$model->sp_note_top)?>
+<?php echo str_repeat('&nbsp;<br />',$model->sp_note_top)?>
 
 
 <table Style="background-color:#FFFFFF;" border=0>

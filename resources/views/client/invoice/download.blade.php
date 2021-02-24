@@ -1,7 +1,7 @@
 
 <table border="0" cellpadding="2" cellspacing="2" >
   <tr>
-    <td>{{$model->wfrom_company}} <br>
+    <td>{{$model->wfrom_company}} <br />
       <table border="0">
         
         @if($invoice->company->name && $model->c_name_v==1)
@@ -37,11 +37,11 @@
         
       </table>
     </td>
-    <td rowspan="2" style="font-size:200%;"><?php echo str_repeat('<br>',$model->title_sp);?>{!!$model->invoice_title!!}</td>
+    <td rowspan="2" style="font-size:200%;"><?php echo str_repeat("&nbsp;<br />",$model->title_sp);?>{!!$model->invoice_title!!}</td>
     <td style="text-align:right"> <img alt="CompanyLogo" src="{{asset('imgs/logo1.png')}}" width="350px" height="200px" /> </td>
   </tr>
   <tr>
-    <td>{{$model->wto_client}}<br>
+    <td>{{$model->wto_client}}<br />
     <table border="0">
         
         @if($invoice->client->name && $model->cl_name_v==1)
@@ -135,18 +135,17 @@
   </tbody>
   
 </table>
-@if($model->wnote)
-<?php echo str_repeat('<br>',$model->sp_gt_note)?>
-<p style="text-align:'center';border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
-@endif
-<?php echo str_repeat('<br>',$model->sp_note_top)?>
+<?php echo str_repeat("&nbsp;<br />",$model->sp_gt_note)?>
+  <p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">{!!$model->wnote!!}</p>
+
+<?php echo str_repeat("&nbsp;<br />",$model->sp_note_top)?>
 
 <table Style="background-color:#FFFFFF;" border=0>
 
-  @if($model->note1_v==1)<tr><td> <ul>{!!$model->note1!!}</ul> </td></tr>@endif
+  @if($model->note1_v==1)<tr><td> {!!$model->note1!!} </td></tr>@endif
 </table>
-<table>
-  <?php echo str_repeat('<tr><td ></td></tr>',$model->sp_note_footer);?>
-</table>
-<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};">{{$model->footer}}</p>
+<p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};">
+
+<?php echo str_repeat("&nbsp;<br />",$model->sp_note_footer);?>
+{{$model->footer}}</p>
           
