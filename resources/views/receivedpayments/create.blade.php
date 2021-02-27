@@ -30,6 +30,18 @@
                     <input type="text" name="payment_date" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0">
                   </div>
                   <div class="form-group">
+                    <label for="paid_by">Paid by:</label>
+                    <input type="text" name="paid_by" class="form-control" id="paid_by">
+                  </div>
+                  <div class="form-group">
+                    <label for="shipping_address">Shipping Address:</label>
+                    <input type="text" name="shipping_address" class="form-control" id="shipping_address">
+                  </div>
+                  <div class="form-group">
+                    <label for="transction_id">Transction ID</label>
+                    <input type="text" name="transction_id" class="form-control" id="transction_id">
+                  </div>
+                  <div class="form-group">
                     <label for="amount_paid">Amount Paid:</label>
                     <input type="text" name="amount_paid" class="form-control" id="amount_paid">
                   </div>
@@ -40,6 +52,14 @@
                         <option value="{{$bank->id}}">{{$bank->name}}</option>
                         @endforeach
                     </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea name="notes" class="form-control" id="notes"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="details">Details:</label>
+                    <textarea name="details" class="form-control" id="details"></textarea>
                   </div>
                   <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
                 </div>

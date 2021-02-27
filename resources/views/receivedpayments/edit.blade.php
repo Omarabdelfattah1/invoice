@@ -20,7 +20,7 @@
                     <label for="name">Payment Type:</label>
                     <select class="form-control" name="payment_type" id="">
                         @foreach($paymenttypes as $paymenttype)
-                        <option value="{{$paymenttype->name}}" {{$receivedpayment->payment_type==$paymenttype->name?'selected':''}}>{{$paymenttype->name}}</option>
+                        <option value="{{$paymenttype->name}}" {{$paymenttype->name==$receivedpayment->payment_type?'selected':''}}>{{$paymenttype->name}}</option>
                         @endforeach
                     </select>
                     <a href="{{route('paymenttypes.create')}}">...</a>
@@ -28,21 +28,40 @@
                   </div>
                   <div class="form-group">
                     <label for="country">Payment Date:</label>
-                    <input type="text" value="{{$receivedpayment->payment_date}}" name="payment_date" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0">
+                    <input value="{{$receivedpayment->payment_date}}" type="text" name="payment_date" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0">
+                  </div>
+                  <div class="form-group">
+                    <label for="paid_by">Paid by:</label>
+                    <input value="{{$receivedpayment->paid_by}}" type="text" name="paid_by" class="form-control" id="paid_by">
+                  </div>
+                  <div class="form-group">
+                    <label for="shipping_address">Shipping Address:</label>
+                    <input value="{{$receivedpayment->shipping_address}}" type="text" name="shipping_address" class="form-control" id="shipping_address">
+                  </div>
+                  <div class="form-group">
+                    <label for="transction_id">Transction ID</label>
+                    <input value="{{$receivedpayment->transction_id}}" type="text" name="transction_id" class="form-control" id="transction_id">
                   </div>
                   <div class="form-group">
                     <label for="amount_paid">Amount Paid:</label>
-                    <input type="text" value="{{$receivedpayment->amount_paid}}" name="amount_paid" class="form-control" id="amount_paid">
+                    <input value="{{$receivedpayment->amount_paid}}" type="text" name="amount_paid" class="form-control" id="amount_paid">
                   </div>
                   <div class="form-group">
                     <label for="phone">Bank:</label>
                     <select class="form-control" name="bank_id" id="">
-                        @foreach($banks as $bank)
-                        <option value="{{$bank->id}}" {{$receivedpayment->bank_id==$bank->id?'selected':''}}>{{$bank->name}}</option>
-                        @endforeach
+                      @foreach($banks as $bank)
+                      <option value="{{$bank->id}}"{{$bank->id==$receivedpayment->bank_id?'selected':''}}>{{$bank->name}}</option>
+                      @endforeach
                     </select>
                   </div>
-                  <input type="hidden" name="invoice_id" value="{{$receivedpayment->invoice->id}}">
+                  <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea name="notes" class="form-control" id="notes">{{$receivedpayment->notes}}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="details">Details:</label>
+                    <textarea name="details" class="form-control" id="details">{{$receivedpayment->details}}</textarea>
+                  </div>
                 </div>
                 <div class="col">
                   <h3>INV #:{{$receivedpayment->invoice->inv_number}}</h3>

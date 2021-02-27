@@ -32,6 +32,9 @@ class InvoiceController extends Controller
         {
             $invoice = Invoice::query();
             return DataTables::of($invoice)
+                    ->addColumn('client', function($invoice){
+                        return $invoice->client->name;
+                    })
                     ->addColumn('model', function($invoice){
                         $model=CModel::first();
                         if($invoice->model_id){
@@ -45,8 +48,11 @@ class InvoiceController extends Controller
                         if($invoice->received==$invoice->amount){
                             $b= 'Paid';
 
+                        }else if($invoice->received>0 && $invoice->received<$invoice->amount){
+                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-default">Partial</a>';
+                            
                         }else{
-                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-default">Enter Payment</a>';
+                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-default">Draft</a>';
                         }
                         return $b;
                     })
@@ -62,7 +68,7 @@ class InvoiceController extends Controller
                         }
                         return $button;
                     })
-                    ->rawColumns(['model','action','payment'])
+                    ->rawColumns(['model','client','action','payment'])
                     ->toJson();
         }
         return view('client.invoice.index');

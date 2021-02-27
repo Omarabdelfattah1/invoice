@@ -15,6 +15,10 @@ class ReceivedPayment extends Model
         'amount_paid',
         'invoice_id',
         'bank_id',
+        'paid_by',
+        'shipping_address',
+        'transction_id',
+        'details',
     ];
     public function invoice(){
         return $this->belongsTo(Invoice::class);

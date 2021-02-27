@@ -17,6 +17,7 @@
               <tr role="row">
                 <th >#</th>
                 <th > INV_Number</th>
+                <th > Client</th>
                 <th >Invoice Date</th>
                 <th >Date from</th>
                 <th >Date to</th>
@@ -83,6 +84,7 @@ $(document).ready(function(){
       "columns": [
           { "data": "id" },
           { "data": "inv_number" },
+          { "data": "client" },
           { "data": "invoice_date" },
           { "data": "from_date" },
           { "data": "to_date" },
