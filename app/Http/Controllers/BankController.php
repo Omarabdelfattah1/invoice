@@ -124,7 +124,7 @@ class BankController extends Controller
     }
     public function edit_currency(Currency $currency)
     {
-        return view('bank.curr')->with('currency',$currency);
+        return view('bank.curr')->with('currency',$currency)->with('currencies',Currency::all());
     }
     public function update_currency(Request $reauest)
     {
