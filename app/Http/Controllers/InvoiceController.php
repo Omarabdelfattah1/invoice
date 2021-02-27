@@ -40,8 +40,18 @@ class InvoiceController extends Controller
                         $b= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('cmodels.edit',$model->id).'">'.$model->name.'</a>';
                         return $b;
                     })
+                    ->addColumn('payment', function($invoice){
+                        $b='';
+                        if($invoice->received==$invoice->amount){
+                            $b= 'Paid';
+
+                        }else{
+                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-default">Enter Payment</a>';
+                        }
+                        return $b;
+                    })
                     ->addColumn('action', function($invoice){
-                        $button= '<a type="button" title="Download" target="_blank" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                        $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$invoice->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         if(!$invoice->locked){
                             $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('invoices.edit',$invoice->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
                             $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$invoice->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
@@ -52,7 +62,7 @@ class InvoiceController extends Controller
                         }
                         return $button;
                     })
-                    ->rawColumns(['model','action'])
+                    ->rawColumns(['model','action','payment'])
                     ->toJson();
         }
         return view('client.invoice.index');
@@ -65,18 +75,13 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        
         return view('client.invoice.create')
         ->with('items',Item::all())
         ->with('companies',Company::all())
         ->with('clients',Client::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $inv_number='Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1];
@@ -107,6 +112,7 @@ class InvoiceController extends Controller
         return redirect(route('invoices.add_items' ,$invoice));
 
     }
+
     public function print(Invoice $invoice){
         $model=CModel::first();
         if($invoice->model_id){
@@ -133,17 +139,13 @@ class InvoiceController extends Controller
         if($model->pdf_ml && $model->pdf_mt && $model->pdf_mr){
             PDF::SetMargins($model->pdf_ml,$model->pdf_mt,$model->pdf_mr);
         }
+
         PDF::writeHTML($html_content,true,false,true,false,'');
         PDF::Output($invoice->client->name.$invoice->inv_number.'.pdf');
         // return $html_content;
         
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Sample_data  $invoice
-     * @return \Illuminate\Http\Response
-     */
+    
     public function add_item(Invoice $invoice,Request $request)
     {
         return view('client.invoice.add_items')
@@ -198,12 +200,6 @@ class InvoiceController extends Controller
         return redirect(route('invoices.add_items',$invoice));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Client  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Invoice $invoice)
     {
 
@@ -213,13 +209,7 @@ class InvoiceController extends Controller
         ->with('clients',Client::all());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $invoice
-     * @return \Illuminate\Http\Response
-     */
+    
     public function change_model(Request $request, Invoice $invoice)
     {
 
@@ -241,12 +231,6 @@ class InvoiceController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Sample_data  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function lock($id)
     {
 

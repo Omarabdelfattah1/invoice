@@ -51,21 +51,7 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-       
-
-        $form_data = array(
-            'name'=>$request->bank_name,
-            'update_date'=>$request->update_date,
-            'amount'=>$request->amount,
-            'exchange_rate'=>$request->exchange_rate,
-            'exchange_amount'=>$request->exchange_amount,
-            'local_amount'=>$request->local_amount,
-            'comment'=>$request->comment,
-            'image'=>$request->image,
-            'currency_id'=>$request->currency_id,
-        );
-       
-        Bank::create($form_data);
+        Bank::create($request->except('_token'));
 
         return redirect(route('banks.index'));
 
@@ -106,18 +92,7 @@ class BankController extends Controller
     public function update(Request $request, Bank $bank)
     {
        
-        $form_data = array(
-            'name'=>$request->bank_name,
-            'update_date'=>$request->update_date,
-            'amount'=>$request->amount,
-            'exchange_rate'=>$request->exchange_rate,
-            'exchange_amount'=>$request->exchange_amount,
-            'local_amount'=>$request->local_amount,
-            'comment'=>$request->comment,
-            'image'=>$request->image,
-            'currency_id'=>$request->currency_id,
-        );
-        $bank->update($form_data);
+        $bank->update($request->except('_token'));
 
         return redirect(route('banks.index'));
 

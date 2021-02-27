@@ -12,14 +12,14 @@ $cm3='#00CCCC';
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
 @endsection
 @section('content')
-<form action="{{route('vinvoices.change-model',$vinvoice)}}" method="post">
+<form action="{{route('vinvoices.change-model',$vinvoic)}}" method="post">
   @csrf
   @method('put')
   <label for="mmm">Choose Model</label>
   <input type="hidden" name="model" value="1">
   <select name="model_id" id="mmm">
     @foreach($models as $model1)
-    <option value="{{$model1->id}}" {{$model->id==$vinvoice->model_id?'selected':''}}>{{$model1->name}}</option>
+    <option value="{{$model1->id}}" {{$model->id==$vinvoic->model_id?'selected':''}}>{{$model1->name}}</option>
     @endforeach
   </select>
   <button type="submit" class="btn btn-primary">Change</button>
@@ -38,39 +38,39 @@ $cm3='#00CCCC';
                   <h4><b>{{$model->wfrom_company}}</b></h4>
 
                   <address>
-                  @if($vinvoice->company->name && $model->c_name_v==1)
-                    <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->name}}</strong><br>
+                  @if($vinvoic->company->name && $model->c_name_v==1)
+                    <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->company->name}}</strong><br>
                   @endif 
-                  @if($vinvoice->company->address && $model->c_address_v==1)
-                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->address}}<br>
+                  @if($vinvoic->company->address && $model->c_address_v==1)
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->company->address}}<br>
                   @endif 
-                  @if($vinvoice->company->phone  && $model->c_phone_v==1)
-                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->phone}}<br>
+                  @if($vinvoic->company->phone  && $model->c_phone_v==1)
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->company->phone}}<br>
                   @endif 
-                  @if($vinvoice->company->country  && $model->c_country_v==1)
-                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->country}}<br>
+                  @if($vinvoic->company->country  && $model->c_country_v==1)
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->company->country}}<br>
                   @endif 
-                  @if($vinvoice->company->email  && $model->c_email_v==1)
-                   <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->company->email}}
+                  @if($vinvoic->company->email  && $model->c_email_v==1)
+                   <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->company->email}}
                   @endif
                   </address>
                   <h4><b>{{$model->wto_client}}</b></h4>
 
                   <address>
-                    @if($vinvoice->client->name && $model->cl_name_v==1)
-                      <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->client->name}}</strong><br>
+                    @if($vinvoic->client->name && $model->cl_name_v==1)
+                      <strong><?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->client->name}}</strong><br>
                     @endif 
-                    @if($vinvoice->client->address && $model->cl_address_v==1)
-                      <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->client->address}}<br>
+                    @if($vinvoic->client->address && $model->cl_address_v==1)
+                      <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->client->address}}<br>
                     @endif 
-                    @if($vinvoice->client->phone  && $model->cl_phone_v==1)
-                      <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->client->phone}}<br>
+                    @if($vinvoic->client->phone  && $model->cl_phone_v==1)
+                      <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->client->phone}}<br>
                     @endif 
-                    @if($vinvoice->client->country  && $model->cl_country_v==1)
-                      <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->client->country}}<br>
+                    @if($vinvoic->client->country  && $model->cl_country_v==1)
+                      <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->client->country}}<br>
                     @endif 
-                    @if($vinvoice->client->email  && $model->cl_email_v==1)
-                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoice->client->email}}
+                    @if($vinvoic->client->email  && $model->cl_email_v==1)
+                    <?php echo str_repeat('&nbsp;',$model->spcr);?>{{$vinvoic->client->email}}
                     @endif
                   </address>
                 </div>
@@ -82,8 +82,8 @@ $cm3='#00CCCC';
                     <img src="{{asset('imgs/logo1.png')}}"  width="350" height="200" alt="">
                   </h4>
                   <table border="0">
-                    <tr><td>{{$model->winvoice_number}}</td><td>{{$vinvoice->inv_number}}</td></tr>
-                    <tr><td>{{$model->wfrom_date}}</td><td>{{$vinvoice->invoice_date}}</td></tr>
+                    <tr><td>{{$model->winvoice_number}}</td><td>{{$vinvoic->inv_number}}</td></tr>
+                    <tr><td>{{$model->wfrom_date}}</td><td>{{$vinvoic->invoice_date}}</td></tr>
                     <tr><td>{{$model->wto_date}}</td><td>Due on Receipt</td></tr>
                   </table>
                 </div>
@@ -91,11 +91,11 @@ $cm3='#00CCCC';
               @if($model->from_date_v==1 && $model->to_date_v==1)
                 <p style="text-align:center;">
                 {{$model->text1}} From 
-                    @if($vinvoice->type=='week')Mon {{$vinvoice->from_date}}
-                    till Sun {{$vinvoice->to_date}}
+                    @if($vinvoic->type=='week')Mon {{$vinvoic->from_date}}
+                    till Sun {{$vinvoic->to_date}}
                     @else
-                    <?php echo date('F-Y',strtotime($vinvoice->from_date));?> till  
-                    <?php echo date('F-Y',strtotime($vinvoice->to_date));?>
+                    <?php echo date('F-Y',strtotime($vinvoic->from_date));?> till  
+                    <?php echo date('F-Y',strtotime($vinvoic->to_date));?>
                     @endif</p>
               @endif
               <div class="row">
@@ -112,7 +112,7 @@ $cm3='#00CCCC';
                     </thead>
                     <tbody>
                       <?php $total=0;$q=0;?>
-                      @foreach($vinvoice->invoice_items as $item)
+                      @foreach($vinvoic->invoice_items as $item)
                         <tr>
                           <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}">{{$item->item->name}}</td>
                           <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}">{{$item->item->description}}</td>
@@ -155,7 +155,7 @@ $cm3='#00CCCC';
               </div>
               <div class="row no-print">
                 <div class="col-12">
-                <a href="{{route('vinvoices.download',$vinvoice)}}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                <a href="{{route('vinvoices.download',$vinvoic)}}" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                 </div>
               </div>
             </div>

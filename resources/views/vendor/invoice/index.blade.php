@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('vinvoices.create')}}" class="btn btn-block bg-gradient-success">Add New Invoice</a>
+    <a type="button" href="{{route('vinvoics.create')}}" class="btn btn-block bg-gradient-success">Add New Invoice</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -59,7 +59,7 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('vinvoices.index') }}",
+      "ajax": "{{ route('vinvoics.index') }}",
       "columns": [
           { "data": "id" },
           { "data": "inv_number" },
@@ -82,7 +82,7 @@ $(document).ready(function(){
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"vinvoices/destroy/"+user_id,
+   url:"vinvoics/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },
@@ -99,7 +99,7 @@ $(document).ready(function(){
 function lock(id){
    $('#delete'+id).click(function(){
     $.ajax({
-    url:"vinvoices/lock/"+id,
+    url:"vinvoics/lock/"+id,
     success:function(data)
     {
       setTimeout(function(){

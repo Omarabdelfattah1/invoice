@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('invoices.create')}}" class="btn btn-block bg-gradient-success">Add New Invoice</a>
+    <button type="button" data-toggle="modal" data-target="#add_payment" class="btn btn-block bg-gradient-success">Add New Payment</button>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -15,14 +15,10 @@
           <table id="datatable" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
             <thead>
               <tr role="row">
-                <th >#</th>
-                <th > INV_Number</th>
-                <th >Invoice Date</th>
-                <th >Date from</th>
-                <th >Date to</th>
+                <th >Client Inv#</th>
+                <th >Payment Date</th>
+                <th >Type</th>
                 <th >Amount</th>
-                <th >Model</th>
-                <th >Payment</th>
                 <th ></th>
               </tr>
             </thead>
@@ -36,19 +32,48 @@
   </div>
 </div>
 
-<div id="payment" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div id="add_payment" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
+        <div class="modal-header">
+          <h4 align="center" style="margin:0;">Which invoice you received payment for?</h4>
+        </div>
         <div class="modal-body">
-          <form action="{{route('receivedpayments.store')}}" method="post">
-            @csrf
-            <div id="payment-form">
-
-            </div>
-          </form>
+          <table class="table table-bordered table-striped dataTable dtr-inline no-footer">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>INV Number</th>
+                <th>Client</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+          @foreach($invoices as $invoice)          
+              <tr>
+                <td>
+                  <a class="btn btn-primary btn-sm" href="{{route('receivedpayments.create',['invoice_id'=>$invoice->id])}}">Choose</a>
+                </td>
+                <td>
+                  {{$invoice->inv_number}}
+                </td>
+                <td>
+                  {{$invoice->client->name}}
+                </td>
+                <td>
+                  {{$invoice->amount}}
+                </td>
+                <td>
+                  {{$invoice->invoice_date}}
+                </td>
+              </tr>
+          @endforeach
+            </tbody>
+          </table>
         </div>
         <div class="modal-footer">
-          <button type="submit" name="ok_button" class="btn btn-success">Add</button>
+        <button type="button" class="btn btn-danger">OK</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
@@ -69,6 +94,8 @@
 </div>
 
 
+@endsection
+
 @section('scripts')
 <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js">
 </script>
@@ -79,16 +106,12 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('invoices.index') }}",
+      "ajax": "{{ route('receivedpayments.index') }}",
       "columns": [
-          { "data": "id" },
-          { "data": "inv_number" },
-          { "data": "invoice_date" },
-          { "data": "from_date" },
-          { "data": "to_date" },
-          { "data": "amount" },
-          { "data": "model" },
-          { "data": "payment" },
+          { "data": "invoice" },
+          { "data": "payment_date" },
+          { "data": "payment_type" },
+          { "data": "amount_paid" },
           { "data": "action",
           "orderable":false },
       ]
@@ -104,7 +127,7 @@ $(document).ready(function(){
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"invoices/destroy/"+user_id,
+   url:"receivedpayments/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },
@@ -118,24 +141,7 @@ $(document).ready(function(){
    }
   })
  });
- function lock(id){
-    $.ajax({
-    url:"invoices/lock/"+id,
-    success:function(data)
-    {
-      setTimeout(function(){
-        $('#datatable').DataTable().ajax.reload();
-      }, 2000);
-    }
-  });
- }
- 
- 
-
- 
 
 </script>
 
 @endsection
-@endsection
-

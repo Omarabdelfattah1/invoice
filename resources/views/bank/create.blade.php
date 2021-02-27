@@ -15,58 +15,63 @@
             <table border="0">
               <tbody>
                 <tr> 
-                  <th align="left">Update Date :</th>
+                  <th align="left">Date :</th>
                   <td>
-                    <input class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0" name="update_date" placeholder="Select to date" required="">
+                    <input class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0" name="date" placeholder="Select to date" required="">
                     
                   </td>
                 </tr>
                 <tr>
                   <th align="left">Bank Name</th>
                   <td>
-                    <textarea class="form-control" name="bank_name"></textarea>
+                    <textarea class="form-control" name="name"></textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">Amount</th>
-                  <td class="row">
-                    <input class="col-10 form-control" id="amount" type="text" name="amount" value="">$
-                  </td>
+                  <th align="left">City</th>
+                  <td>
+                    <textarea class="form-control" name="city"></textarea>
+                    </td>
                 </tr>
                 <tr>
-                  <th align="left">Exchange Rate</th>
-                  <td class="row">
-                    <input class="col-6 form-control" id="exrate" type="text" name="exchange_rate" value="">Select Currency
-                    <select class="col-3 form-control" name="currency_id">
+                  <th align="left">Country</th>
+                  <td>
+                    <textarea class="form-control" name="country"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                  <th align="left">Address</th>
+                  <td>
+                    <textarea class="form-control" name="address"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                  <th align="left">Details</th>
+                  <td>
+                    <textarea class="form-control" name="details"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                  <th align="left">Account</th>
+                  <td>
+                    <textarea class="form-control" name="account"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                  <th align="left">Note</th>
+                  <td>
+                    <textarea class="form-control" name="notes"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                   <th>Select Currency</th> 
+                   <td>
+                    <select class="form-control" name="currency">
                       @foreach($currencies as $currency)
-                        <option value="{{$currency->id}}">{{$currency->ref}}</option>
+                        <option value="{{$currency->ref}}">{{$currency->ref}}</option>
                       @endforeach
                     </select>
                     <a href="{{route('currencies.index')}}">....</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th align="left">Exchange Amount</th>
-                  <td>
-                    <input id="examount" class="form-control" type="text" name="exchange_amount" readonly="">
-                  </td>
-                </tr>
-                <tr>
-                  <th align="left">Local Amount</th>
-                  <td>
-                    <input type="text" class="form-control" name="local_amount" value="">
-                  </td>
-                </tr>
-                <tr>
-                  <th align="left">Comment</th>
-                  <td>
-                    <textarea class="form-control" name="comment"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                  <th align="left">File Upload :</th>
-                  <td class="row">
-                    <input type="text" class="col-6 form-control" name="name_image"><input class="col-6 form-control" type="file" name="file">
                   </td>
                 </tr>
                 <tr>
@@ -99,22 +104,7 @@
             }
         );
     });
-    $(document).ready(function(){
-    
-    $("#exrate,#amount").on('keyup',function(){
 
-        document.getElementById("examount").value = '';
-        var price = document.getElementById("amount").value
-        var amount = document.getElementById("exrate").value
-        var val = price * amount;
-        
-      if(price &&amount) {
-       document.getElementById("examount").value = val;
-      }
-       
-    });
-
-});
 </script>
 @endsection
 @endsection

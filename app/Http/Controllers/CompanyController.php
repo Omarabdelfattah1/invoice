@@ -68,10 +68,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sample_data  $Company
+     * @param  \App\Sample_data  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $Company)
+    public function show(Company $company)
     {
         //
     }
@@ -79,23 +79,23 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Company  $Company
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $Company)
+    public function edit(Company $company)
     {
 
-        return view('company.edit')->with('Company',$Company);
+        return view('company.edit')->with('company',$company);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Company  $Company
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $Company)
+    public function update(Request $request, Company $company)
     {
        
         $form_data = array(
@@ -106,16 +106,16 @@ class CompanyController extends Controller
             'tel'         =>  $request->tel,
         );
 
-        $Company->update($form_data);
+        $company->update($form_data);
 
-        return redirect(route('companies.edit',$Company));
+        return redirect(route('companies.edit',$company));
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sample_data  $Company
+     * @param  \App\Sample_data  $company
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

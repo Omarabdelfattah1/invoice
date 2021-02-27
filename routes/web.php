@@ -37,10 +37,19 @@ Route::middleware(['auth','accepted'])->group(function() {
   Route::get('/currencies/{currency}/edit', 'BankController@edit_currency')->name('currencies.edit');
   Route::put('/currencies/{currency}/update', 'BankController@update_currency')->name('currencies.update');
  #========================================
+ 
+  Route::resource('/paymenttypes','PaymentMethodController');
+  #========================================
 
 
   Route::resource('/vendors','VendorController');
   Route::get('vendors/destroy/{id}', 'VendorController@destroy');
+
+  Route::resource('/receivedpayments','ReceivedPaymentController');
+  Route::get('receivedpayments/destroy/{id}', 'ReceivedPaymentController@destroy');
+  
+  Route::resource('/donepayments','DonePaymentController');
+  Route::get('donepayments/destroy/{id}', 'DonePaymentController@destroy');
 
   Route::resource('/cmodels','CModelController');
   Route::get('cmodels/destroy/{id}', 'CModelController@destroy');
@@ -66,18 +75,18 @@ Route::middleware(['auth','accepted'])->group(function() {
   Route::get('invoices/{invoice}/{item}/edit_item','InvoiceController@edit_item')->name('invoices.edit_item');
  #========================================
 
-  Route::resource('/vinvoices','VInvoiceController');
-  Route::get('/vinvoices/{vinvoice}/print','VInvoiceController@print')->name('vinvoices.print');
-  Route::get('/vinvoices/{vinvoice}/download','VInvoiceController@download')->name('vinvoices.download');
-  Route::put('/vinvoices/{vinvoice}/change-model','VInvoiceController@change_model')->name('vinvoices.change-model');
+  Route::resource('/vinvoics','VInvoiceController');
+  Route::get('/vinvoics/{vinvoic}/print','VInvoiceController@print')->name('vinvoics.print');
+  Route::get('/vinvoics/{vinvoic}/download','VInvoiceController@download')->name('vinvoics.download');
+  Route::put('/vinvoics/{vinvoic}/change-model','VInvoiceController@change_model')->name('vinvoics.change-model');
   
-  Route::get('vinvoices/destroy/{id}', 'VInvoiceController@destroy');
-  Route::get('vinvoices/lock/{id}', 'VInvoiceController@lock');
-  Route::get('vinvoices/{vinvoice}/add_items','VInvoiceController@add_item')->name('vinvoices.add_items');
-  Route::post('vinvoices/{vinvoice}/add_items','VInvoiceController@store_item')->name('vinvoices.store_items');
-  Route::post('vinvoices/{vinvoice}/{item}/update_item','VInvoiceController@update_item')->name('vinvoices.update_item');
-  Route::get('vinvoices/{vinvoice}/{item}/delete_item','VInvoiceController@delete_item')->name('vinvoices.delete_item');
-  Route::get('vinvoices/{vinvoice}/{item}/edit_item','VInvoiceController@edit_item')->name('vinvoices.edit_item');
+  Route::get('vinvoics/destroy/{id}', 'VInvoiceController@destroy');
+  Route::get('vinvoics/lock/{id}', 'VInvoiceController@lock');
+  Route::get('vinvoics/{vinvoic}/add_items','VInvoiceController@add_item')->name('vinvoics.add_items');
+  Route::post('vinvoics/{vinvoic}/add_items','VInvoiceController@store_item')->name('vinvoics.store_items');
+  Route::post('vinvoics/{vinvoic}/{item}/update_item','VInvoiceController@update_item')->name('vinvoics.update_item');
+  Route::get('vinvoics/{vinvoic}/{item}/delete_item','VInvoiceController@delete_item')->name('vinvoics.delete_item');
+  Route::get('vinvoics/{vinvoic}/{item}/edit_item','VInvoiceController@edit_item')->name('vinvoics.edit_item');
  #========================================
 
   Route::resource('/items','ItemController');

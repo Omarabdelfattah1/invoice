@@ -9,7 +9,7 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-sm-12">
-          <form action="{{route('companies.update',$company)}}" method="post">
+          <form action="{{route('companys.update',$company)}}" method="post">
           @method('put')
           @csrf
 
@@ -24,7 +24,7 @@
               </div>
               <div class="form-group">
                 <label for="country">Company Country:</label>
-                <input type="text" name="country" class="form-control" id="country" value="{{$company->country}}">
+                <input type="text" name="country" class="form-control" id="country" value="{{$company->Country}}">
               </div>
               <div class="form-group">
                 <label for="address">Company Address:</label>

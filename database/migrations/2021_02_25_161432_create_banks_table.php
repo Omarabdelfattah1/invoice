@@ -13,18 +13,18 @@ class CreateBanksTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('banks');
+
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('update_date');
-            $table->integer('amount')->nullable();
-            $table->integer('exchange_rate')->nullable();
-            $table->integer('exchange_amount')->nullable();
-            $table->integer('local_amount')->nullable();
-            $table->text('comment')->nullable();
-            $table->string('image')->nullable();
-            $table->integer('currency_id')->nullable();
-            
+            $table->string('date');
+            $table->string('currency');
+            $table->string('city');
+            $table->string('country');
+            $table->text('details');
+            $table->text('address');
+            $table->text('notes');
             $table->timestamps();
         });
     }

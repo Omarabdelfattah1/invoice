@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12">
         
-        <form action="{{route('vinvoices.store')}}" method="post">
+        <form action="{{route('vinvoics.store')}}" method="post">
           @csrf
           <br>
           <table border="0">

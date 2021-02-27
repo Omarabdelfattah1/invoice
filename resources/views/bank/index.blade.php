@@ -17,15 +17,13 @@
             <thead>
               <tr role="row">
                 <th>Id</th>
+                <th>Name</th>
                 <th>Date</th>
-                <th>Bank Name</th>
-                <th>Amount</th>
-                <th>Exchange Rate</th>
-                <th>Exchange Amount</th>
-                <th>Local Amount</th>
+                <th>Account</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Address</th>
                 <th>Currency</th>
-                <th>Comment</th>
-                <th>Image</th>
                 <th></th>
               </tr>
             </thead>
@@ -51,14 +49,12 @@ $(document).ready( function () {
       "columns": [
           { "data": "id" },
           { "data": "name" },
-          { "data": "update_date" },
-          { "data": "amount" },
-          { "data": "exchange_rate" },
-          { "data": "exchange_amount" },
-          { "data": "local_amount" },
-          { "data": "currency_id" },
-          { "data": "comment" },
-          { "data": "image" },
+          { "data": "date" },
+          { "data": "account" },
+          { "data": "city" },
+          { "data": "country" },
+          { "data": "address" },
+          { "data": "currency" },
           { "data": "action",
           "orderable":false },
       ]

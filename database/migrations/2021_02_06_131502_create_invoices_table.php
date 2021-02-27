@@ -19,7 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('from_date');
             $table->string('to_date');
             $table->string('inv_number');
-            $table->integer('amount');
+            $table->double('amount', 10, 5);
             $table->unsignedBigInteger('model_id');
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('company_id');

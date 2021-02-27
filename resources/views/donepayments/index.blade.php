@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('invoices.create')}}" class="btn btn-block bg-gradient-success">Add New Invoice</a>
+    <a type="button" href="{{route('donepayments.create')}}" class="btn btn-block bg-gradient-success">Add New Payment</a>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -15,14 +15,10 @@
           <table id="datatable" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
             <thead>
               <tr role="row">
-                <th >#</th>
-                <th > INV_Number</th>
-                <th >Invoice Date</th>
-                <th >Date from</th>
-                <th >Date to</th>
+                <th >Client Inv#</th>
+                <th >Payment Date</th>
+                <th >Type</th>
                 <th >Amount</th>
-                <th >Model</th>
-                <th >Payment</th>
                 <th ></th>
               </tr>
             </thead>
@@ -36,24 +32,6 @@
   </div>
 </div>
 
-<div id="payment" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <form action="{{route('receivedpayments.store')}}" method="post">
-            @csrf
-            <div id="payment-form">
-
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" name="ok_button" class="btn btn-success">Add</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-</div>
 <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -69,6 +47,8 @@
 </div>
 
 
+@endsection
+
 @section('scripts')
 <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js">
 </script>
@@ -79,16 +59,12 @@ $(document).ready(function(){
   $('#datatable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": "{{ route('invoices.index') }}",
+      "ajax": "{{ route('donepayments.index') }}",
       "columns": [
-          { "data": "id" },
-          { "data": "inv_number" },
-          { "data": "invoice_date" },
-          { "data": "from_date" },
-          { "data": "to_date" },
-          { "data": "amount" },
-          { "data": "model" },
-          { "data": "payment" },
+          { "data": "client_invoice" },
+          { "data": "payment_date" },
+          { "data": "payment_type" },
+          { "data": "amount_paid" },
           { "data": "action",
           "orderable":false },
       ]
@@ -104,7 +80,7 @@ $(document).ready(function(){
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"invoices/destroy/"+user_id,
+   url:"donepayments/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },
@@ -118,24 +94,7 @@ $(document).ready(function(){
    }
   })
  });
- function lock(id){
-    $.ajax({
-    url:"invoices/lock/"+id,
-    success:function(data)
-    {
-      setTimeout(function(){
-        $('#datatable').DataTable().ajax.reload();
-      }, 2000);
-    }
-  });
- }
- 
- 
-
- 
 
 </script>
 
 @endsection
-@endsection
-

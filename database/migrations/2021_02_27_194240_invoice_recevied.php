@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditInovoicesTable extends Migration
+class InvoiceRecevied extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class EditInovoicesTable extends Migration
     public function up()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->dropColumn('amount');
+            $table->double('received', 10, 5)->nullable();
         });
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->double('amount', 10, 5);
+        Schema::table('v_invoics', function (Blueprint $table) {
+            $table->double('received', 10, 5)->nullable();
         });
     }
 

@@ -118,13 +118,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('vinvoices.create')}}" class="nav-link">
+                <a href="{{route('vinvoics.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>New</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('vinvoices.index')}}" class="nav-link">
+                <a href="{{route('vinvoics.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>List</p>
                 </a>
@@ -145,6 +145,18 @@
                 <a href="{{route('banks.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bank</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('receivedpayments.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Received Payment</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('donepayments.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Done Payment</p>
                 </a>
               </li>
               
