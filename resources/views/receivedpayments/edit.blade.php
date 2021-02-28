@@ -9,9 +9,9 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-sm-12">
-          <form action="{{route('receivedpayments.update',$receivedpayment)}}" method="post">
-          @method('put')
-          @csrf
+          <form action="{{route('receivedpayments.update',$receivedpayment)}}" method="post" enctype="multipart/form-data" >
+            @method('put')
+            @csrf
 
             <div class="card-body">
               <div class="row">
@@ -62,10 +62,16 @@
                     <label for="details">Details:</label>
                     <textarea name="details" class="form-control" id="details">{{$receivedpayment->details}}</textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="rcpnt">Upload Receipt:</label>
+                    <input type="file" name="rcpnt" id="rcpnt">
+                    <label for="rcpt_name">Receipt Name:</label>
+                    <input type="text" name="rcpt_name" id="rcpt_name">
+                  </div>
                 </div>
                 <div class="col">
                   <h3>INV #:{{$receivedpayment->invoice->inv_number}}</h3>
-                  <p class="lead">Amount Due {{$receivedpayment->invoice->invoice_date}}</p>
+                  <p class="lead">Amount Due {{$receivedpayment->invoice->amount}}</p>
                     
                   <div class="table-responsive">
                     <table class="table">

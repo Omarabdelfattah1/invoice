@@ -19,8 +19,12 @@ class ReceivedPayment extends Model
         'shipping_address',
         'transction_id',
         'details',
+        'rcpnt',
     ];
     public function invoice(){
         return $this->belongsTo(Invoice::class);
+    }
+    public function bank(){
+        return $this->belongsTo(Bank::class);
     }
 }

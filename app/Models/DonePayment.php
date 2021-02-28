@@ -13,7 +13,18 @@ class DonePayment extends Model
         'payment_type',
         'payment_date',
         'amount_paid',
-        'v_invoic_id',
+        'invoice_id',
         'bank_id',
+        'paid_by',
+        'shipping_address',
+        'transction_id',
+        'details',
+        'rcpnt',
     ];
+    public function invoice(){
+        return $this->belongsTo(VInvoice::class);
+    }
+    public function bank(){
+        return $this->belongsTo(Bank::class);
+    }
 }

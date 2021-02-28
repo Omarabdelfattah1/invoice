@@ -9,7 +9,7 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
     <div class="row">
         <div class="col-sm-12">
-          <form action="{{route('receivedpayments.store')}}" method="post">
+          <form action="{{route('receivedpayments.store')}}" method="post" enctype="multipart/form-data">
           @csrf
 
             <div class="card-body">
@@ -61,11 +61,17 @@
                     <label for="details">Details:</label>
                     <textarea name="details" class="form-control" id="details"></textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="rcpnt">Upload Receipt:</label>
+                    <input type="file" name="rcpnt" id="rcpnt">
+                    <label for="rcpt_name">Receipt Name:</label>
+                    <input type="text" name="rcpt_name" id="rcpt_name">
+                  </div>
                   <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
                 </div>
                 <div class="col">
                   <h3>INV #:{{$invoice->inv_number}}</h3>
-                  <p class="lead">Amount Due {{$invoice->invoice_date}}</p>
+                  <p class="lead">Amount Due {{$invoice->amount}}</p>
 
                   <div class="table-responsive">
                     <table class="table">
