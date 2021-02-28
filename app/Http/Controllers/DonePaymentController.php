@@ -35,7 +35,7 @@ class DonePaymentController extends Controller
                     ->rawColumns(['invoice','action'])
                     ->make(true);
         }
-        return view('donepayments.index')->with('invoices',VInvoice::all());
+        return view('donepayments.index')->with('invoices',VInvoic::all());
     }
 
     
@@ -65,7 +65,7 @@ class DonePaymentController extends Controller
             $r_p->save();
 
         }
-        $vinvoic=VInvoice::find($request->invoice_id);
+        $vinvoic=VInvoic::find($request->invoice_id);
         $vinvoic->received=$request->amount_paid;
         $vinvoic->save();
         return redirect(route('donepayments.index'));
