@@ -185,8 +185,9 @@ class InvoiceController extends Controller
     public function delete_item(Invoice $invoice,InvoiceItem $item,Request $request)
     {
         $item->delete();
-
-        $invoice->amount-=$item->quantity*$item->item->rate;
+        if($invoice->amount>0){
+            $invoice->amount-=$item->quantity*$item->item->rate;
+        }
         $invoice->save();
         return redirect(route('invoices.add_items',$invoice));
     }

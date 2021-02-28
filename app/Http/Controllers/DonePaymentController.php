@@ -74,7 +74,6 @@ class DonePaymentController extends Controller
 
     public function edit(DonePayment $donepayment)
     {
-
         return view('donepayments.edit')
         ->with('Donepayment',$donepayment)
         ->with('paymenttypes',PaymentType::all())
@@ -110,6 +109,10 @@ class DonePaymentController extends Controller
     {
         $data = DonePayment::findOrFail($id);
         $data->delete();
+    }
+    public function receipt($id){
+        $donepayment=DonePayment::find($id);
+        return response()->file('storage/'.$donepayment->rcpnt);
     }
 }
 

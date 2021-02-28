@@ -28,7 +28,7 @@ class ReceivedPaymentController extends Controller
                         $button = '<a type="button" name="edit" href="'.route('receivedpayments.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         if($data->rcpnt){
-                            $button .= '<a type="button" href='.asset('storage/'.$data->rcpnt).' class="btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                            $button .= '<a type="button" href='.route('receivedpayments.receipt',$data->id).' class="btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                         }
                         return $button;
                     })
@@ -111,6 +111,13 @@ class ReceivedPaymentController extends Controller
     {
         $data = ReceivedPayment::findOrFail($id);
         $data->delete();
+    }
+
+    public function receipt( $id){
+        $receivedpayment=ReceivedPayment::find($id);
+        // dd($receivedpayment);
+        // dd('storage/'.$receivedpayment->rcpnt);
+        return response()->file('storage/'.$receivedpayment->rcpnt);
     }
 }
 

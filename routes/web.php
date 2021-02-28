@@ -47,9 +47,12 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/receivedpayments','ReceivedPaymentController');
   Route::get('receivedpayments/destroy/{id}', 'ReceivedPaymentController@destroy');
+  Route::get('receivedpayments/receipt/{id}', 'ReceivedPaymentController@receipt')->name('receivedpayments.receipt');
+
   
   Route::resource('/donepayments','DonePaymentController');
   Route::get('donepayments/destroy/{id}', 'DonePaymentController@destroy');
+  Route::get('donepayments/receipt/{id}', 'DonePaymentController@receipt')->name('donepayments.receipt');
 
   Route::resource('/cmodels','CModelController');
   Route::get('cmodels/destroy/{id}', 'CModelController@destroy');
