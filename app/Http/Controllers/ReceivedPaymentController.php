@@ -24,6 +24,10 @@ class ReceivedPaymentController extends Controller
                         $invoice=Invoice::find($data->invoice_id);
                         return $invoice->client->name.'<br>'.$invoice->inv_number;
                     })
+                    ->addColumn('remains', function($data){
+                        $invoice=Invoice::find($data->invoice_id);
+                        return $invoice->amount-$data->amount_paid;
+                    })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" href="'.route('receivedpayments.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
@@ -32,7 +36,7 @@ class ReceivedPaymentController extends Controller
                         }
                         return $button;
                     })
-                    ->rawColumns(['invoice','action'])
+                    ->rawColumns(['invoice','action','remains'])
                     ->make(true);
         }
         return view('receivedpayments.index')->with('invoices',Invoice::all());

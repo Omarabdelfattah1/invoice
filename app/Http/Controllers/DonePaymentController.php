@@ -24,6 +24,10 @@ class DonePaymentController extends Controller
                         $vinvoic=VInvoic::find($data->invoice_id);
                         return $vinvoic->vendor->name.'<br>'.$vinvoic->inv_number;
                     })
+                    ->addColumn('remains', function($data){
+                        $vinvoic=VInvoic::find($data->invoice_id);
+                        return $vinvoic->amount-$data->amount_paid;
+                    })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" href="'.route('donepayments.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
@@ -32,7 +36,7 @@ class DonePaymentController extends Controller
                         }
                         return $button;
                     })
-                    ->rawColumns(['invoice','action'])
+                    ->rawColumns(['invoice','action','remains'])
                     ->make(true);
         }
         return view('donepayments.index')->with('invoices',VInvoic::all());

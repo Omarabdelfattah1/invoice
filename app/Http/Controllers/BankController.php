@@ -126,7 +126,7 @@ class BankController extends Controller
     {
         return view('bank.curr')->with('currency',$currency)->with('currencies',Currency::all());
     }
-    public function update_currency(Request $reauest)
+    public function update_currency(Request $request)
     {
         Currency::create(['ref'=>$request->ref]);
         return redirect(route('currencies.index'));
