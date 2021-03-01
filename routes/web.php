@@ -25,10 +25,14 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/clients','ClientController');
   Route::get('clients/destroy/{id}', 'ClientController@destroy');
+  Route::get('clients/soa/{id}', 'ClientController@soa')->name('clients.soa');
+  Route::post('clients/download', 'ClientController@download')->name('clients.download');
  #========================================
 
   Route::resource('/banks','BankController');
   Route::get('banks/destroy/{id}', 'BankController@destroy');
+  Route::get('banks/soa/{id}', 'BankController@soa')->name('banks.soa');
+  Route::post('banks/download', 'BankController@download')->name('banks.download');
  
  #========================================
   Route::get('/currencies', 'BankController@index_currency')->name('currencies.index');
@@ -44,15 +48,19 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/vendors','VendorController');
   Route::get('vendors/destroy/{id}', 'VendorController@destroy');
+  Route::get('vendors/soa/{id}', 'VendorController@soa')->name('vendors.soa');
+  Route::post('vendors/download', 'VendorController@download')->name('vendors.download');
 
   Route::resource('/receivedpayments','ReceivedPaymentController');
   Route::get('receivedpayments/destroy/{id}', 'ReceivedPaymentController@destroy');
   Route::get('receivedpayments/receipt/{id}', 'ReceivedPaymentController@receipt')->name('receivedpayments.receipt');
+  Route::get('receivedpayments/exchange_rate/{id}', 'ReceivedPaymentController@exchange_rate')->name('receivedpayments.exchange_rate');
 
   
   Route::resource('/donepayments','DonePaymentController');
   Route::get('donepayments/destroy/{id}', 'DonePaymentController@destroy');
   Route::get('donepayments/receipt/{id}', 'DonePaymentController@receipt')->name('donepayments.receipt');
+  Route::get('donepayments/exchange_rate/{id}', 'DonePaymentController@exchange_rate')->name('donepayments.exchange_rate');
 
   Route::resource('/cmodels','CModelController');
   Route::get('cmodels/destroy/{id}', 'CModelController@destroy');
@@ -63,6 +71,8 @@ Route::middleware(['auth','accepted'])->group(function() {
 
   Route::resource('/companies','CompanyController');
   Route::get('companies/destroy/{id}', 'CompanyController@destroy');
+  Route::get('companies/soa/{id}', 'CompanyController@soa')->name('companies.soa');
+  Route::post('companies/download', 'CompanyController@download')->name('companies.download');
  #========================================
 
   Route::resource('/invoices','InvoiceController');

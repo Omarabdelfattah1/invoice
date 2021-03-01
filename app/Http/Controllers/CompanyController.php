@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Invoice;
+use App\Models\ReceivedPayment;
+use PDF;
 use DataTables;
 use Validator;
 
@@ -21,12 +24,16 @@ class CompanyController extends Controller
         {
             $data = Company::latest()->get();
             return DataTables::of($data)
+                    ->addColumn('soa', function($data){
+                        $button = '<a type="button" name="edit" href="'.route('companies.soa',$data->id).'" class="edit btn btn-link btn-xs">SOA</a>';
+                        return $button;
+                    })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" href="'.route('companies.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','soa'])
                     ->make(true);
         }
         return view('company.index');
@@ -122,6 +129,23 @@ class CompanyController extends Controller
     {
         $data = Company::findOrFail($id);
         $data->delete();
+    }
+    public function soa($id){
+        $invoices=Invoice::where('company_id',$id)->get();
+        $company=Company::find($id);
+        $invs=Invoice::select('id')->where('company_id',$id)->get();
+        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->get();
+        return view('company.soa')
+        ->with('invoices',$invoices)
+        ->with('company',$company)
+        ->with('payments',$payments);
+    }
+    public function download(Request $request){
+        PDF::AddPage('L','A4');
+        PDF::writeHTML($request->html,true,false,true,false,'');
+        PDF::Output('invoice.pdf');
+        // return $html_content;
+        
     }
 }
 

@@ -19,6 +19,7 @@
                 <th >Payment Date</th>
                 <th >Type</th>
                 <th >Amount</th>
+                <th >Remains</th>
                 <th ></th>
               </tr>
             </thead>
@@ -112,6 +113,7 @@ $(document).ready(function(){
           { "data": "payment_date" },
           { "data": "payment_type" },
           { "data": "amount_paid" },
+          { "data": "remains" },
           { "data": "action",
           "orderable":false },
       ]

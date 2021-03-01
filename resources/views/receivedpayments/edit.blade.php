@@ -47,6 +47,12 @@
                     <input value="{{$receivedpayment->amount_paid}}" type="text" name="amount_paid" class="form-control" id="amount_paid">
                   </div>
                   <div class="form-group">
+                    <label for="exchange_rate">Exchange Rate:</label>
+                    <input type="text" value="{{$receivedpayment->exchange_rate}}" name="exchange_rate" class="form-control" id="exchange_rate">
+                    <label for="exchange_rate_file">Exchange Rate File:</label>
+                    <input type="file" name="exchange_rate_file"  id="exchange_rate_file">
+                  </div>
+                  <div class="form-group">
                     <label for="phone">Bank:</label>
                     <select class="form-control" name="bank_id" id="">
                       @foreach($banks as $bank)

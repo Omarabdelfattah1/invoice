@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\ReceivedPayment;
+use App\Models\Invoice;
 use DataTables;
 use Validator;
-
+use PDF;
 
 class ClientController extends Controller
 {
@@ -21,12 +23,16 @@ class ClientController extends Controller
         {
             $data = Client::latest()->get();
             return DataTables::of($data)
+                    ->addColumn('soa', function($data){
+                        $button = '<a type="button" name="edit" href="'.route('clients.soa',$data->id).'" class="edit btn btn-link btn-xs">SOA</a>';
+                        return $button;
+                    })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" href="'.route('clients.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','soa'])
                     ->make(true);
         }
         return view('client.index');
@@ -122,6 +128,25 @@ class ClientController extends Controller
     {
         $data = Client::findOrFail($id);
         $data->delete();
+    }
+    public function soa($id){
+        $invoices=Invoice::where('client_id',$id)->get();
+        $client=Client::find($id);
+        $invoice=Invoice::where('client_id',$id)->first();
+        $invs=Invoice::select('id')->where('client_id',$id)->get();
+        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->get();
+        return view('client.soa')
+        ->with('invoices',$invoices)
+        ->with('client',$client)
+        ->with('payments',$payments)
+        ->with('company',$invoice->company);
+    }
+    public function download(Request $request){
+        PDF::AddPage('L','A4');
+        PDF::writeHTML($request->html,true,false,true,false,'');
+        PDF::Output('invoice.pdf');
+        // return $html_content;
+        
     }
 }
 

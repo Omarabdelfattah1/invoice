@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <a type="button" href="{{route('donepayments.create')}}" class="btn btn-block bg-gradient-success">Add New Payment</a>
+    <button type="button" data-toggle="modal" data-target="#add_payment" class="btn btn-block bg-gradient-success">Add New Payment</button>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -19,6 +19,7 @@
                 <th >Payment Date</th>
                 <th >Type</th>
                 <th >Amount</th>
+                <th >Remains</th>
                 <th ></th>
               </tr>
             </thead>
@@ -45,7 +46,53 @@
       </div>
     </div>
 </div>
-
+<div id="add_payment" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 align="center" style="margin:0;">Which invoice you received payment for?</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered table-striped dataTable dtr-inline no-footer">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>INV Number</th>
+                <th>Client</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+          @foreach($invoices as $invoice)          
+              <tr>
+                <td>
+                  <a class="btn btn-primary btn-sm" href="{{route('donepayments.create',['invoice_id'=>$invoice->id])}}">Choose</a>
+                </td>
+                <td>
+                  {{$invoice->inv_number}}
+                </td>
+                <td>
+                  {{$invoice->company->name}}
+                </td>
+                <td>
+                  {{$invoice->amount}}
+                </td>
+                <td>
+                  {{$invoice->invoice_date}}
+                </td>
+              </tr>
+          @endforeach
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger">OK</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+</div>
 
 @endsection
 
@@ -65,6 +112,7 @@ $(document).ready(function(){
           { "data": "payment_date" },
           { "data": "payment_type" },
           { "data": "amount_paid" },
+          { "data": "remains" },
           { "data": "action",
           "orderable":false },
       ]

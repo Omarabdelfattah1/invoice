@@ -20,6 +20,8 @@ class ReceivedPayment extends Model
         'transction_id',
         'details',
         'rcpnt',
+        'exchange_rate',
+        'exchange_rate_file',
     ];
     public function invoice(){
         return $this->belongsTo(Invoice::class);

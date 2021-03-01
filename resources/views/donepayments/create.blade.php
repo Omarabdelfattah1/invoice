@@ -4,6 +4,8 @@
   <div class="card-header">
     <h3 class="card-title">Add new Payment</h3>
   </div>
+  <?php $vinvoic=App\Models\VInvoic::find($_GET['invoice_id'])?>
+
   <!-- /.card-header -->
   <div class="card-body">
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -32,6 +34,12 @@
                   <div class="form-group">
                     <label for="amount_paid">Amount Paid:</label>
                     <input type="text" name="amount_paid" class="form-control" id="amount_paid">
+                  </div>
+                  <div class="form-group">
+                    <label for="exchange_rate">Exchange Rate:</label>
+                    <input type="text" name="exchange_rate" class="form-control" id="exchange_rate">
+                    <label for="exchange_rate_file">Exchange Rate File:</label>
+                    <input type="file" name="exchange_rate_file"  id="exchange_rate_file">
                   </div>
                   <div class="form-group">
                     <label for="phone">Bank:</label>

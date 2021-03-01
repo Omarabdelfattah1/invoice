@@ -24,6 +24,7 @@
                 <th>Country</th>
                 <th>Address</th>
                 <th>Currency</th>
+                <th>SOA</th>
                 <th></th>
               </tr>
             </thead>
@@ -55,6 +56,7 @@ $(document).ready( function () {
           { "data": "country" },
           { "data": "address" },
           { "data": "currency" },
+          { "data": "soa" },
           { "data": "action",
           "orderable":false },
       ]

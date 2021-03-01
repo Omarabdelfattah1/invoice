@@ -17,7 +17,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="name">Payment Type:</label>
-                    <select class="form-control" name="payment_type" id="">
+                    <select class="form-control" name="payment_type" id="" required>
                         @foreach($paymenttypes as $paymenttype)
                         <option value="{{$paymenttype->name}}">{{$paymenttype->name}}</option>
                         @endforeach
@@ -46,8 +46,14 @@
                     <input type="text" name="amount_paid" class="form-control" id="amount_paid">
                   </div>
                   <div class="form-group">
+                    <label for="exchange_rate">Exchange Rate:</label>
+                    <input type="text" name="exchange_rate" class="form-control" id="exchange_rate">
+                    <label for="exchange_rate_file">Exchange Rate File:</label>
+                    <input type="file" name="exchange_rate_file"  id="exchange_rate_file">
+                  </div>
+                  <div class="form-group">
                     <label for="phone">Bank:</label>
-                    <select class="form-control" name="bank_id" id="">
+                    <select class="form-control" name="bank_id" id="" required>
                         @foreach($banks as $bank)
                         <option value="{{$bank->id}}">{{$bank->name}}</option>
                         @endforeach

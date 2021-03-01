@@ -21,6 +21,7 @@
                 <th >Address</th>
                 <th >Email</th>
                 <th >Phone</th>
+                <th >SOA</th>
                 <th ></th>
               </tr>
             </thead>
@@ -69,6 +70,7 @@ $(document).ready(function(){
           { "data": "address" },
           { "data": "email" },
           { "data": "tel" },
+          { "data": "soa" },
           { "data": "action",
           "orderable":false },
       ]

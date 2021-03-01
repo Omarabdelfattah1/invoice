@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bank;
+use App\Models\ReceivedPayment;
+use App\Models\DonePayment;
 use App\Models\Currency;
 use DataTables;
 use Validator;
@@ -22,12 +24,16 @@ class BankController extends Controller
         {
             $data = Bank::latest()->get();
             return DataTables::of($data)
+                    ->addColumn('soa', function($data){
+                        $button = '<a type="button" name="edit" href="'.route('banks.soa',$data->id).'" class="btn btn-link btn-xs">SOA</a>';
+                        return $button;
+                    })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" href="'.route('banks.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','soa'])
                     ->make(true);
         }
         return view('bank.index');
@@ -135,6 +141,22 @@ class BankController extends Controller
     {
         $currency->delete();
         return redirect(route('currencies.index'));
+    }
+    public function soa($id){
+        $bank=Bank::find($id);
+        $payment_d=DonePayment::where('bank_id',$id)->get();
+        $payment_r=ReceivedPayment::where('bank_id',$id)->get();
+        return view('bank.soa')
+        ->with('bank',$bank)
+        ->with('payment_r',$payment_r)
+        ->with('payment_d',$payment_d);
+    }
+    public function download(Request $request){
+        PDF::AddPage('L','A4');
+        PDF::writeHTML($request->html,true,false,true,false,'');
+        PDF::Output('invoice.pdf');
+        // return $html_content;
+        
     }
 
 }

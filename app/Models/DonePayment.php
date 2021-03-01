@@ -20,6 +20,8 @@ class DonePayment extends Model
         'transction_id',
         'details',
         'rcpnt',
+        'exchange_rate',
+        'exchange_rate_file',
     ];
     public function invoice(){
         return $this->belongsTo(VInvoice::class);
