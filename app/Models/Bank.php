@@ -18,5 +18,6 @@ class Bank extends Model
         'country',
         'address',
         'notes',
+        'title',
     ];
 }

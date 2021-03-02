@@ -15,8 +15,12 @@
             @endif
             @csrf
             <div class="form-group">
-              <label for="curr">Currency</label>
-              <input type="text" value="{{isset($currency)?$currency->ref:''}}" name="ref" class="form-control">
+              <label for="curr">Ref</label>
+              <input type="text" value="{{isset($currency)?$currency->ref:''}}" name="ref" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="curr">Description</label>
+              <input type="text" value="{{isset($currency)?$currency->description:''}}" name="description" class="form-control">
             </div>
             <button class="btn btn-primary">Add</button>
           </form>

@@ -13,60 +13,66 @@
           <form method="post" action="{{route('banks.update',$bank)}}" enctype="multipart/form-data">
             @method('put')
             @csrf
-            <table border="0">
+            <table border="0" width="100%">
               <tbody>
                 <tr> 
-                  <th align="left">Date :</th>
-                  <td>
+                  <th width="20%" align="left">Date :</th>
+                  <td width="80%">
                     <input value="{{$bank->date}}" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0" name="date" placeholder="Select to date" required="">
                     
                   </td>
                 </tr>
                 <tr>
-                  <th align="left">Bank Name</th>
-                  <td>
+                  <th width="20%" align="left">Bank Name</th>
+                  <td width="80%">
                     <textarea class="form-control" name="name">{{$bank->name}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">City</th>
-                  <td>
+                  <th width="20%" align="left">Title</th>
+                  <td width="80%">
+                    <textarea class="form-control" name="title">{{$bank->title}}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                  <th width="20%" align="left">City</th>
+                  <td width="80%">
                     <textarea class="form-control" name="city">{{$bank->city}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">Country</th>
-                  <td>
+                  <th width="20%" align="left">Country</th>
+                  <td width="80%">
                     <textarea class="form-control" name="country">{{$bank->country}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">Address</th>
-                  <td>
+                  <th width="20%" align="left">Address</th>
+                  <td width="80%">
                     <textarea class="form-control" name="address">{{$bank->address}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">Details</th>
-                  <td>
+                  <th width="20%" align="left">Details</th>
+                  <td width="80%">
                     <textarea class="form-control" name="details">{{$bank->details}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">Account</th>
-                  <td>
+                  <th width="20%" align="left">Account</th>
+                  <td width="80%">
                     <textarea class="form-control" name="account">{{$bank->account}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                  <th align="left">Note</th>
-                  <td>
+                  <th width="20%" align="left">Note</th>
+                  <td width="80%">
                     <textarea class="form-control" name="notes">{{$bank->notes}}</textarea>
                     </td>
                 </tr>
                 <tr>
-                   <th>Select Currency</th> 
-                   <td>
+                   <th width="20%">Select Currency</th> 
+                   <td width="80%">
                     <select class="form-control" name="currency">
                       @foreach($currencies as $currency)
                         <option value="{{$currency->ref}}"{{$bank->currency==$currency->ref?'selected':''}}>{{$currency->ref}}</option>
@@ -76,7 +82,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th colspan="2"><input type="submit" value="Save" name="submit2"></th>
+                  <th width="20%" colspan="2"><input type="submit" value="Save" name="submit2"></th>
                 </tr>
               </tbody>
             </table>

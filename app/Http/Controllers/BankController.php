@@ -125,7 +125,7 @@ class BankController extends Controller
     }
     public function store_currency(Request $request)
     {
-        Currency::create(['ref'=>$request->ref]);
+        Currency::create($request->except('_token'));
         return redirect(route('currencies.index'));
     }
     public function edit_currency(Currency $currency)
@@ -134,7 +134,7 @@ class BankController extends Controller
     }
     public function update_currency(Request $request)
     {
-        Currency::create(['ref'=>$request->ref]);
+        Currency::create($request->except('_token'));
         return redirect(route('currencies.index'));
     }
     public function delete_currency(Currency $currency)
