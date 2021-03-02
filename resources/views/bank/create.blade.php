@@ -72,9 +72,9 @@
                     </td>
                 </tr>
                 <tr>
-                  <th width="20%" align="left">Note</th>
+                  <th width="20%" align="left" >Note</th>
                   <td width="80%">
-                    <textarea class="form-control" name="notes"></textarea>
+                    <textarea class="form-control" name="notes" rows="5"></textarea>
                     </td>
                 </tr>
                 <tr>

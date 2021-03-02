@@ -76,7 +76,7 @@
                 <tr>
                   <th width="20%" align="left">Note</th>
                   <td width="80%">
-                    <textarea class="form-control" name="notes">{{$bank->notes}}</textarea>
+                    <textarea class="form-control" name="notes" rows="5">{{$bank->notes}}</textarea>
                     </td>
                 </tr>
                 <tr>
