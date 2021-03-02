@@ -32,6 +32,7 @@
             <tr>
               <th>Id</th>
               <th>Currency</th>
+              <th>Description</th>
               <th></th>
             </tr>
           </thead>
@@ -40,6 +41,7 @@
               <tr>
                 <td>{{$currency->id}}</td>
                 <td>{{$currency->ref}}</td>
+                <td>{{$currency->description}}</td>
                 <td><a class="btn btn-primary" href="{{route('currencies.edit',$currency)}}"><i class="fas fa-edit"></i></a></td>
                 <td><a class="btn btn-danger" href="{{route('currencies.delete',$currency)}}"><i class="fas fa-trash"></i></a><td>
               </tr>
