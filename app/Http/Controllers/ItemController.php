@@ -51,13 +51,11 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description,
-            'rate'=>$request->rate
-        );
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Item,name'
+        ]);
 
-        Item::create($form_data);
+        Item::create($request->except('_taken'));
 
         return redirect(route('items.index'));
 
@@ -95,13 +93,10 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description,
-            'rate'         =>  $request->rate
-        );
-
-        $item->update($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Item,name'
+        ]);
+        $item->update($request->except('_taken'));
 
         return redirect(route('items.edit',$item));
 

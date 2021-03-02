@@ -56,16 +56,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
-        );
-
-        Client::create($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Client,name'
+        ]);
+        Client::create($request->except('_taken'));
 
         return redirect(route('clients.index'));
 
@@ -104,15 +98,11 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
 
-        $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
-        );
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Client,name'
+        ]);
 
-        $client->update($form_data);
+        $client->update($request->except('_taken'));
 
         return redirect(route('clients.edit',$client));
 

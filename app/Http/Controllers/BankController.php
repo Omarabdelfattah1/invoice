@@ -57,6 +57,9 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'account' => 'unique:App\Models\Bank,account'
+        ]);
         Bank::create($request->except('_token'));
 
         return redirect(route('banks.index'));
@@ -97,7 +100,9 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-       
+        $validated = $request->validate([
+            'account' => 'unique:App\Models\Bank,account'
+        ]);
         $bank->update($request->except('_token'));
 
         return redirect(route('banks.index'));
@@ -125,6 +130,9 @@ class BankController extends Controller
     }
     public function store_currency(Request $request)
     {
+        $validated = $request->validate([
+            'ref' => 'unique:App\Models\Currency,ref'
+        ]);
         Currency::create($request->except('_token'));
         return redirect(route('currencies.index'));
     }
@@ -132,9 +140,12 @@ class BankController extends Controller
     {
         return view('bank.curr')->with('currency',$currency)->with('currencies',Currency::all());
     }
-    public function update_currency(Request $request)
+    public function update_currency(Request $request,Currency $currency)
     {
-        Currency::create($request->except('_token'));
+        $validated = $request->validate([
+            'ref' => 'unique:App\Models\Currency,ref'
+        ]);
+        $currency->update($request->except('_token'));
         return redirect(route('currencies.index'));
     }
     public function delete_currency(Currency $currency)

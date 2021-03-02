@@ -11,7 +11,15 @@
         <div class="col-sm-12">
           <form method="post" enctype="multipart/form-data" metho="post" action="{{route('banks.store')}}">
             @csrf
-            
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <table border="0" width="100%">
               <tbody>
                 <tr> 

@@ -56,17 +56,10 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-       
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
-        );
-
-        Vendor::create($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Vendor,name'
+        ]);
+        Vendor::create($request->except('_taken'));
 
         return redirect(route('vendors.index'));
 
@@ -104,17 +97,10 @@ class VendorController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
-       
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
-        );
-
-        $vendor->update($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Vendor,name'
+        ]);
+        $vendor->update($request->except('_taken'));
 
         return redirect(route('vendors.edit',$vendor));
 

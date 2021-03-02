@@ -57,16 +57,10 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-       
-        $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
-        );
-
-        Company::create($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Company,name'
+        ]);
+        Company::create($request->except('_taken'));
 
         return redirect(route('companies.index'));
 
@@ -105,15 +99,10 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
        
-        $form_data = array(
-            'name'        =>  $request->name,
-            'country'         =>  $request->country,
-            'address'         =>  $request->address,
-            'email'         =>  $request->email,
-            'tel'         =>  $request->tel,
-        );
-
-        $company->update($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\Company,name'
+        ]);
+        $company->update($request->except('_taken'));
 
         return redirect(route('companies.edit',$company));
 

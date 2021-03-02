@@ -12,7 +12,15 @@
         <div class="col-sm-12">
           <form action="{{route('clients.store')}}" method="post">
           @csrf
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Client Name:</label>

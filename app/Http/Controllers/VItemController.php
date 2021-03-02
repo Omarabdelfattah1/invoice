@@ -50,19 +50,10 @@ class VItemController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required',
-        );
-
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description,
-            'rate'         =>  $request->rate,
-        );
-
-        VItem::create($form_data);
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\VItem,name'
+        ]);
+        VItem::create($request->except('_taken'));
 
         return redirect(route('vitems.index'));
 
@@ -100,19 +91,11 @@ class VItemController extends Controller
      */
     public function update(Request $request, VItem $vitem)
     {
-        $rules = array(
-            'name'    =>  'required',
-            'description'     =>  'required'
-        );
+        $validated = $request->validate([
+            'name' => 'unique:App\Models\VItem,name'
+        ]);
 
-
-        $form_data = array(
-            'name'        =>  $request->name,
-            'description'         =>  $request->description,
-            'rate'         =>  $request->rate,
-        );
-
-        $vitem->update($form_data);
+        $vitem->update($request->except('_taken'));
 
         return redirect(route('vitems.edit',$vitem));
 

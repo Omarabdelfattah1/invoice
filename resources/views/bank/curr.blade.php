@@ -14,6 +14,15 @@
               @method('put')
             @endif
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group">
               <label for="curr">Ref</label>
               <input type="text" value="{{isset($currency)?$currency->ref:''}}" name="ref" class="form-control" required>

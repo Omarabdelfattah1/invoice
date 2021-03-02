@@ -13,6 +13,15 @@
           <form method="post" action="{{route('banks.update',$bank)}}" enctype="multipart/form-data">
             @method('put')
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <table border="0" width="100%">
               <tbody>
                 <tr> 
