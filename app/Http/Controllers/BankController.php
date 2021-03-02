@@ -100,9 +100,11 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-        $validated = $request->validate([
-            'account' => 'unique:App\Models\Bank,account'
-        ]);
+        if($request->account != $bank->account){
+            $validated = $request->validate([
+                'account' => 'unique:App\Models\Bank,account'
+            ]);
+        }
         $bank->update($request->except('_token'));
 
         return redirect(route('banks.index'));
@@ -142,9 +144,12 @@ class BankController extends Controller
     }
     public function update_currency(Request $request,Currency $currency)
     {
-        $validated = $request->validate([
-            'ref' => 'unique:App\Models\Currency,ref'
-        ]);
+        if($request->ref!=$currency->ref){
+            $validated = $request->validate([
+                'ref' => 'unique:App\Models\Currency,ref'
+            ]);    
+        }
+        
         $currency->update($request->except('_token'));
         return redirect(route('currencies.index'));
     }

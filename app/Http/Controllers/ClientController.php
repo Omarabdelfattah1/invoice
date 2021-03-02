@@ -98,9 +98,11 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
 
-        $validated = $request->validate([
-            'name' => 'unique:App\Models\Client,name'
-        ]);
+        if($request->name != $client->name){
+            $validated = $request->validate([
+                'name' => 'unique:App\Models\Client,name'
+            ]);
+        }
 
         $client->update($request->except('_taken'));
 

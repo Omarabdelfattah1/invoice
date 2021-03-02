@@ -97,9 +97,11 @@ class VendorController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
-        $validated = $request->validate([
-            'name' => 'unique:App\Models\Vendor,name'
-        ]);
+        if($request->name != $vendor->name){
+            $validated = $request->validate([
+                'name' => 'unique:App\Models\Vendor,name'
+            ]);
+        }
         $vendor->update($request->except('_taken'));
 
         return redirect(route('vendors.edit',$vendor));

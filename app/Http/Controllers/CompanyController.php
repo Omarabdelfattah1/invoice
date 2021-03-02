@@ -99,9 +99,11 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
        
-        $validated = $request->validate([
-            'name' => 'unique:App\Models\Company,name'
-        ]);
+        if($request->name != $company->name){
+            $validated = $request->validate([
+                'name' => 'unique:App\Models\Company,name'
+            ]);
+        }
         $company->update($request->except('_taken'));
 
         return redirect(route('companies.edit',$company));

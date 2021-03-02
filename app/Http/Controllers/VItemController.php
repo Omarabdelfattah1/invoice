@@ -91,9 +91,11 @@ class VItemController extends Controller
      */
     public function update(Request $request, VItem $vitem)
     {
+       if($request->name != $vitem->name){
         $validated = $request->validate([
             'name' => 'unique:App\Models\VItem,name'
         ]);
+       }
 
         $vitem->update($request->except('_taken'));
 

@@ -93,9 +93,11 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $validated = $request->validate([
-            'name' => 'unique:App\Models\Item,name'
-        ]);
+        if($request->name != $item->name){
+            $validated = $request->validate([
+                'name' => 'unique:App\Models\Item,name'
+            ]);
+        }
         $item->update($request->except('_taken'));
 
         return redirect(route('items.edit',$item));
