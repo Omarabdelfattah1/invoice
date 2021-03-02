@@ -19,7 +19,7 @@
               <input type="text" value="{{isset($currency)?$currency->ref:''}}" name="ref" class="form-control" required>
             </div>
             <div class="form-group">
-              <label for="curr">Description</label>
+              <label for="description">Description</label>
               <input type="text" value="{{isset($currency)?$currency->description:''}}" name="description" class="form-control">
             </div>
             <button class="btn btn-primary">Add</button>
