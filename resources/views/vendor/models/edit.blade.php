@@ -32,7 +32,7 @@
           @method('put')
           <div class="card-header" width="50%"><h2>Invoice Models Form </h2>
           <b>Model name :</b>
-          <input  type="text"  name="name"  value="{{$vmodel->name}}">
+          <input  type="text"  name="name"  value="{{$vmodel->name}}" required>
           </div>
 
           <p align="center">Model Settings</p>

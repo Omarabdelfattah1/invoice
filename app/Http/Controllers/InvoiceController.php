@@ -37,6 +37,9 @@ class InvoiceController extends Controller
                     })
                     ->addColumn('model', function($invoice){
                         $model=CModel::where('default',1)->first();
+                        if($invoice->client->model_id){
+                            $model=CModel::findOrFail($invoice->client->model_id);
+                        }
                         if($invoice->model_id){
                             $model=CModel::findOrFail($invoice->model_id);
                         }
@@ -132,6 +135,9 @@ class InvoiceController extends Controller
     public function download(Invoice $invoice){
         
         $model=CModel::where('default',1)->first();
+        if($invoice->client->model_id){
+            $model=CModel::findOrFail($invoice->client->model_id);
+        }
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }

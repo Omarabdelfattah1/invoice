@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\ReceivedPayment;
 use App\Models\Invoice;
+use App\Models\CModel;
 use DataTables;
 use Validator;
 use PDF;
@@ -45,7 +46,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('client.create');
+        return view('client.create')->with('models',CModel::all());
     }
 
     /**
@@ -85,7 +86,7 @@ class ClientController extends Controller
     public function edit(Client $client)
     {
 
-        return view('client.edit')->with('client',$client);
+        return view('client.edit')->with('client',$client)->with('models',CModel::all());
     }
 
     /**
@@ -140,5 +141,6 @@ class ClientController extends Controller
         // return $html_content;
         
     }
+    
 }
 

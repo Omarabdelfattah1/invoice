@@ -25,7 +25,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Company Name:</label>
-                <input type="text" name="name" class="form-control" id="name" value="{{$company->name}}">
+                <input type="text" name="name" class="form-control" id="name" value="{{$company->name}}" required>
               </div>
               <div class="form-group">
                 <label for="email">Company Email:</label>
@@ -33,7 +33,7 @@
               </div>
               <div class="form-group">
                 <label for="country">Company Country:</label>
-                <input type="text" name="country" class="form-control" id="country" value="{{$company->country}}">
+                <input type="text" name="country" class="form-control" id="country" value="{{$company->country}}" required>
               </div>
               <div class="form-group">
                 <label for="address">Company Address:</label>

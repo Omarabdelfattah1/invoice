@@ -25,7 +25,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Client Name:</label>
-                <input type="text" name="name" class="form-control" id="name" value="{{$client->name}}">
+                <input type="text" name="name" class="form-control" id="name" value="{{$client->name}}" required>
               </div>
               <div class="form-group">
                 <label for="email">Client Email:</label>
@@ -33,7 +33,7 @@
               </div>
               <div class="form-group">
                 <label for="country">Client Country:</label>
-                <input type="text" name="country" class="form-control" id="country" value="{{$client->Country}}">
+                <input type="text" name="country" class="form-control" id="country" value="{{$client->country}}" required>
               </div>
               <div class="form-group">
                 <label for="address">Client Address:</label>
@@ -43,7 +43,14 @@
                 <input type="text" name="tel" class="form-control" id="phone" value="{{$client->tel}}">
               </div>
             </div>
-
+            <div class="form-group">
+              <label for="model_id">Model:</label>
+              <select type="text" name="model_id" class="form-control" id="model_id">
+              @foreach($models as $model)
+                <option value="{{$model->id}}" {{$model->id==$client->model_id?'selected':''}}>{{$model->name}}</option>
+              @endforeach
+              </select>
+            </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>

@@ -25,7 +25,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Item Name:</label>
-                <input type="text" name="name" class="form-control" id="name" value="{{$item->name}}">
+                <input type="text" name="name" class="form-control" id="name" value="{{$item->name}}" required>
               </div>
               <div class="form-group">
                 <label for="description">Item Description:</label>

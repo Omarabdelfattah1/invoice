@@ -36,6 +36,9 @@ class VInvoiceController extends Controller
                     if($vinvoic->model_id){
                         $model=VModel::findOrFail($vinvoic->model_id);
                     }
+                    if($vinvoic->vendor->model_id){
+                        $model=VModel::findOrFail($vinvoic->vendor->model_id);
+                    }
                     $b= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('vmodels.edit',$model->id).'">'.$model->name.'</a>';
                     return $b;
                 })

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Vendor;
 use App\Models\DonePayment;
 use App\Models\VInvoic;
+use App\Models\VModel;
 use DataTables;
 use Validator;
 
@@ -45,7 +46,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('vendor.create');
+        return view('vendor.create')->with('models',VModel::all());
     }
 
     /**
@@ -85,7 +86,7 @@ class VendorController extends Controller
     public function edit(Vendor $vendor)
     {
 
-        return view('vendor.edit')->with('Vendor',$vendor);
+        return view('vendor.edit')->with('Vendor',$vendor)->with('models',VModel::all());
     }
 
     /**
@@ -136,5 +137,6 @@ class VendorController extends Controller
         // return $html_content;
         
     }
+    
 }
 

@@ -41,6 +41,14 @@
                 <label for="phone">Client Phone:</label>
                 <input type="text" name="tel" class="form-control" id="phone">
               </div>
+              <div class="form-group">
+                <label for="model_id">Model:</label>
+                <select type="text" name="model_id" class="form-control" id="model_id">
+                @foreach($models as $model)
+                  <option value="{{$model->id}}">{{$model->name}}</option>
+                @endforeach
+                </select>
+              </div>
             </div>
 
             <div class="card-footer">

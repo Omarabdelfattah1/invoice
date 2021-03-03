@@ -12,14 +12,13 @@ $cm3='#00CCCC';
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
 @endsection
 @section('content')
-<form action="{{route('invoices.change-model',$invoice)}}" method="post">
+<form action="{{route('invoices.change_model',$invoice)}}" method="post">
   @csrf
   @method('put')
   <label for="mmm">Choose Model</label>
-  <input type="hidden" name="model" value="1">
   <select name="model_id" id="mmm">
     @foreach($models as $model1)
-    <option value="{{$model1->id}}" {{$model->id==$invoice->model_id?'selected':''}}>{{$model1->name}}</option>
+    <option value="{{$model1->id}}" {{$model1->id==$invoice->model_id?'selected':''}}>{{$model1->name}}</option>
     @endforeach
   </select>
   <button type="submit" class="btn btn-primary">Change</button>

@@ -32,7 +32,7 @@
                 <tr>
                   <th width="20%" align="left">Bank Name</th>
                   <td width="80%">
-                    <textarea class="form-control" name="name"></textarea>
+                    <textarea class="form-control" name="name" required></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -50,7 +50,7 @@
                 <tr>
                   <th width="20%" align="left">Country</th>
                   <td width="80%">
-                    <textarea class="form-control" name="country"></textarea>
+                    <textarea class="form-control" name="country" required></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -68,7 +68,7 @@
                 <tr>
                   <th width="20%" align="left">Account</th>
                   <td width="80%">
-                    <textarea class="form-control" name="account"></textarea>
+                    <textarea class="form-control" name="account" required></textarea>
                     </td>
                 </tr>
                 <tr>

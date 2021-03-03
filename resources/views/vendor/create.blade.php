@@ -24,7 +24,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Vendor Name:</label>
-                <input type="text" name="name" class="form-control" id="name">
+                <input type="text" name="name" class="form-control" id="name" required>
               </div>
               <div class="form-group">
                 <label for="email">Vendor Email:</label>
@@ -32,7 +32,7 @@
               </div>
               <div class="form-group">
                 <label for="country">Vendor Country:</label>
-                <input type="text" name="country" class="form-control" id="country">
+                <input type="text" name="country" class="form-control" id="country" required>
               </div>
               <div class="form-group">
                 <label for="address">Vendor Address:</label>
@@ -41,6 +41,14 @@
                 <label for="phone">Vendor Phone:</label>
                 <input type="text" name="tel" class="form-control" id="phone">
               </div>
+            </div>
+            <div class="form-group">
+              <label for="model_id">Model:</label>
+              <select type="text" name="model_id" class="form-control" id="model_id">
+              @foreach($models as $model)
+                <option value="{{$model->id}}">{{$model->name}}</option>
+              @endforeach
+              </select>
             </div>
 
             <div class="card-footer">

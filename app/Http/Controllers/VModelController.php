@@ -25,7 +25,7 @@ class VModelController extends Controller
                     ->addColumn('default', function($data){
                         $button='';
                         if(!$data->default==1){
-                            $button = '<a type="button" name="edit" href="'.route('vmodels.set_default').'" class="edit btn btn-primary btn-xs">Make Default</a>';
+                            $button = '<a type="button" name="edit" href="'.route('vmodels.set_default',$data->id).'" class="edit btn btn-primary btn-xs">Make Default</a>';
                         }
                         return $button;
                     })
@@ -126,7 +126,6 @@ class VModelController extends Controller
         $model->default=1;
         $model->save();
         return redirect(route('vmodels.index'));
-
     }
 }
 

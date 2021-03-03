@@ -18,7 +18,7 @@
                 <tr>
                   <th align="left">Select Company</th>
                   <td>
-                    <select class="form-control" name="company_id">
+                    <select class="form-control" name="company_id" required>
                       @foreach($companies as $company)
                       <option value="{{$company->id}}" {{$company->id == $vinvoic->company_id?'selected':''}}>{{$company->name}}</option>
                       @endforeach
@@ -29,7 +29,7 @@
                 <tr>
                   <th align="left">Select Client</th>
                   <td>
-                    <select class="form-control" name="client_id">
+                    <select class="form-control" name="client_id" required>
                       @foreach($clients as $client)
                         <option value="{{$client->id}}" {{$client->id == $vinvoic->client_id?'selected':''}}>{{$client->name}}</option>
                       @endforeach

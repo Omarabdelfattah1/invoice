@@ -34,7 +34,7 @@
                 <tr>
                   <th width="20%" align="left">Bank Name</th>
                   <td width="80%">
-                    <textarea class="form-control" name="name">{{$bank->name}}</textarea>
+                    <textarea class="form-control" name="name" required>{{$bank->name}}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -52,7 +52,7 @@
                 <tr>
                   <th width="20%" align="left">Country</th>
                   <td width="80%">
-                    <textarea class="form-control" name="country">{{$bank->country}}</textarea>
+                    <textarea class="form-control" name="country" required>{{$bank->country}}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -70,7 +70,7 @@
                 <tr>
                   <th width="20%" align="left">Account</th>
                   <td width="80%">
-                    <textarea class="form-control" name="account">{{$bank->account}}</textarea>
+                    <textarea class="form-control" name="account" required>{{$bank->account}}</textarea>
                     </td>
                 </tr>
                 <tr>
