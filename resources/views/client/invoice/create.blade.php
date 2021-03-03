@@ -55,22 +55,22 @@
               <tr id="weekly" style="display:none;"> 
                 <th align="left">From Date :</th>
                 <td>
-                  <input class="form-control datetimepicker" type="text" onchange="getDateData(0)" id="datetime0" name="from_date" placeholder="Select From date">
+                  <input class="form-control datetimepicker" type="text" onchange="getDateData(0)" id="datetime0" name="from_date_w" placeholder="Select From date">
                 </td>
               
                 <th align="left">To Date :</th>
                 <td>
-                  <input class="form-control datetimepicker" onchange="getDateData(2)" id="datetime2" type="text" name="to_date" placeholder="Select to date">
+                  <input class="form-control datetimepicker" onchange="getDateData(2)" id="datetime2" type="text" name="to_date_w" placeholder="Select to date">
                 </td>
               </tr>
               <tr id="monthly" style="display:none;"> 
                 <th align="left">From Date :</th>
                 <td>
-                  <input class="form-control" type="month" name="from_date" placeholder="Select From date">
+                  <input class="form-control" type="month" name="from_date_m" placeholder="Select From date">
                 </td>
                 <th align="left">To Date :</th>
                 <td>
-                  <input class="form-control" type="month" name="to_date" placeholder="Select to date">
+                  <input class="form-control" type="month" name="to_date_m" placeholder="Select to date">
                 </td>
               </tr>
               

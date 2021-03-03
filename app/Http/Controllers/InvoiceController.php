@@ -93,6 +93,16 @@ class InvoiceController extends Controller
 
     public function store(Request $request)
     {
+        $from_date='';
+        $to_date='';
+        if($request->type=='month'){
+            $from_date=$request->from_date_m;
+            $to_date=$request->to_date_m;
+        }
+        if($request->type=='week'){
+            $from_date=$request->from_date_w;
+            $to_date=$request->to_date_w;
+        }
         $inv_number='Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1];
         $vdd='01';
         $n=DB::table('invoices')->select(DB::raw('lpad(substring(inv_number,10,2)+1,2,"0") as vdd'))->where(DB::raw('substring(inv_number,1,9)'),'=',$inv_number)->get();
@@ -109,8 +119,8 @@ class InvoiceController extends Controller
             'client_id'         =>  $request->client_id,
             'invoice_date'         =>  $request->invoice_date,
             'inv_number'         => $inv_number,
-            'from_date'         =>  $request->from_date,
-            'to_date'         =>  $request->to_date,
+            'from_date'         =>  $from_date,
+            'to_date'         =>  $to_date,
             'type'         =>  $request->type,
             'model_id'         =>  0,
             'amount'         =>  0,
@@ -237,8 +247,26 @@ class InvoiceController extends Controller
     }
     public function update(Request $request, Invoice $invoice)
     {
-
-        $invoice->update($request->except('_token'));
+        // dd($request->all());
+        $from_date='';
+        $to_date='';
+        if($request->type=='month'){
+            $from_date=$request->from_date_m;
+            $to_date=$request->to_date_m;
+        }
+        if($request->type=='week'){
+            $from_date=$request->from_date_w;
+            $to_date=$request->to_date_w;
+        }
+        $form_data = array(
+            'company_id'        =>  $request->company_id,
+            'client_id'         =>  $request->client_id,
+            'invoice_date'         =>  $request->invoice_date,
+            'from_date'         =>  $from_date,
+            'to_date'         =>  $to_date,
+            'type'         =>  $request->type,
+        );
+        $invoice->update($form_data);
 
         return redirect(route('invoices.add_items',$invoice));
 

@@ -31,11 +31,11 @@
               <tr>
                 <td>From Date: </td>
                 <td>
-                  <input class="form-control" type="text" name="date_from" value="{{$invoice->from_date}}">
+                  <input class="form-control" type="text" name="from_date" value="{{$invoice->from_date}}">
                 </td>
                 <td>To Date: </td>
                 <td>
-                  <input class="form-control" type="text" name="inv_date2" value="{{$invoice->to_date}}">
+                  <input class="form-control" type="text" name="to_date" value="{{$invoice->to_date}}">
                 </td>
               </tr>
               <tr>

@@ -43,10 +43,10 @@ class VInvoiceController extends Controller
                     return $b;
                 })
                 ->addColumn('action', function($vinvoic){
-                    $button= '<a type="button" title="Download" name="download" href="'.route('invoices.download',$vinvoic->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
+                    $button= '<a type="button" title="Download" name="download" href="'.route('vinvoics.download',$vinvoic->id).'" class="edit btn btn-warning btn-xs"><i class="fas fa-file-pdf"></i></a>';
                     if(!$vinvoic->locked){
-                        $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('invoices.edit',$vinvoic->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
-                        $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('invoices.print',$vinvoic->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button .= '<a type="button" title="Edit invoice"  name="edit" href="'.route('vinvoics.edit',$vinvoic->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-pen"></i></a>';
+                        $button .= '<a type="button" title="Edit Model" target="_blank" name="print" href="'.route('vinvoics.print',$vinvoic->id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"></i></a>';
                     }
                     $button .= '<button title="Lock" id="delete'.$vinvoic->id.'" onclick="lock('.$vinvoic->id.')" type="button" name="edit"class="btn btn-dark btn-xs"><i class="fas fa-lock"></i></button>';
                     if(!$vinvoic->locked){
@@ -81,9 +81,19 @@ class VInvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        $from_date='';
+        $to_date='';
+        if($request->type=='month'){
+            $from_date=$request->from_date_m;
+            $to_date=$request->to_date_m;
+        }
+        if($request->type=='week'){
+            $from_date=$request->from_date_w;
+            $to_date=$request->to_date_w;
+        }
         $inv_number='Inv'.$request->invoice_date[8].$request->invoice_date[9].$request->invoice_date[3].$request->invoice_date[4].$request->invoice_date[0].$request->invoice_date[1];
         $vdd='01';
-        $n=DB::table('vinvoices')->select(DB::raw('lpad(substring(inv_number,10,2)+1,2,"0") as vdd'))->where(DB::raw('substring(inv_number,1,9)'),'=',$inv_number)->get();
+        $n=DB::table('vinvoics')->select(DB::raw('lpad(substring(inv_number,10,2)+1,2,"0") as vdd'))->where(DB::raw('substring(inv_number,1,9)'),'=',$inv_number)->get();
         $m=count($n)+1;
         if  ($m>=9)
         {
@@ -97,8 +107,8 @@ class VInvoiceController extends Controller
             'vendor_id'         =>  $request->client_id,
             'invoice_date'         =>  $request->invoice_date,
             'inv_number'         => $inv_number,
-            'from_date'         =>  $request->from_date,
-            'to_date'         =>  $request->to_date,
+            'from_date'         =>  $from_date,
+            'to_date'         =>  $to_date,
             'type'         =>  $request->type,
             'model_id'         =>  0,
             'amount'         =>  0,
@@ -217,7 +227,25 @@ class VInvoiceController extends Controller
     }
     public function update(Request $request, VInvoic $vinvoic)
     {
-        $vinvoic->update($request->except('_taken'));
+        $from_date='';
+        $to_date='';
+        if($request->type=='month'){
+            $from_date=$request->from_date_m;
+            $to_date=$request->to_date_m;
+        }
+        if($request->type=='week'){
+            $from_date=$request->from_date_w;
+            $to_date=$request->to_date_w;
+        }
+        $form_data = array(
+            'company_id'        =>  $request->company_id,
+            'client_id'         =>  $request->client_id,
+            'invoice_date'         =>  $request->invoice_date,
+            'from_date'         =>  $from_date,
+            'to_date'         =>  $to_date,
+            'type'         =>  $request->type,
+        );
+        $vinvoic->update($form_data);
 
         return redirect(route('vinvoices.add_items',$vinvoic));
 
