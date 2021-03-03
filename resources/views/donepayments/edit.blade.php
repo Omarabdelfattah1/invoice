@@ -9,7 +9,7 @@
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-sm-12">
-          <form enctype="multipart/form-data" action="{{route('receivedpayments.update',$donepayment)}}" method="post">
+          <form enctype="multipart/form-data" action="{{route('donepayments.update',$donepayment)}}" method="post">
           @method('put')
           @csrf
 
@@ -74,27 +74,31 @@
                   </div>
                 </div>
                 <div class="col">
-                  <h3>INV #:{{$donepayment->invoice->inv_number}}</h3>
-                  <p class="lead">Amount Due {{$donepayment->invoice->invoice_date}}</p>
-                    
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tbody>
-                      <tr>
-                        <th style="width:50%">Amount: </th>
-                        <td>{{$donepayment->invoice->amount}}</td>
-                      </tr>
-                      <tr>
-                        <th>Received: </th>
-                        <td>{{$donepayment->invoice->received}}</td>
-                      </tr>
-                      <tr>
-                        <th>The rest: </th>
-                        <td>{{$donepayment->invoice->amount-$donepayment->invoice->received}}</td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  @if($donepayment->v_invoic_id)
+                    <input type="hidden" name="invoice_id" value="{{$donepayment->invoice->id}}">
+                  
+                    <h3>INV #:{{$donepayment->invoice->inv_number}}</h3>
+                    <p class="lead">Amount Due {{$donepayment->invoice->amount}}</p>
+
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                        <tr>
+                          <th style="width:50%">Amount: </th>
+                          <td>{{$donepayment->invoice->amount}}</td>
+                        </tr>
+                        <tr>
+                          <th>Received: </th>
+                          <td>{{$donepayment->invoice->received}}</td>
+                        </tr>
+                        <tr>
+                          <th>The rest: </th>
+                          <td>{{$donepayment->invoice->amount-$donepayment->invoice->received}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  @endif
                 </div>
               </div>
             </div>

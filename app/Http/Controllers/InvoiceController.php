@@ -36,7 +36,7 @@ class InvoiceController extends Controller
                         return $invoice->client->name;
                     })
                     ->addColumn('model', function($invoice){
-                        $model=CModel::first();
+                        $model=CModel::where('default',1)->first();
                         if($invoice->model_id){
                             $model=CModel::findOrFail($invoice->model_id);
                         }
@@ -120,7 +120,7 @@ class InvoiceController extends Controller
     }
 
     public function print(Invoice $invoice){
-        $model=CModel::first();
+        $model=CModel::where('default',1)->first();
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }
@@ -131,7 +131,7 @@ class InvoiceController extends Controller
     }
     public function download(Invoice $invoice){
         
-        $model=CModel::first();
+        $model=CModel::where('default',1)->first();
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }

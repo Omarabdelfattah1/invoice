@@ -32,7 +32,7 @@ class VInvoiceController extends Controller
             $vinvoic = VInvoic::latest()->get();
             return DataTables::of($vinvoic)
                 ->addColumn('model', function($vinvoic){
-                    $model=VModel::first();
+                    $model=VModel::where('default',1)->first();
                     if($vinvoic->model_id){
                         $model=VModel::findOrFail($vinvoic->model_id);
                     }
@@ -105,7 +105,7 @@ class VInvoiceController extends Controller
 
     }
     public function download(VInvoic $vinvoic){
-        $model=VModel::first();
+        $model=VModel::where('default',1)->first();
         if($vinvoic->model_id){
             $model=VModel::findOrFail($vinvoic->model_id);
         }
@@ -122,7 +122,7 @@ class VInvoiceController extends Controller
         
     }
     public function print(VInvoic $vinvoic){
-        $model=VModel::first();
+        $model=VModel::where('default',1)->first();
         if($vinvoic->model_id){
             $model=VModel::findOrFail($vinvoic->model_id);
         }

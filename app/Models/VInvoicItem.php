@@ -11,7 +11,7 @@ class VInvoicItem extends Model
     protected $fillable=['v_invoic_id','v_item_id','quantity','price'];
 
     public function invoice(){
-        return $this->belongsTo(VInvoice::class,'v_invoic_id');
+        return $this->belongsTo(VInvoic::class,'v_invoic_id');
     }
     public function item(){
         return $this->belongsTo(VItem::class,'v_item_id');

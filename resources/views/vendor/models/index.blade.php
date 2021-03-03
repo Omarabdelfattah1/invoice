@@ -18,6 +18,7 @@
               <tr role="row">
                 <th >#</th>
                 <th >Name</th>
+                <th >Set Default</th>
                 <th ></th>
               </tr>
             </thead>
@@ -62,6 +63,7 @@ $(document).ready(function(){
       "columns": [
           { "data": "id" },
           { "data": "name" },
+          { "data": "default" },
           { "data": "action",
           "orderable":false },
       ]

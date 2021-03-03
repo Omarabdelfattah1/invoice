@@ -7,7 +7,7 @@ use App\Models\VModel;
 use App\Models\Invoice;
 use DataTables;
 use Validator;
-
+use DB;
 
 class VModelController extends Controller
 {
@@ -22,12 +22,19 @@ class VModelController extends Controller
         {
             $data = VModel::latest()->get();
             return DataTables::of($data)
+                    ->addColumn('default', function($data){
+                        $button='';
+                        if(!$data->default==1){
+                            $button = '<a type="button" name="edit" href="'.route('vmodels.set_default').'" class="edit btn btn-primary btn-xs">Make Default</a>';
+                        }
+                        return $button;
+                    })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" href="'.route('vmodels.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','default'])
                     ->make(true);
         }
         return view('vendor.models.index');
@@ -112,6 +119,14 @@ class VModelController extends Controller
         }
         $data = VModel::findOrFail($id);
         $data->delete();
+    }
+    public function set_default($id){
+        DB::table('v_models')->where('default', '=', 1)->update(array('default' => 0));
+        $model=VModel::findOrFail($id);
+        $model->default=1;
+        $model->save();
+        return redirect(route('vmodels.index'));
+
     }
 }
 

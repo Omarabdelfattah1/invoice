@@ -4,7 +4,6 @@
   <div class="card-header">
     <h3 class="card-title">Add new Payment</h3>
   </div>
-  <?php $invoice=App\Models\Invoice::find($_GET['invoice_id'])?>
   <div class="card-body">
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
     <div class="row">
@@ -73,9 +72,13 @@
                     <label for="rcpt_name">Receipt Name:</label>
                     <input type="text" name="rcpt_name" id="rcpt_name">
                   </div>
-                  <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
                 </div>
                 <div class="col">
+                  @if(isset($_GET['invoice_id']))
+                    <?php $invoice=App\Models\Invoice::find($_GET['invoice_id'])?>
+
+                  <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                
                   <h3>INV #:{{$invoice->inv_number}}</h3>
                   <p class="lead">Amount Due {{$invoice->amount}}</p>
 
@@ -97,6 +100,7 @@
                       </tbody>
                     </table>
                   </div>
+                  @endif
                 </div>
               </div>
             </div>

@@ -80,5 +80,7 @@ class VModel extends Model
         'color_border',
         'color_heading',
         'sp_note_top',
+        'default',
+
     ];
 }

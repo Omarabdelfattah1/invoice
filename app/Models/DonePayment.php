@@ -24,7 +24,7 @@ class DonePayment extends Model
         'exchange_rate_file',
     ];
     public function invoice(){
-        return $this->belongsTo(VInvoice::class);
+        return $this->belongsTo(VInvoic::class);
     }
     public function bank(){
         return $this->belongsTo(Bank::class);

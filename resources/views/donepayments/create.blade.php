@@ -4,8 +4,6 @@
   <div class="card-header">
     <h3 class="card-title">Add new Payment</h3>
   </div>
-  <?php $vinvoic=App\Models\VInvoic::find($_GET['invoice_id'])?>
-
   <!-- /.card-header -->
   <div class="card-body">
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -61,30 +59,35 @@
                     <label for="rcpnt">Upload Receipt:</label>
                     <input type="file" name="rcpnt" id="rcpnt">
                   </div>
-                  <input type="hidden" name="invoice_id" value="{{$vinvoic->id}}">
                 </div>
                 <div class="col">
-                  <h3>INV #:{{$vinvoic->inv_number}}</h3>
-                  <p class="lead">Amount Due {{$vinvoic->amount}}</p>
+                  @if(isset($_GET['invoice_id']))
+                    <?php $invoice=App\Models\VInvoic::find($_GET['invoice_id'])?>
 
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tbody>
-                      <tr>
-                        <th style="width:50%">Amount: </th>
-                        <td>{{$vinvoic->amount}}</td>
-                      </tr>
-                      <tr>
-                        <th>Received: </th>
-                        <td>{{$vinvoic->received}}</td>
-                      </tr>
-                      <tr>
-                        <th>The rest: </th>
-                        <td>{{$vinvoic->amount-$vinvoic->received}}</td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                    <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                  
+                    <h3>INV #:{{$invoice->inv_number}}</h3>
+                    <p class="lead">Amount Due {{$invoice->amount}}</p>
+
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                        <tr>
+                          <th style="width:50%">Amount: </th>
+                          <td>{{$invoice->amount}}</td>
+                        </tr>
+                        <tr>
+                          <th>Received: </th>
+                          <td>{{$invoice->received}}</td>
+                        </tr>
+                        <tr>
+                          <th>The rest: </th>
+                          <td>{{$invoice->amount-$invoice->received}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  @endif
                 </div>
               </div>
             </div>

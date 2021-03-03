@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::middleware(['auth','accepted'])->group(function() {
+  Route::get('/cmodels/{id}/set_default','CModelController@set_default')->name('cmodels.set_default');
+  Route::get('/vmodels/{id}/set_default','VModelController@set_default')->name('vmodels.set_default');
  #========================================
 
   Route::resource('/clients','ClientController');

@@ -80,6 +80,7 @@ class CModel extends Model
             'color_border',
             'color_heading',
         'sp_note_top',
+        'default',
             
     ];
 }

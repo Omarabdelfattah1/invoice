@@ -21,12 +21,22 @@ class ReceivedPaymentController extends Controller
             $data = ReceivedPayment::latest()->get();
             return DataTables::of($data)
                     ->addColumn('invoice', function($data){
-                        $invoice=Invoice::find($data->invoice_id);
-                        return $invoice->client->name.'<br>'.$invoice->inv_number;
+                        if($data->invoice_id){
+                            $invoice=Invoice::find($data->invoice_id);
+                            return $invoice->client->name.'<br>'.$invoice->inv_number;
+                        }else{
+                            return '';
+                        }
+                        
                     })
                     ->addColumn('remains', function($data){
-                        $invoice=Invoice::find($data->invoice_id);
-                        return $invoice->amount-$data->amount_paid;
+                        if($data->invoice_id){
+                            $invoice=Invoice::find($data->invoice_id);
+                            return $invoice->amount-$data->amount_paid;
+                        }else{
+                            return '';
+                        }
+                        
                     })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" title="edit" href="'.route('receivedpayments.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
@@ -59,14 +69,16 @@ class ReceivedPaymentController extends Controller
         $ext='';
         $receivedpayment=ReceivedPayment::create($request->except('_token','exchange_rate_file','rcpt_name','rcpnt'));
         
-        $invoice=Invoice::find($request->invoice_id);
-        $invoice->received=$request->amount_paid;
-        $invoice->save();
+        if($request->invoice_id){
+            $invoice=Invoice::find($request->invoice_id);
+            $invoice->received=$request->amount_paid;
+            $invoice->save();
+        }
         if($request->file('rcpnt'))
         {
             $name = $request->file('rcpnt')->getClientOriginalName();
             $name=str_replace(' ', '-', $name);
-            if($receivedpayment->bank->name.'-'.$invoice->client->name){
+            if($request->invoice_id){
                 $name=$receivedpayment->bank->name.'-'.$invoice->client->name;
             }
             $ext=$request->file('rcpnt')->extension();
@@ -79,7 +91,7 @@ class ReceivedPaymentController extends Controller
         {
             $name = $request->file('exchange_rate_file')->getClientOriginalName();
             $name=str_replace(' ', '-', $name);
-            if($receivedpayment->bank->name.'-'.$invoice->client->name){
+            if($request->invoice_id){
                 $name='exrate_'.$receivedpayment->bank->name.'-'.$invoice->client->name;
             }
             $ext=$request->file('exchange_rate_file')->extension();
@@ -103,18 +115,21 @@ class ReceivedPaymentController extends Controller
 
     public function update(Request $request, ReceivedPayment $receivedpayment)
     {
-        // dd($request);
-        $invoice=Invoice::findOrFail($receivedpayment->invoice_id);
-        $invoice->received-=$receivedpayment->amount_paid;
+        $invoice;
+        if($request->invoice_id){
+            $invoice=Invoice::findOrFail($receivedpayment->invoice_id);
+            $invoice->received-=$receivedpayment->amount_paid;
+            $invoice->received+=$receivedpayment->amount_paid;
+            $invoice->save();
+        }
+        
         $receivedpayment->update($request->except('_token','rcpt_name','rcpnt'));
-        $invoice->received+=$receivedpayment->amount_paid;
-        $invoice->save();
         if($request->file('rcpnt'))
         {
             $name = $request->file('rcpnt')->getClientOriginalName();
             $name=str_replace(' ', '-', $name);
-            if($donepayment->bank->name.'-'.$vinvoice->company->name){
-                $name=$donepayment->bank->name.'-'.$vinvoice->company->name;
+            if($request->invoice_id){
+                $name=$receivedpayment->bank->name.'-'.$vinvoice->company->name;
             }
             $ext=$request->file('rcpnt')->extension();
             $rcpnt=$request->file('rcpnt')->storeAs('public/receipt',$name);
