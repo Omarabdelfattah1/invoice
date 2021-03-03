@@ -30,7 +30,7 @@ class CModelController extends Controller
                         return $button;
                     })
                     ->addColumn('action', function($data){
-                        $button = '<a type="button" name="edit" href="'.route('vmodels.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
+                        $button = '<a type="button" name="edit" href="'.route('cmodels.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
                         $button .= '<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>';
                         return $button;
                     })
