@@ -13,7 +13,8 @@ class Client extends Model
         'address',
         'country',
         'tel',
-        'email'
+        'email',
+        'model_id',
     ];
 
     
