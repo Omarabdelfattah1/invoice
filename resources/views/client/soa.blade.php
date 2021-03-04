@@ -111,7 +111,7 @@
                     <td align='left' >&nbsp;{{$payment->notes}}</td>
                     <td align='center'>{{$payment->amount_paid}}</td>
                     <td align='center'>{{$payment->exchange_rate}}</td>
-                    <td align='center'>{{$payment->exchange_rate*$payment->amount_paid}}</td>
+                    <td align='center'>{{$payment->amount_paid/$payment->exchange_rate}}</td>
                   </tr>
                   <?php $totalp=$payment->amount?>
                   @endforeach
