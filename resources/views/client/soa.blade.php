@@ -57,8 +57,8 @@
         <br>
         <p align='center'><b>Balance/Payable :
         <?php $balance=0;
-          foreach($payments as $payment){
-            $balance+=$payment->amount_paid/$payment->exchange_rate;
+          foreach($invoices as $invoice){
+            $balance+=$invoice->amount/$invoice->exchange_rate;
           }
           echo $balance .'USD';
         ?>    
@@ -118,7 +118,7 @@
                     <td align='center'>{{$payment->exchange_rate}}</td>
                     <td align='center'>{{$payment->amount_paid/$payment->exchange_rate}}</td>
                   </tr>
-                  <?php $totalp=$payment->amount_paid?>
+                  <?php $totalp=$payment->amount_paid/$payment->exchange_rate?>
                   @endforeach
               </table>
             </td>
