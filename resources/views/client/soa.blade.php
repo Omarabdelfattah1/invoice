@@ -60,7 +60,7 @@
           foreach($invoices as $invoice){
             $balance+=$invoice->amount;
           }
-          echo $balance .'USD';
+          echo $balance .'USD$';
         ?>    
       </b></p>
         <br>
