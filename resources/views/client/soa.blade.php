@@ -60,7 +60,10 @@
           foreach($invoices as $invoice){
             $balance+=$invoice->amount;
           }
-          echo $balance .'USD$';
+          foreach($payments as $payment){
+            $balance-=$payment->amount_paid/$payment->exchange_rate;
+          }
+          echo $balance .' USD$';
         ?>    
       </b></p>
         <br>
