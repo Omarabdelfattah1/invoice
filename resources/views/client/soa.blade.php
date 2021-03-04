@@ -96,18 +96,16 @@
                   </tr>
                   <tr>
                     <th align='center' width="15%">Date</th>
-                    <th align='center' width="30%">Description/To Date</th>
                     <th align='center' width="30%">Comment</th>
                     <th align='center' width="12.5%">Amount</th>
                     <th align='center' width="12.5%">XCH</th>
-                    <th align='center' width="12.5%">Inv Amount</th>
+                    <th align='center' width="12.5%">USD$</th>
                   </tr>
                 </thead>
                 <?php $totalp=0;?>
                   @foreach($payments as $payment)
                   <tr>
                     <td align='center'>{{$payment->payment_date}}</td>
-                    <td align='left' >&nbsp;{{$payment->details}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>
                     <td align='center'>{{$payment->amount_paid}}</td>
                     <td align='center'>{{$payment->exchange_rate}}</td>
