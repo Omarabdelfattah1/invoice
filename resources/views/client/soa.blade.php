@@ -58,7 +58,7 @@
         <p align='center'><b>Balance/Payable :
         <?php $balance=0;
           foreach($invoices as $invoice){
-            $balance+=$invoice->amount/$invoice->exchange_rate;
+            $balance+=$invoice->amount;
           }
           echo $balance .'USD';
         ?>    
