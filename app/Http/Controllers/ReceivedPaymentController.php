@@ -66,7 +66,7 @@ class ReceivedPaymentController extends Controller
     
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $name='';
         $ext='';
         $receivedpayment=ReceivedPayment::create($request->except('_token','exchange_rate_file','rcpt_name','rcpnt'));
