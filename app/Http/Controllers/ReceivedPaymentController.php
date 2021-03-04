@@ -7,6 +7,7 @@ use App\Models\ReceivedPayment;
 use App\Models\PaymentType;
 use App\Models\Invoice;
 use App\Models\Bank;
+use App\Models\Client;
 use DataTables;
 use Validator;
 
@@ -55,11 +56,11 @@ class ReceivedPaymentController extends Controller
         return view('receivedpayments.index')->with('invoices',Invoice::all());
     }
 
-    public function create(Invoice $invoice)
+    public function create()
     {
         return view('receivedpayments.create')
-        ->with('invoice',$invoice)
         ->with('paymenttypes',PaymentType::all())
+        ->with('clients',Client::all())
         ->with('banks',Bank::all());;
     }
     
@@ -110,6 +111,7 @@ class ReceivedPaymentController extends Controller
         return view('receivedpayments.edit')
         ->with('receivedpayment',$receivedpayment)
         ->with('paymenttypes',PaymentType::all())
+        ->with('clients',Client::all())
         ->with('banks',Bank::all());
     }
 
@@ -129,7 +131,7 @@ class ReceivedPaymentController extends Controller
             $name = $request->file('rcpnt')->getClientOriginalName();
             $name=str_replace(' ', '-', $name);
             if($request->invoice_id){
-                $name=$receivedpayment->bank->name.'-'.$vinvoice->company->name;
+                $name=$receivedpayment->bank->name.'-'.$invoice->client->name;
             }
             $ext=$request->file('rcpnt')->extension();
             $rcpnt=$request->file('rcpnt')->storeAs('public/receipt',$name);
@@ -162,14 +164,10 @@ class ReceivedPaymentController extends Controller
 
     public function receipt( $id){
         $receivedpayment=ReceivedPayment::find($id);
-        // dd($receivedpayment);
-        // dd('storage/'.$receivedpayment->rcpnt);
         return response()->file('storage/'.$receivedpayment->rcpnt);
     }
     public function exchange_rate( $id){
         $receivedpayment=ReceivedPayment::find($id);
-        // dd($receivedpayment);
-        // dd('storage/'.$receivedpayment->rcpnt);
         return response()->file('storage/'.$receivedpayment->exchange_rate_file);
     }
 }

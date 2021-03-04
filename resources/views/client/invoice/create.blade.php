@@ -40,7 +40,7 @@
               <tr>
                 <th align="left">Invoice Date</th>
                 <td>
-                  <input type="text" class="form-control datetimepicker" onchange="getDateData(1)" id="datetime1" name="invoice_date" placeholder="Select Invoice date">
+                  <input type="text" class="form-control datetimepicker" onchange="getDateData(1)" id="datetime1" name="invoice_date">
                 </td>
               </tr>
               <tr>

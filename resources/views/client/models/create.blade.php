@@ -55,7 +55,7 @@
                               </th>
                               </tr>
                               <tr>
-                                <th align="left" rowspan="5">Spaces:<input  type="text" name="spcr" value="" size="2"></th>
+                                <th align="left" rowspan="5">Spaces:<input  type="text" name="spcr" value="3" size="2"></th>
                                 <th align="left"> Name :</th>
                                 <td>
                                 <select name="c_name_v">;
@@ -68,8 +68,8 @@
                                 <th align="left"> Address :</th>
                                 <td>
                                 <select name="c_adress_v">
-                                  <option value="1" selected>Show</option>
-                                  <option value="0">Hide</option>										</select>
+                                  <option value="1">Show</option>
+                                  <option value="0" selected>Hide</option>										</select>
                                 </td>
                               </tr>
                               <tr>
@@ -121,8 +121,8 @@
                                 <th align="left"> Address  :</th>
                                 <td>
                                   <select name="cl_adress_v">
-                                    <option value="1" selected>Show</option>
-                                    <option value="0">Hide</option>
+                                    <option value="1" >Show</option>
+                                    <option value="0" selected>Hide</option>
                                   </select>
                                 </td>
                               </tr>
@@ -170,7 +170,7 @@
                       <tr>
                         <td>
                           <b>Title spaces</b>
-                          <input  type="text" name="title_sp" value="" size="2">
+                          <input  type="text" name="title_sp" value="0" size="2">
                         </td>
                       </tr>
                       <tr>
@@ -340,7 +340,7 @@
                       </tr>
                       <tr>
                         <td colspan="4" align="right"><b>Outstanding :<br>
-                        <textarea  rows="1" name="woutstanding"></textarea></b></td>
+                        <textarea  rows="1" name="woutstanding">Grand </textarea></b></td>
                         <td>
                           <select name="wtotal_alignment" id="">
                             <option value="center">center</option>
@@ -411,37 +411,37 @@
                 <th align="left">PDF Margin</th>
                 <td> Right:</td>
                 <td>
-                  <input  type="text" name="pdf_mr" value="" size="2">
+                  <input  type="text" name="pdf_mr" value="5" size="2">
                 </td>
                 <td>Left:</td>
                 <td>
-                  <input  type="text" name="pdf_ml" value="" size="2">
+                  <input  type="text" name="pdf_ml" value="5" size="2">
                 </td>
                 <td> Top:</td>
                 <td>
-                  <input  type="text" name="pdf_mt" value="" size="2">
+                  <input  type="text" name="pdf_mt" value="5" size="2">
                 </td>
               </tr>
               <tr>
                 <th>Spaces</th>
                 <td> Grand Total / Notes :</td>
                 <td>
-                  <input  type="text" name="sp_gt_note" value="" size="2">
+                  <input  type="text" name="sp_gt_note" value="5" size="2">
                 </td>
                 <td>notes margin top</td>
                 <td>
-                  <input  type="text" name="sp_note_top" value="" size="2">
+                  <input  type="text" name="sp_note_top" value="1" size="2">
                 </td>
                 <td>notes / Footer:</td>
                 <td>
-                  <input  type="text" name="sp_note_footer" value="" size="2">
+                  <input  type="text" name="sp_note_footer" value="1" size="2">
                 </td>
               </tr>
             </tbody>
           </table>
-          Color Scheme :  <input  type="color" name="color_sheme">
-          Color border :  <input  type="color" name="color_border">
-          Color Under Heading :  <input  type="color" name="color_heading">
+          Color Scheme :  <input  type="color" name="color_sheme" value="#c3471d">
+          Color border :  <input  type="color" name="color_border" value="#0d0c0c">
+          Color Under Heading :  <input  type="color" name="color_heading" value="#c9dd31">
           <br>
           <input class="btn btn-primary" type="submit">
         </form>

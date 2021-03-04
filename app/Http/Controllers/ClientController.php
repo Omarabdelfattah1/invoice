@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\ReceivedPayment;
 use App\Models\Invoice;
-use App\Models\CModel;
 use DataTables;
 use Validator;
 use PDF;
@@ -126,8 +125,7 @@ class ClientController extends Controller
         $invoices=Invoice::where('client_id',$id)->get();
         $client=Client::find($id);
         $invoice=Invoice::where('client_id',$id)->first();
-        $invs=Invoice::select('id')->where('client_id',$id)->get();
-        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->get();
+        $payments=ReceivedPayment::where('client_id',$id)->get();
         return view('client.soa')
         ->with('invoices',$invoices)
         ->with('client',$client)

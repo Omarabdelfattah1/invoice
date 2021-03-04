@@ -26,7 +26,7 @@
                   </div>
                   <div class="form-group">
                     <label for="country">Payment Date:</label>
-                    <input type="text" name="payment_date" class="form-control datetimepicker" onchange="getDateData(0)" type="text" id="datetime0">
+                    <input type="text" name="payment_date" class="form-control datetimepicker" onchange="getDateData(0)" id="datetime0">
                   </div>
                   <div class="form-group">
                     <label for="paid_by">Paid by:</label>
@@ -55,6 +55,22 @@
                     <select class="form-control" name="bank_id" id="" required>
                         @foreach($banks as $bank)
                         <option value="{{$bank->id}}">{{$bank->name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Client:</label>
+                    <select class="form-control" name="bank_id" id="" required>
+                        @foreach($clients as $client)
+                        <option value="{{$client->id}}"
+                          <?php if(isset($_GET['invoice_id'])){
+                            $invoice=App\Models\Invoice::find($_GET['invoice_id']);
+                            if($client->id==$invoice->client_id){
+                              echo 'selected';
+                            }
+                          } 
+                            ?>
+                          >{{$client->name}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -114,24 +130,7 @@
     </div>
   </div>
 </div>
-<script>
-$(document).ready(function(){
-    
-    $("#exrate,#amount").on('keyup',function(){
 
-        document.getElementById("examount").value = '';
-        var price = document.getElementById("amount").value
-        var amount = document.getElementById("exrate").value
-        var val = price * amount;
-        
-      if(price &&amount) {
-       document.getElementById("examount").value = val;
-      }
-       
-    });
-
-});
-</script>
 @section('scripts')
 <script type="text/javascript">
      function getDateData(id) {
