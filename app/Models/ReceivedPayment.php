@@ -15,6 +15,7 @@ class ReceivedPayment extends Model
         'amount_paid',
         'invoice_id',
         'bank_id',
+        'client_id',
         'paid_by',
         'shipping_address',
         'transction_id',

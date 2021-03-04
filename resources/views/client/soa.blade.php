@@ -69,8 +69,7 @@
                     <th colspan="4" align='center'>Invoice/Payments</th>
                   </tr>
                   <tr>
-                    <th align='center'>From Date</th>
-                    <th align='center'>To Date</th>
+                    <th align='center'>Invoice Date</th>
                     <th align='center'>Inv_Number</th>
                     <th align='center'>Amount</th>
                   </tr>
@@ -78,8 +77,7 @@
                 <?php $totalv=0;?>
                   @foreach($invoices as $invoice)
                   <tr>
-                    <td align='center'>{{$invoice->from_date}}</td>
-                    <td align='center'>{{$invoice->to_date}}</td>
+                    <td align='center'>{{$invoice->invoice_date}}</td>
                     <td align='center'>{{$invoice->inv_number}}</td>
                     <td align='center'>{{$invoice->amount}}</td>
                   </tr>
@@ -91,10 +89,10 @@
               <table border="1" width="100%" style="table-layout: auto;" >
                 <thead>
                   <tr>
-                    <th colspan="5" align='center'><b><?php echo $client->name; ?></b></th>
+                    <th colspan="6" align='center'><b><?php echo $client->name; ?></b></th>
                   </tr>
                   <tr>
-                    <th colspan="5" align='center'>Invoice/Payments</th>
+                    <th colspan="6" align='center'>Invoice/Payments</th>
                   </tr>
                   <tr>
                     <th align='center' width="15%">Date</th>
@@ -102,6 +100,7 @@
                     <th align='center' width="30%">Comment</th>
                     <th align='center' width="12.5%">Amount</th>
                     <th align='center' width="12.5%">XCH</th>
+                    <th align='center' width="12.5%">Inv Amount</th>
                   </tr>
                 </thead>
                 <?php $totalp=0;?>
@@ -110,8 +109,9 @@
                     <td align='center'>{{$payment->payment_date}}</td>
                     <td align='left' >&nbsp;{{$payment->details}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>
-                    <td align='center'>{{$payment->amount}}</td>
+                    <td align='center'>{{$payment->amount_paid}}</td>
                     <td align='center'>{{$payment->exchange_rate}}</td>
+                    <td align='center'>{{$payment->exchange_rate*$payment->amount_paid}}</td>
                   </tr>
                   <?php $totalp=$payment->amount?>
                   @endforeach

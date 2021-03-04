@@ -61,6 +61,14 @@
                     </select>
                   </div>
                   <div class="form-group">
+                    <label for="phone">Client:</label>
+                    <select class="form-control" name="client_id" id="" required>
+                        @foreach($clients as $client)
+                        <option value="{{$client->id}}" {{$receivedpayment->client_id==$client->id?'selected':''}}>{{$client->name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label for="notes">Notes:</label>
                     <textarea name="notes" class="form-control" id="notes">{{$receivedpayment->notes}}</textarea>
                   </div>

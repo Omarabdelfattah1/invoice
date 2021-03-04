@@ -60,7 +60,7 @@
                   </div>
                   <div class="form-group">
                     <label for="phone">Client:</label>
-                    <select class="form-control" name="bank_id" id="" required>
+                    <select class="form-control" name="client_id" id="" required>
                         @foreach($clients as $client)
                         <option value="{{$client->id}}"
                           <?php if(isset($_GET['invoice_id'])){
