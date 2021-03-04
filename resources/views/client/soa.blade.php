@@ -71,7 +71,7 @@
                   <tr>
                     <th align='center'>Invoice Date</th>
                     <th align='center'>Inv_Number</th>
-                    <th align='center'>Amount</th>
+                    <th align='center'>USD$</th>
                   </tr>
                 </thead>
                 <?php $totalv=0;?>
