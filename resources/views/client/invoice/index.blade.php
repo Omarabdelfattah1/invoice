@@ -93,7 +93,7 @@ $(document).ready(function(){
       "columns": [
           { "data": "id" },
           { "data": "inv_number" },
-          { "data": "client" },
+          { "data": "client.name" },
           { "data": "invoice_date" },
           { "data": "from_date" },
           { "data": "to_date" },
@@ -102,7 +102,8 @@ $(document).ready(function(){
           { "data": "payment" },
           { "data": "action",
           "orderable":false },
-      ]
+      ],
+      "order":[[3,'desc']]
     });
 } );
 

@@ -37,7 +37,7 @@
                 <td>{{$paymenttype->id}}</td>
                 <td>{{$paymenttype->name}}</td>
                 <td><a class="btn btn-primary" href="{{route('paymenttypes.edit',$paymenttype)}}"><i class="fas fa-edit"></i></a></td>
-                <td><a class="btn btn-danger" href="{{route('paymenttypes.destroy',$paymenttype)}}"><i class="fas fa-trash"></i></a><td>
+                <td><a class="btn btn-danger" href="{{route('paymenttypes.delete',$paymenttype)}}"><i class="fas fa-trash"></i></a><td>
               </tr>
             @endforeach
           </tbody>

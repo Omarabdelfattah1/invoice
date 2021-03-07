@@ -30,11 +30,8 @@ class InvoiceController extends Controller
         
         if($request->ajax())
         {
-            $invoice = Invoice::query();
+            $invoice = Invoice::with('client');
             return DataTables::of($invoice)
-                    ->addColumn('client', function($invoice){
-                        return $invoice->client->name;
-                    })
                     ->addColumn('model', function($invoice){
                         $model=CModel::where('default',1)->first();
                         if($invoice->client->model_id){
@@ -71,7 +68,7 @@ class InvoiceController extends Controller
                         }
                         return $button;
                     })
-                    ->rawColumns(['model','client','action','payment'])
+                    ->rawColumns(['model','action','payment'])
                     ->toJson();
         }
         return view('client.invoice.index');

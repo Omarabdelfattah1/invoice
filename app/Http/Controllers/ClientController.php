@@ -122,11 +122,12 @@ class ClientController extends Controller
         $data = Client::findOrFail($id);
         $data->delete();
     }
+    
     public function soa($id){
-        $invoices=Invoice::where('client_id',$id)->get();
+        $invoices=Invoice::where('client_id',$id)->orderBy('invoice_date','asc')->get();
         $client=Client::find($id);
         $invoice=Invoice::where('client_id',$id)->first();
-        $payments=ReceivedPayment::where('client_id',$id)->get();
+        $payments=ReceivedPayment::where('client_id',$id)->orderBy('payment_date','asc')->get();
         return view('client.soa')
         ->with('invoices',$invoices)
         ->with('client',$client)

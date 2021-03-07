@@ -149,6 +149,16 @@
             }
         );
     });
+    $('#inv_type').on('change', function() {
+      if(this.value=='week'){
+        $('#monthly').hide();
+        $('#weekly').show();
+      }
+      if(this.value=='month'){
+        $('#monthly').show();
+        $('#weekly').hide();
+      }
+    });
 
 </script>
 @endsection

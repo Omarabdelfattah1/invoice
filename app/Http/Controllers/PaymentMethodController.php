@@ -44,7 +44,7 @@ class PaymentMethodController extends Controller
     {
         $paymenttype->update($request->except('_token'));
 
-        return redirect(route('paymenttypes.edit',$paymenttype));
+        return redirect(route('paymenttypes.index'));
 
     }
 
@@ -52,6 +52,8 @@ class PaymentMethodController extends Controller
     {
         $data = PaymentType::findOrFail($id);
         $data->delete();
+        return redirect(route('paymenttypes.index'));
+
     }
 }
 

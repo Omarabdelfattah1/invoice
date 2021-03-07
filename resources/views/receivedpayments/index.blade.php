@@ -70,7 +70,8 @@ $(document).ready(function(){
           { "data": "remains" },
           { "data": "action",
           "orderable":false },
-      ]
+      ],
+      "order":[[3,'desc']]
     });
 } );
 

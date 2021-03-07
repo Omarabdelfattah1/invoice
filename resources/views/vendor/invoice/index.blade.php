@@ -69,7 +69,8 @@ $(document).ready(function(){
           { "data": "amount" },
           { "data": "action",
           "orderable":false },
-      ]
+      ],
+      "order":[[3,'desc']]
     });
 } );
 

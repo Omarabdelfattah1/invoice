@@ -34,8 +34,9 @@
     </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        @include('layouts.inc.navbar')
         @include('layouts.inc.aside')
+        @include('layouts.inc.navbar')
+        
             <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -87,7 +88,7 @@
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
-@yield('scripts')
 </body>
 </html>
+@yield('scripts')
 

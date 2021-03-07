@@ -121,10 +121,10 @@ class VendorController extends Controller
         $data->delete();
     }
     public function soa($id){
-        $invoices=VInvoic::where('vendor_id',$id)->get();
+        $invoices=VInvoic::where('vendor_id',$id)->orderBy('invoice_date','asc')->get();
         $vendor=Vendor::find($id);
         $invs=VInvoic::select('id')->where('vendor_id',$id)->get();
-        $payments=DonePayment::whereIn('v_invoic_id',$invs)->get();
+        $payments=DonePayment::whereIn('v_invoic_id',$invs)->orderBy('payment_date','asc')->get();
         return view('vendor.soa')
         ->with('invoices',$invoices)
         ->with('vendor',$vendor)

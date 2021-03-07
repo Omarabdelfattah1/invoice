@@ -22,13 +22,17 @@ class ReceivedPaymentController extends Controller
             $data = ReceivedPayment::latest()->get();
             return DataTables::of($data)
                     ->addColumn('invoice', function($data){
+                        $i='';
+                        $c='';
                         if($data->invoice_id){
                             $invoice=Invoice::find($data->invoice_id);
-                            return $invoice->client->name.'<br>'.$invoice->inv_number;
-                        }else{
-                            return '';
+                            $i=$invoice->inv_number;
                         }
-                        
+                        if($data->client_id){
+                            $client=Client::find($data->client_id);
+                            $c=$client->name;
+                        }
+                        return $i.'<br>'.$c;
                     })
                     ->addColumn('remains', function($data){
                         if($data->invoice_id){
@@ -73,7 +77,7 @@ class ReceivedPaymentController extends Controller
         
         if($request->invoice_id){
             $invoice=Invoice::find($request->invoice_id);
-            $invoice->received=$request->amount_paid;
+            $invoice->received+=$request->amount_paid;
             $invoice->save();
         }
         if($request->file('rcpnt'))
@@ -122,7 +126,7 @@ class ReceivedPaymentController extends Controller
         if($request->invoice_id){
             $invoice=Invoice::findOrFail($receivedpayment->invoice_id);
             $invoice->received-=$receivedpayment->amount_paid;
-            $invoice->received+=$receivedpayment->amount_paid;
+            $invoice->received+=$request->amount_paid;
             $invoice->save();
         }
         
@@ -140,6 +144,7 @@ class ReceivedPaymentController extends Controller
             $r_p->save();
 
         }
+        
         if($request->file('exchange_rate_file'))
         {
             $name = $request->file('exchange_rate_file')->getClientOriginalName();
