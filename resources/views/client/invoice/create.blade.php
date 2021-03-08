@@ -47,20 +47,20 @@
                 <th align="left">Invoice Type</th>
                 <td>
                   <select name="type" id="inv_type">
-                    <option value="week">Weekly</option>
+                    <option value="week" selected>Weekly</option>
                     <option value="month">Monthly</option>
                   </select>
                 </td>
               </tr>
-              <tr id="weekly" style="display:none;"> 
+              <tr id="weekly" > 
                 <th align="left">From Date :</th>
                 <td>
-                  <input class="form-control datetimepicker" type="text" onchange="getDateData(0)" id="datetime0" name="from_date_w" placeholder="Select From date">
+                  <input class="form-control datetimepicker" type="text" onchange="getDateData(0)" id="datetime0" value="" name="from_date_w" placeholder="Select From date">
                 </td>
               
                 <th align="left">To Date :</th>
                 <td>
-                  <input class="form-control datetimepicker" onchange="getDateData(2)" id="datetime2" type="text" name="to_date_w" placeholder="Select to date">
+                  <input class="form-control datetimepicker" onchange="getDateData(2)" id="datetime2" type="text" value="" name="to_date_w" placeholder="Select to date">
                 </td>
               </tr>
               <tr id="monthly" style="display:none;"> 

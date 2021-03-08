@@ -31,6 +31,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('style')
+    
     </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -68,12 +69,6 @@
             </div>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <!-- Main Footer -->
-        <footer class="main-footer">
-        <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
     </div>
 <!-- ./wrapper -->
 
@@ -88,7 +83,10 @@
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+@yield('scripts')
+<script>
+document.getElementById("ui-datepicker-div").style.top = '304px';
+</script>
 </body>
 </html>
-@yield('scripts')
 

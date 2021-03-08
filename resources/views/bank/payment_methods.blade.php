@@ -16,7 +16,7 @@
             @csrf
             <div class="form-group">
               <label for="curr">Method Name</label>
-              <input type="text" value="{{isset($paymenttype)?$paymenttype->name:''}}" name="name" class="form-control">
+              <input type="text" value="{{isset($paymenttype)?$paymenttype->name:''}}" name="name" class="form-control" required>
             </div>
             <button class="btn btn-primary">Add</button>
           </form>

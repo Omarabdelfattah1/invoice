@@ -124,10 +124,10 @@ class ClientController extends Controller
     }
     
     public function soa($id){
-        $invoices=Invoice::where('client_id',$id)->orderBy('invoice_date','asc')->get();
+        $invoices=Invoice::where('client_id',$id)->orderBy('STR_TO_DATE(invoice_date,"%d-%m-%Y")','asc')->get();
         $client=Client::find($id);
         $invoice=Invoice::where('client_id',$id)->first();
-        $payments=ReceivedPayment::where('client_id',$id)->orderBy('payment_date','asc')->get();
+        $payments=ReceivedPayment::where('client_id',$id)->orderBy('STR_TO_DATE(payment_date,"%d-%m-%Y")','asc')->get();
         return view('client.soa')
         ->with('invoices',$invoices)
         ->with('client',$client)

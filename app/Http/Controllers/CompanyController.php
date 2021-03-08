@@ -122,10 +122,10 @@ class CompanyController extends Controller
         $data->delete();
     }
     public function soa($id){
-        $invoices=Invoice::where('company_id',$id)->orderBy('invoice_date','asc')->get();
+        $invoices=Invoice::where('company_id',$id)->orderBy('STR_TO_DATE(invoice_date)','asc')->get();
         $company=Company::find($id);
         $invs=Invoice::select('id')->where('company_id',$id)->get();
-        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->orderBy('payment_date','asc')->get();
+        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->orderBy('STR_TO_DATE(payment_date)','asc')->get();
         return view('company.soa')
         ->with('invoices',$invoices)
         ->with('company',$company)
