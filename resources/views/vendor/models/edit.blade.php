@@ -429,6 +429,10 @@
               </tr>
               <tr>
                 <th>Spaces</th>
+                <td> Dates / Heading :</td>
+                <td>
+                  <input  type="text" name="sp_date_heading" value="{{$vmodel->sp_date_heading}}" size="2">
+                </td>
                 <td> Grand Total / Notes :</td>
                 <td>
                   <input  type="text" name="sp_gt_note" value="{{$vmodel->sp_gt_note}}" size="2">

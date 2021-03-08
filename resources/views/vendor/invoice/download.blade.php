@@ -89,6 +89,8 @@
 
   </tr>
 </table>
+<?php echo str_repeat("&nbsp;<br />",$model->sp_date_heading)?>
+
 @if($model->from_date_v==1 && $model->to_date_v==1 && $model->text1_v==1)
 <p style="text-align:center;">
 {{$model->text1}} From 
