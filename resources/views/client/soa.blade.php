@@ -61,13 +61,11 @@
             $balance+=$invoice->amount;
           }
           foreach($payments as $payment){
-            $b=0;
             if($payment->exchange_rate){
-              $b=$payment->amount_paid/$payment->exchange_rate;
+              $balance-=$payment->amount_paid/$payment->exchange_rate;
             }else{
-              $b=$payment->amount_paid;
+              $balance-=$payment->amount_paid;
             }
-            $balance-=$b;
           }
           echo round($balance,2) .' USD$';
 
