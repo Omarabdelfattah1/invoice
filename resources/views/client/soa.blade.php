@@ -137,10 +137,11 @@
                      ?></td>
                   </tr>
                   <?php 
-                      $totalp=$payment->amount_paid;
 
                     if($payment->exchange_rate){
-                      $totalp=$payment->amount_paid/$payment->exchange_rate;
+                      $totalp+=$payment->amount_paid/$payment->exchange_rate;
+                    }else{
+                      $totalp+=$payment->amount_paid;
                     }
                   ?>
                   @endforeach
