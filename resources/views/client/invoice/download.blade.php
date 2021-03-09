@@ -127,6 +127,18 @@
     <tr>
       <td colspan="5" style="border-bottom:2px solid {{$model->color_border}};">&nbsp;</td>
     </tr>
+    @if(count($previous))
+      @foreach($previous as $p)
+      <tr>
+        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}"></td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}">{{$p->inv_number}}</td>
+        <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}"></td>
+        <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}"></td>
+        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}">{{$p->amount-$p->received}}</td>
+        <?php $total+=$p->amount-$p->received;?>
+      </tr>
+      @endforeach
+    @endif
     <tr>
       <td colspan="2">&nbsp;</td>
       <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>

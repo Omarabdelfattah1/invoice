@@ -37,7 +37,7 @@ class ReceivedPaymentController extends Controller
                     ->addColumn('remains', function($data){
                         if($data->invoice_id){
                             $invoice=Invoice::find($data->invoice_id);
-                            return $invoice->amount-$data->amount_paid;
+                            return round($invoice->amount-($data->amount_paid/$data->exchange_rate),2);
                         }else{
                             return '';
                         }
@@ -77,7 +77,7 @@ class ReceivedPaymentController extends Controller
         
         if($request->invoice_id){
             $invoice=Invoice::find($request->invoice_id);
-            $invoice->received+=$request->amount_paid;
+            $invoice->received+=($request->amount_paid/$request->exchange_rate);
             $invoice->save();
         }
         if($request->file('rcpnt'))
@@ -125,8 +125,8 @@ class ReceivedPaymentController extends Controller
         $invoice;
         if($request->invoice_id){
             $invoice=Invoice::findOrFail($receivedpayment->invoice_id);
-            $invoice->received-=$receivedpayment->amount_paid;
-            $invoice->received+=$request->amount_paid;
+            $invoice->received-=($request->amount_paid/$request->exchange_rate);
+            $invoice->received+=($request->amount_paid/$request->exchange_rate);
             $invoice->save();
         }
         
