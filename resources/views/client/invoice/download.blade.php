@@ -140,16 +140,19 @@
 <?php echo str_repeat("&nbsp;<br />",$model->sp_gt_note)?>
 
   <p style="text-align:center;border-bottom:2px solid {{$model->color_border}};">
-  {!!$model->wnote!!}</p>
+  {!!$model->wnote!!}
+  <?php echo str_repeat("&nbsp;<br />",$model->sp_note_top)?>
 
-<?php echo str_repeat("&nbsp;<br />",$model->sp_note_top)?>
+</p>
+
 
 <table Style="background-color:#FFFFFF;" border=0>
 
   @if($model->note1_v==1)<tr><td> {!!$model->note1!!} </td></tr>@endif
 </table>
+<?php echo str_repeat("&nbsp;<br />",$model->sp_note_footer);?>
+
 <p style="text-align:{{$model->footer_alignment != null?$model->footer_alignment:'center'}};border-top:2px solid {{$model->color_border}};">
 
-<?php echo str_repeat("&nbsp;<br />",$model->sp_note_footer);?>
 {{$model->footer}}</p>
           
