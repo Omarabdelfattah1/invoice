@@ -26,7 +26,9 @@ class DonePaymentController extends Controller
                     })
                     ->addColumn('remains', function($data){
                         $vinvoic=VInvoic::find($data->invoice_id);
-                        return $vinvoic->amount-$data->amount_paid;
+                        $a=$vinvoic->amount;
+                        $b=($data->amount_paid/$data->exchange_rate);
+                        return $a-$b;
                     })
                     ->addColumn('action', function($data){
                         $button = '<a type="button" name="edit" title="edit" href="'.route('donepayments.edit',$data->id).'" class="edit btn btn-primary btn-xs"><i class="fas fa-edit"></i></a>';
