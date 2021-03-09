@@ -82,13 +82,13 @@ class DonePaymentController extends Controller
         {
             $name = $request->file('exchange_rate_file')->getClientOriginalName();
             $name=str_replace(' ', '-', $name);
-            if($receivedpayment->bank->name.'-'.$invoice->client->name){
-                $name='exrate_'.$receivedpayment->bank->name.'-'.$invoice->client->name;
+            if($donepayment->bank->name.'-'.$invoice->client->name){
+                $name='exrate_'.$donepayment->bank->name.'-'.$invoice->client->name;
             }
             $ext=$request->file('exchange_rate_file')->extension();
             $rcpnt=$request->file('exchange_rate_file')->storeAs('public/exchange_rates',$name);
-            $receivedpayment->exchange_rate_file='exchange_rates/'.$name;
-            $receivedpayment->save();
+            $donepayment->exchange_rate_file='exchange_rates/'.$name;
+            $donepayment->save();
 
         }
         return redirect(route('donepayments.index'));
@@ -107,7 +107,7 @@ class DonePaymentController extends Controller
     {
         if($request->invoice_id){
             $invoice=VInvoic::findOrFail($request->invoice_id);
-            $invoice->received-=($receivedpayment->amount_paid/$receivedpayment->exchange_rate);
+            $invoice->received-=($donepayment->amount_paid/$donepayment->exchange_rate);
             $invoice->received+=($request->amount_paid/$request->exchange_rate);
             $invoice->save();
         }
@@ -130,13 +130,13 @@ class DonePaymentController extends Controller
         {
             $name = $request->file('exchange_rate_file')->getClientOriginalName();
             $name=str_replace(' ', '-', $name);
-            if($receivedpayment->bank->name.'-'.$invoice->client->name){
-                $name='exrate_'.$receivedpayment->bank->name.'-'.$invoice->client->name;
+            if($donepayment->bank->name.'-'.$invoice->client->name){
+                $name='exrate_'.$donepayment->bank->name.'-'.$invoice->client->name;
             }
             $ext=$request->file('exchange_rate_file')->extension();
             $rcpnt=$request->file('exchange_rate_file')->storeAs('public/exchange_rates',$name);
-            $receivedpayment->exchange_rate_file='exchange_rates/'.$name;
-            $receivedpayment->save();
+            $donepayment->exchange_rate_file='exchange_rates/'.$name;
+            $donepayment->save();
 
         }
         return redirect(route('donepayments.edit',$donepayment));
