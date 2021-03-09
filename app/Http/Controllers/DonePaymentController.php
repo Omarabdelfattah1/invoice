@@ -105,11 +105,14 @@ class DonePaymentController extends Controller
 
     public function update(Request $request, DonePayment $donepayment)
     {
-        $vinvoic=VInvoic::findOrFail($request->invoice_id);
-        $vinvoic->received-=$donepayment->amount_paid;
+        if($request->invoice_id){
+            $invoice=VInvoic::findOrFail($request->invoice_id);
+            $invoice->received-=($receivedpayment->amount_paid/$receivedpayment->exchange_rate);
+            $invoice->received+=($request->amount_paid/$request->exchange_rate);
+            $invoice->save();
+        }
+        
         $donepayment->update($request->except('_token','rcpt_name','rcpnt'));
-        $vinvoic->received+=$donepayment->amount_paid;
-        $vinvoic->save();
         if($request->file('rcpnt'))
         {
             $name = $request->file('rcpnt')->getClientOriginalName();

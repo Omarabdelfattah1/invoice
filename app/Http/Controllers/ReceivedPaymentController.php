@@ -79,7 +79,7 @@ class ReceivedPaymentController extends Controller
         
         if($request->invoice_id){
             $invoice=Invoice::find($request->invoice_id);
-            $invoice->received+=($request->amount_paid/$request->exchange_rate);
+            $invoice->received+=$request->amount_paid/$request->exchange_rate;
 
             $invoice->save();
         }
@@ -128,7 +128,7 @@ class ReceivedPaymentController extends Controller
         $invoice;
         if($request->invoice_id){
             $invoice=Invoice::findOrFail($receivedpayment->invoice_id);
-            $invoice->received-=($request->amount_paid/$request->exchange_rate);
+            $invoice->received-=($receivedpayment->amount_paid/$receivedpayment->exchange_rate);
             $invoice->received+=($request->amount_paid/$request->exchange_rate);
             $invoice->save();
         }
