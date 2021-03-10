@@ -120,7 +120,7 @@
         <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}">{{$item->item->description}}</td>
         <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}">{{$item->quantity}}</td>
         <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}">{{$item->item->rate}}</td>
-        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}">@money($item->item->rate*$item->quantity)</td>
+        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}"><?php echo number_format($item->item->rate*$item->quantity,2)?></td>
         <?php $total+=$item->item->rate*$item->quantity;$q+=$item->quantity;?>
       </tr>
     @endforeach
