@@ -127,7 +127,6 @@
     <tr>
       <td colspan="5" style="border-bottom:2px solid {{$model->color_border}};">&nbsp;</td>
     </tr>
-    @if(count($previous))
       @foreach($previous as $p)
       <tr>
         <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}"></td>
@@ -138,7 +137,6 @@
         <?php $total+=$p->amount-$p->received;?>
       </tr>
       @endforeach
-    @endif
     <tr>
       <td colspan="2">&nbsp;</td>
       <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>

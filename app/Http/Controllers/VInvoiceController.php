@@ -122,8 +122,8 @@ class VInvoiceController extends Controller
         if($vinvoic->model_id){
             $model=VModel::findOrFail($vinvoic->model_id);
         }
-        $previous=VInvoic::where('company_id',$invoice->company_id)
-        ->where('received','<','amount')->get();
+        $previous=VInvoic::where('company_id','=',$invoice->company_id)
+        ->whereraw('received < amount')->get();
         $view=View::make('vendor.invoice.download',[
                                             'vinvoic' => $vinvoic,
                                             'previous'=>$previous,
@@ -264,7 +264,11 @@ class VInvoiceController extends Controller
     {
 
         $vinvoic = VInvoic::findOrFail($id);
-        $vinvoic->locked=1;
+        if($vinvoic->locked==1){
+            $vinvoic->locked=0;
+        }else{
+            $vinvoic->locked=1;
+        }
         $vinvoic->save();
     }
     public function destroy($id)

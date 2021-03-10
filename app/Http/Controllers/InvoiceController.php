@@ -148,8 +148,9 @@ class InvoiceController extends Controller
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }
-        $previous=Invoice::where('client_id',$invoice->client_id)
-        ->where('received','<','amount')->get();
+        $previous=Invoice::where('client_id','=',$invoice->client_id)
+        ->whereraw('received < amount')->get();
+        // dd($previous);
         $view=View::make('client.invoice.download',[
                                             'invoice' => $invoice,
                                             'previous'=>$previous,
@@ -276,7 +277,11 @@ class InvoiceController extends Controller
     {
 
         $invoice = Invoice::findOrFail($id);
-        $invoice->locked=1;
+        if($invoice->locked==1){
+            $invoice->locked=0;
+        }else{
+            $invoice->locked=1;
+        }
         $invoice->save();
     }
     public function destroy($id)
