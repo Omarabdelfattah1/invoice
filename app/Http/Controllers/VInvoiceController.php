@@ -123,7 +123,9 @@ class VInvoiceController extends Controller
             $model=VModel::findOrFail($vinvoic->model_id);
         }
         $previous=VInvoic::where('company_id','=',$invoice->company_id)
-        ->whereraw('received < amount')->get();
+        ->whereraw('received < amount')
+        ->whereraw('id !='.$vinvoic->id)
+        ->get();
         $view=View::make('vendor.invoice.download',[
                                             'vinvoic' => $vinvoic,
                                             'previous'=>$previous,

@@ -149,7 +149,9 @@ class InvoiceController extends Controller
             $model=CModel::findOrFail($invoice->model_id);
         }
         $previous=Invoice::where('client_id','=',$invoice->client_id)
-        ->whereraw('received < amount')->get();
+        ->whereraw('received < amount')
+        ->whereraw('id !='.$invoice->id)
+        ->get();
         // dd($previous);
         $view=View::make('client.invoice.download',[
                                             'invoice' => $invoice,
