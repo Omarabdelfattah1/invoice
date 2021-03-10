@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         yajra\DataTables\DataTablesServiceProvider::class,
+        App\Providers\BladeServiceProvider::class,
         /*
          * Package Service Providers...
          */
