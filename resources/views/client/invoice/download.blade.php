@@ -133,7 +133,7 @@
         <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};">{{$p->inv_number}}</td>
         <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}"></td>
         <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};" >Balance</td>
-        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}">@money($p->amount-$p->received)</td>
+        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}"><?php echo number_format($p->amount-$p->received,2)?></td>
         <?php $total+=$p->amount-$p->received;?>
       </tr>
       @endforeach
@@ -141,7 +141,7 @@
       <td colspan="2">&nbsp;</td>
       <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>
       <td style="color:white;background-color:{{$model->color_sheme}};" align="{{$model->wtotal_alignment}}">Total : </td>
-      <td align="{{$model->total_alignment}}">@money($total)</td>
+      <td align="{{$model->total_alignment}}"><?php echo number_format($total,2)?></td>
     </tr>
     
   </tbody>
