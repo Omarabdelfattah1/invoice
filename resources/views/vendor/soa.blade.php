@@ -42,7 +42,20 @@
           </tr>
         </table>
         <br>
-        <p align='center'><b>Balance/Payable : </b></p>
+        <p align='center'><b>Balance/Payable :<?php $balance=0;
+              foreach($invoices as $invoice){
+                $balance+=$invoice->amount;
+              }
+              foreach($payments as $payment){
+                if($payment->exchange_rate){
+                  $balance-=$payment->amount_paid/$payment->exchange_rate;
+                }else{
+                  $balance-=$payment->amount_paid;
+                }
+              }
+              echo number_format(round($balance,2)) .' USD$';
+
+            ?>     </b></p>
         <br>
         <table border="1" width="100%">
           <tr>
@@ -65,10 +78,9 @@
                 <?php $totalv=0;?>
                   @foreach($invoices as $invoice)
                   <tr>
-                    <td align='center'>{{$invoice->from_date}}</td>
-                    <td align='center'>{{$invoice->to_date}}</td>
-                    <td align='center'>{{$invoice->inv_number}}</td>
-                    <td align='center'>{{$invoice->amount}}</td>
+                    <td align='center'>{{$invoice->invoice_date}}</td>
+                    <td align='center'><a href="{{route('invoices.download',$invoice->id)}}">{{$invoice->inv_number}}</a></td>
+                    <td align='center'><?php echo number_format(round($invoice->amount,2));?></td>
                   </tr>
                   <?php $totalv+=$invoice->amount?>
                   @endforeach
@@ -92,22 +104,37 @@
                   </tr>
                 </thead>
                 <?php $totalp=0;?>
-                  @foreach($payments as $payment)
+                @foreach($payments as $payment)
                   <tr>
                     <td align='center'>{{$payment->payment_date}}</td>
-                    <td align='left' >&nbsp;{{$payment->details}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>
-                    <td align='center'>{{$payment->amount}}</td>
+                    <td align='center'><?php echo number_format(round($payment->amount_paid,2));?></td>
                     <td align='center'>{{$payment->exchange_rate}}</td>
+                    <td align='center'><?php
+                    if($payment->exchange_rate){
+                      echo number_format(round($payment->amount_paid/$payment->exchange_rate,2));
+
+                    }else{
+                     echo number_format(round($payment->amount_paid,2));
+
+                    }
+                     ?></td>
                   </tr>
-                  <?php $totalp=$payment->amount?>
+                  <?php 
+
+                    if($payment->exchange_rate){
+                      $totalp+=$payment->amount_paid/$payment->exchange_rate;
+                    }else{
+                      $totalp+=$payment->amount_paid;
+                    }
+                  ?>
                   @endforeach
               </table>
             </td>
           </tr>
           <tr>
-            <td align='center'>Total : {{$totalv}} </td>
-            <td align='center'>Total : {{$totalp}}</td>
+            <td align='center'>Total : <?php echo number_format(round($totalv,2));?> </td>
+            <td align='center'>Total : <?php echo number_format(round($totalp,2));?></td>
           </tr>
         </table>
       </textarea> 

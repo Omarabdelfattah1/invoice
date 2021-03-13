@@ -55,7 +55,7 @@
             }
             $balance-=$b;
           }
-          echo round($balance,2) .' USD$';
+          echo number_format(round($balance,2)) .' USD$';
 
         ?>    
       </b></p>
@@ -82,7 +82,7 @@
                   <tr>
                     <td align='center'>{{$invoice->invoice_date}}</td>
                     <td align='center'>{{$invoice->inv_number}}</td>
-                    <td align='center'><?php echo round($invoice->amount,2);?></td>
+                    <td align='center'><?php echo number_format(round($invoice->amount,2));?></td>
                   </tr>
                   <?php $totalv+=$invoice->amount?>
                   @endforeach
@@ -110,14 +110,14 @@
                   <tr>
                     <td align='center'>{{$payment->payment_date}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>
-                    <td align='center'><?php echo round($payment->amount_paid,2);?></td>
+                    <td align='center'><?php echo number_format(round($payment->amount_paid,2));?></td>
                     <td align='center'>{{$payment->exchange_rate}}</td>
                     <td align='center'><?php
                     if($payment->exchange_rate){
-                      echo round($payment->amount_paid/$payment->exchange_rate,2);
+                      echo number_format(round($payment->amount_paid/$payment->exchange_rate,2));
 
                     }else{
-                     echo round($payment->amount_paid,2);
+                     echo number_format(round($payment->amount_paid,2));
 
                     }
                      ?></td>
@@ -135,8 +135,8 @@
             </td>
           </tr>
           <tr>
-            <td align='center'>Total : <?php echo round($totalv,2);?> </td>
-            <td align='center'>Total : <?php echo round($totalp,2);?></td>
+            <td align='center'>Total : <?php echo number_format(round($totalv,2));?> </td>
+            <td align='center'>Total : <?php echo number_format(round($totalp,2));?></td>
           </tr>
         </table>
       </textarea> 
