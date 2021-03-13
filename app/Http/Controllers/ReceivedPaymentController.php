@@ -37,9 +37,9 @@ class ReceivedPaymentController extends Controller
                     ->addColumn('remains', function($data){
                         if($data->invoice_id){
                             $invoice=Invoice::find($data->invoice_id);
-                            $a=$invoice->amount;
+                            $a=$invoice->amount-$invoice->received;
                             $b=($data->amount_paid/$data->exchange_rate);
-                            return $a-$b;
+                            return number_format($a-$b,2);
                         }else{
                             return '';
                         }

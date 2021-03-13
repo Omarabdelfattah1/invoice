@@ -23,7 +23,7 @@
   <div class="card-body">
     <form action="{{route('clients.download')}}" method="post">
     @csrf
-      <div  id="editor" name=html>
+      <textarea  id="editor" cols=100 rows=40 name=html>
         <table border="0" cellpadding="2" cellspacing="2" width="100%" >
           <tr>
             <td>From <br>
@@ -68,7 +68,7 @@
                   $balance-=$payment->amount_paid;
                 }
               }
-              echo number_format(round($balance,2)) .' USD$';
+              echo number_format($balance,2) .' USD$';
 
             ?>    
           </b>
@@ -96,7 +96,7 @@
                   <tr>
                     <td align='center'>{{$invoice->invoice_date}}</td>
                     <td align='center'><a href="{{route('invoices.download',$invoice->id)}}">{{$invoice->inv_number}}</a></td>
-                    <td align='center'><?php echo number_format(round($invoice->amount,2));?></td>
+                    <td align='center'><?php echo number_format($invoice->amount,2);?></td>
                   </tr>
                   <?php $totalv+=$invoice->amount?>
                   @endforeach
@@ -124,14 +124,14 @@
                   <tr>
                     <td align='center'>{{$payment->payment_date}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>
-                    <td align='center'><?php echo number_format(round($payment->amount_paid,2));?></td>
+                    <td align='center'><?php echo number_format($payment->amount_paid,2);?></td>
                     <td align='center'>{{$payment->exchange_rate}}</td>
                     <td align='center'><?php
                     if($payment->exchange_rate){
-                      echo number_format(round($payment->amount_paid/$payment->exchange_rate,2));
+                      echo number_format($payment->amount_paid/$payment->exchange_rate,2);
 
                     }else{
-                     echo number_format(round($payment->amount_paid,2));
+                     echo number_format($payment->amount_paid,2);
 
                     }
                      ?></td>
@@ -149,11 +149,11 @@
             </td>
           </tr>
           <tr>
-            <td align='center'>Total : <?php echo number_format(round($totalv,2));?> </td>
-            <td align='center'>Total : <?php echo number_format(round($totalp,2));?></td>
+            <td align='center'>Total : <?php echo number_format($totalv,2);?> </td>
+            <td align='center'>Total : <?php echo number_format($totalp,2);?></td>
           </tr>
         </table>
-      </div> 
+      </textarea> 
       <button type="submit">Generate</button>
     </form>
   </div>
