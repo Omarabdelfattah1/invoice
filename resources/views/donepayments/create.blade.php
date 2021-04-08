@@ -35,7 +35,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exchange_rate">Exchange Rate:</label>
-                    <input type="text" name="exchange_rate" class="form-control" id="exchange_rate">
+                    <input type="text" name="exchange_rate" class="form-control" id="exchange_rate" value="1">
                     <label for="exchange_rate_file">Exchange Rate File:</label>
                     <input type="file" name="exchange_rate_file"  id="exchange_rate_file">
                   </div>
