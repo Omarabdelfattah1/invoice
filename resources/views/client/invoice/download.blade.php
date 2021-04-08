@@ -112,12 +112,17 @@
     </tr>
   </thead>
   <tbody>
-    
-    <?php $total=0;$q=0;?>
+    <?php
+      $time = strtotime($invoice->invoice_date);
+
+      $newformat = date('M',$time);
+      $month=$invoice->type=='month'? '_'.$newformat:'';
+      $total=0;$q=0;
+    ?>
     @foreach($invoice->invoice_items as $item)
       <tr>
-        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}">{{$item->item->name}}</td>
-        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}">{{$item->item->description}}</td>
+        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}">{{$item->item->name}}<?= $month ?></td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}">{{$item->item->description}}<?= $month ?></td>
         <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}">{{$item->quantity}}</td>
         <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}">{{$item->item->rate}}</td>
         <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}"><?php echo number_format($item->item->rate*$item->quantity,2)?></td>

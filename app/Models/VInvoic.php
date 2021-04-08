@@ -18,6 +18,8 @@ class VInvoic extends Model
         'vendor_id',
         'company_id',
         'type',
+        'recurring',
+        'howmany',
     ];
     
     public function invoice_items(){

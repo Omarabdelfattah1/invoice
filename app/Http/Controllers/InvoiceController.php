@@ -44,15 +44,23 @@ class InvoiceController extends Controller
                         return $b;
                     })
                     ->addColumn('payment', function($invoice){
-                        $b='';
+                        $b='<a type="button"
+                         title="Enter payment"
+                          href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'"
+                           class="btn btn-danger btn-sm">Draft</a><a type="button"
+                           title="Change as paid"
+                            href="'.route('invoice.paid',['invoice'=>$invoice]).'"
+                             class="btn btn-success btn-sm">Paid?</a>';
                         if($invoice->received==$invoice->amount){
-                            $b= 'Paid';
+                            $b= '<h3 class="text-success">Paid</h3>';
 
-                        }else if($invoice->received>0 && $invoice->received<$invoice->amount){
-                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-default">Partial</a>';
+                        }
+                        if($invoice->received>0 && $invoice->received<$invoice->amount){
+                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-warning">Partial</a><a type="button"
+                            title="Change as paid"
+                             href="'.route('invoice.paid',['invoice'=>$invoice]).'"
+                              class="btn btn-success btn-sm">Paid?</a>';
                             
-                        }else{
-                            $b= '<a type="button" title="Enter payment" href="'.route('receivedpayments.create',['invoice_id'=>$invoice->id]).'" class="btn btn-default">Draft</a>';
                         }
                         return $b;
                     })
@@ -90,6 +98,7 @@ class InvoiceController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $from_date='';
         $to_date='';
         if($request->type=='month'){
@@ -119,6 +128,7 @@ class InvoiceController extends Controller
             'from_date'         =>  $from_date,
             'to_date'         =>  $to_date,
             'type'         =>  $request->type,
+            'recurring'         =>  $request->recurring,
             'model_id'         =>  0,
             'amount'         =>  0,
         );
@@ -129,6 +139,11 @@ class InvoiceController extends Controller
 
     }
 
+    public function paid(Invoice $invoice){
+        $invoice->received=$invoice->amount;
+        $invoice->save();
+        return redirect()->back();
+    }
     public function print(Invoice $invoice){
         $model=CModel::where('default',1)->first();
         if($invoice->model_id){
@@ -181,14 +196,16 @@ class InvoiceController extends Controller
     }
     public function store_item(Invoice $invoice,Request $request)
     {
-        InvoiceItem::create([
-            'invoice_id'=>$invoice->id,
-            'quantity'=>$request->quantity,
-            'item_id'=>$request->item_id
-        ]);
-        $item=Item::findOrFail($request->item_id);
-        $invoice->amount=$invoice->amount+$request->quantity*$item->rate;
-        $invoice->save();
+        if($invoice->amount == 0 || $invoice->received < $invoice->amount){
+            InvoiceItem::create([
+                'invoice_id'=>$invoice->id,
+                'quantity'=>$request->quantity,
+                'item_id'=>$request->item_id
+            ]);
+            $item=Item::findOrFail($request->item_id);
+            $invoice->amount=$invoice->amount+$request->quantity*$item->rate;
+            $invoice->save();
+        }
         return redirect(route('invoices.add_items' ,$invoice));
     }
     
@@ -228,7 +245,7 @@ class InvoiceController extends Controller
 
     public function edit(Invoice $invoice)
     {
-
+        // dd($invoice);
         return view('client.invoice.edit')->with('invoice',$invoice)
         ->with('items',Item::all())
         ->with('companies',Company::all())
@@ -268,6 +285,7 @@ class InvoiceController extends Controller
             'from_date'         =>  $from_date,
             'to_date'         =>  $to_date,
             'type'         =>  $request->type,
+            'recurring'         =>  $request->recurring,
         );
         $invoice->update($form_data);
 

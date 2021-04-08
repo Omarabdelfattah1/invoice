@@ -9,7 +9,7 @@ use App\Models\ReceivedPayment;
 use PDF;
 use DataTables;
 use Validator;
-
+use DB;
 
 class CompanyController extends Controller
 {
@@ -122,10 +122,14 @@ class CompanyController extends Controller
         $data->delete();
     }
     public function soa($id){
-        $invoices=Invoice::where('company_id',$id)->orderBy('STR_TO_DATE(invoice_date)','asc')->get();
+        $invoices=Invoice::where('company_id',$id)->orderBy(DB::raw('STR_TO_DATE(invoice_date,"%d-%m-%Y")'),'asc')->get();
         $company=Company::find($id);
+        $invoice=Invoice::where('company_id',$id)->firstOrfail();
+        // $payments=ReceivedPayment::where('company_id',$id)->orderBy(DB::raw('STR_TO_DATE(payment_date,"%d-%m-%Y")'),'asc')->get();
+        // $invoices=Invoice::where('company_id',$id)->orderBy(DB::raw('STR_TO_DATE(invoice_date)'),'asc')->get();
+        // $company=Company::find($id);
         $invs=Invoice::select('id')->where('company_id',$id)->get();
-        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->orderBy('STR_TO_DATE(payment_date)','asc')->get();
+        $payments=ReceivedPayment::whereIn('invoice_id',$invs)->orderBy(DB::raw('STR_TO_DATE(payment_date,"%d-%m-%Y")'),'asc')->get();
         return view('company.soa')
         ->with('invoices',$invoices)
         ->with('company',$company)

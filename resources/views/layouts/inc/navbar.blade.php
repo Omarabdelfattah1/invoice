@@ -28,6 +28,16 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" href="{{ route('backup') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('backup-form').submit();">
+                        {{ __('Backup') }}
+                    </a>
+
+                    <form id="backup-form" action="{{ route('backup') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">

@@ -75,8 +75,24 @@
                     <th align='center'>Amount</th>
                   </tr>
                 </thead>
-                <?php $totalv=0;?>
+                <?php $totalv=0;$month_flag=array();?>
                   @foreach($invoices as $invoice)
+                  <?php
+                  
+                    $getYear = $getMonth = ''; 
+                    $getMonth=date("m",strtotime($invoice->invoice_date));
+                    $getYear=date("Y",strtotime($invoice->invoice_date));
+  
+                    if(!isset($month_flag[$getYear][$getMonth])) {
+  
+                      $month_flag[$getYear][$getMonth] = true;
+  
+                      echo "<tr>";
+                      echo "<th colspan='5' align='center'>".date("F",strtotime($invoice->invoice_date))."</th>";
+                      echo "</tr>";
+  
+                    }
+                  ?>
                   <tr>
                     <td align='center'>{{$invoice->invoice_date}}</td>
                     <td align='center'><a href="{{route('invoices.download',$invoice->id)}}">{{$invoice->inv_number}}</a></td>
@@ -103,8 +119,24 @@
                     <th align='center' width="12.5%">XCH</th>
                   </tr>
                 </thead>
-                <?php $totalp=0;?>
-                @foreach($payments as $payment)
+                <?php $totalp=0;$month_flag = array();?>
+                  @foreach($payments as $payment)
+                  <?php
+                  
+                    $getYear = $getMonth = ''; 
+                    $getMonth=date("m",strtotime($payment->payment_date));
+                    $getYear=date("Y",strtotime($payment->payment_date));
+  
+                    if(!isset($month_flag[$getYear][$getMonth])) {
+  
+                      $month_flag[$getYear][$getMonth] = true;
+  
+                      echo "<tr>";
+                      echo "<th colspan='5' align='center'>".date("F",strtotime($payment->payment_date))."</th>";
+                      echo "</tr>";
+  
+                    }
+                  ?>
                   <tr>
                     <td align='center'>{{$payment->payment_date}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>

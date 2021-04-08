@@ -38,8 +38,7 @@ class ReceivedPaymentController extends Controller
                         if($data->invoice_id){
                             $invoice=Invoice::find($data->invoice_id);
                             $a=$invoice->amount-$invoice->received;
-                            $b=($data->amount_paid/$data->exchange_rate);
-                            return number_format($a-$b,2);
+                            return number_format($a,2);
                         }else{
                             return '';
                         }

@@ -26,6 +26,7 @@
       <textarea  id="editor" cols=100 rows=40 name=html>
         <table border="0" cellpadding="2" cellspacing="2" width="100%" >
           <tr>
+            <td>
             <table border="0">
               <tr><td>{{$company->name}}</td></tr>
               <tr><td>{{$company->adress}}</td></tr>
@@ -77,8 +78,24 @@
                     <th align='center'>USD$</th>
                   </tr>
                 </thead>
-                <?php $totalv=0;?>
+                <?php $totalv=0;$month_flag=array();?>
                   @foreach($invoices as $invoice)
+                  <?php
+                  
+                    $getYear = $getMonth = ''; 
+                    $getMonth=date("m",strtotime($invoice->invoice_date));
+                    $getYear=date("Y",strtotime($invoice->invoice_date));
+  
+                    if(!isset($month_flag[$getYear][$getMonth])) {
+  
+                      $month_flag[$getYear][$getMonth] = true;
+  
+                      echo "<tr>";
+                      echo "<th colspan='5' align='center'>".date("F",strtotime($invoice->invoice_date))."</th>";
+                      echo "</tr>";
+  
+                    }
+                  ?>
                   <tr>
                     <td align='center'>{{$invoice->invoice_date}}</td>
                     <td align='center'>{{$invoice->inv_number}}</td>
@@ -92,7 +109,7 @@
               <table border="1" width="100%" style="table-layout: auto;" >
                 <thead>
                   <tr>
-                    <th colspan="6" align='center'><b><?php echo $client->name; ?></b></th>
+                    <th colspan="6" align='center'><b><?php echo $company->name; ?></b></th>
                   </tr>
                   <tr>
                     <th colspan="6" align='center'>Invoice/Payments</th>
@@ -105,8 +122,24 @@
                     <th align='center' width="12.5%">USD$</th>
                   </tr>
                 </thead>
-                <?php $totalp=0;?>
+                <?php $totalp=0;$month_flag = array();?>
                   @foreach($payments as $payment)
+                  <?php
+                  
+                    $getYear = $getMonth = ''; 
+                    $getMonth=date("m",strtotime($payment->payment_date));
+                    $getYear=date("Y",strtotime($payment->payment_date));
+  
+                    if(!isset($month_flag[$getYear][$getMonth])) {
+  
+                      $month_flag[$getYear][$getMonth] = true;
+  
+                      echo "<tr>";
+                      echo "<th colspan='5' align='center'>".date("F",strtotime($payment->payment_date))."</th>";
+                      echo "</tr>";
+  
+                    }
+                  ?>
                   <tr>
                     <td align='center'>{{$payment->payment_date}}</td>
                     <td align='left' >&nbsp;{{$payment->notes}}</td>

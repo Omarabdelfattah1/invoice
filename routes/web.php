@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,13 @@ Route::get('/', function () {
 })->name('/');
 
 
-
 Auth::routes();
 Route::middleware(['auth','accepted'])->group(function() {
+  Route::post('backup',function(){
+    Artisan::call('backup:run');
+    session(['message' => 'Backup Completed Successfully!']);
+    return redirect('/home');
+  })->name('backup');
   Route::get('/profile/change_password','ProfileController@change_password')->name('change_password');
   Route::put('/profile/update_password','ProfileController@update_password')->name('update_password');
 
@@ -79,11 +84,12 @@ Route::middleware(['auth','accepted'])->group(function() {
   Route::resource('/companies','CompanyController');
   Route::get('companies/destroy/{id}', 'CompanyController@destroy');
   Route::get('companies/soa/{id}', 'CompanyController@soa')->name('companies.soa');
-  Route::post('companies/download', 'CompanyController@download')->name('companies.download');
+  Route::post('companies/download', 'CompanyController@download')->name('company.download');
  #========================================
 
   Route::resource('/invoices','InvoiceController');
   Route::get('/invoices/{invoice}/print','InvoiceController@print')->name('invoices.print');
+  Route::get('/invoices/{invoice}/paid','InvoiceController@paid')->name('invoice.paid');
   Route::get('/invoices/{invoice}/download','InvoiceController@download')->name('invoices.download');
   Route::put('/invoices/{invoice}/change_model','InvoiceController@change_model')->name('invoices.change_model');
   Route::get('invoices/destroy/{id}', 'InvoiceController@destroy');

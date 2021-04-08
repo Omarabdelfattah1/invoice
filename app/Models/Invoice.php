@@ -18,6 +18,8 @@ class Invoice extends Model
         'client_id',
         'company_id',
         'type',
+        'recurring',
+        'howmany',
     ];
     public function invoice_items(){
         return $this->hasMany(InvoiceItem::class);

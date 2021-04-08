@@ -84,9 +84,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 @yield('scripts')
-<script>
-document.getElementById("ui-datepicker-div").style.top = '304px';
-</script>
+
 </body>
 </html>
 
