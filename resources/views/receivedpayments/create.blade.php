@@ -90,32 +90,32 @@
                   </div>
                 </div>
                 <div class="col">
-                  @if(isset($_GET['invoice_id']))
-                    <?php $invoice=App\Models\Invoice::find($_GET['invoice_id'])?>
+                @if(isset($_GET['invoice_id']))
+                    <?php $invoice=App\Models\VInvoic::find($_GET['invoice_id'])?>
 
-                  <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
-                
-                  <h3>INV #:{{$invoice->inv_number}}</h3>
-                  <p class="lead">Amount Due {{$invoice->amount}}</p>
+                    <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                  
+                    <h3>INV #:{{$invoice->inv_number}}</h3>
+                    <p class="lead">Amount Due <?php echo number_format($invoice->amount,2);?></p>
 
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tbody>
-                      <tr>
-                        <th style="width:50%">Amount: </th>
-                        <td>{{$invoice->amount}}</td>
-                      </tr>
-                      <tr>
-                        <th>Received: </th>
-                        <td>{{$invoice->received}}</td>
-                      </tr>
-                      <tr>
-                        <th>The rest: </th>
-                        <td>{{$invoice->amount-$invoice->received}}</td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                        <tr>
+                          <th style="width:50%">Amount: </th>
+                          <td><?php echo number_format($invoice->amount,2);?></td>
+                        </tr>
+                        <tr>
+                          <th>Received: </th>
+                          <td><?php echo number_format($invoice->received,2);?></td>
+                        </tr>
+                        <tr>
+                          <th>The rest: </th>
+                          <td><?php echo number_format($invoice->amount-$invoice->received,2);?></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   @endif
                 </div>
               </div>

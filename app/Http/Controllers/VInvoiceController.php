@@ -122,9 +122,11 @@ class VInvoiceController extends Controller
         if($vinvoic->model_id){
             $model=VModel::findOrFail($vinvoic->model_id);
         }
+        $inv_date=strtotime($vinvoic->invoice_date);
         $previous=VInvoic::where('company_id','=',$invoice->company_id)
         ->whereraw('received < amount')
         ->whereraw('id !='.$vinvoic->id)
+        ->whereraw('STR_TO_DATE(invoice_date,"%d%m%Y") <' .$inv_date)
         ->get();
         $view=View::make('vendor.invoice.download',[
                                             'vinvoic' => $vinvoic,

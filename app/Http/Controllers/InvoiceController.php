@@ -163,9 +163,11 @@ class InvoiceController extends Controller
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }
+        $inv_date=strtotime($invoice->invoice_date);
         $previous=Invoice::where('client_id','=',$invoice->client_id)
         ->whereraw('received < amount')
         ->whereraw('id !='.$invoice->id)
+        ->whereraw('STR_TO_DATE(invoice_date,"%d%m%Y") <' .$inv_date)
         ->get();
         // dd($previous);
         $view=View::make('client.invoice.download',[

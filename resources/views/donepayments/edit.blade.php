@@ -78,22 +78,22 @@
                     <input type="hidden" name="invoice_id" value="{{$donepayment->invoice->id}}">
                   
                     <h3>INV #:{{$donepayment->invoice->inv_number}}</h3>
-                    <p class="lead">Amount Due {{$donepayment->invoice->amount}}</p>
+                    <p class="lead">Amount Due <?php echo number_format($donepayment->invoice->amount,2);?></p>
 
                     <div class="table-responsive">
                       <table class="table">
                         <tbody>
                         <tr>
                           <th style="width:50%">Amount: </th>
-                          <td>{{$donepayment->invoice->amount}}</td>
+                          <td><?php echo number_format($donepayment->invoice->amount,2);?></td>
                         </tr>
                         <tr>
                           <th>Received: </th>
-                          <td>{{$donepayment->invoice->received}}</td>
+                          <td><?php echo number_format($donepayment->invoice->received,2);?></td>
                         </tr>
                         <tr>
                           <th>The rest: </th>
-                          <td>{{$donepayment->invoice->amount-$donepayment->invoice->received}}</td>
+                          <td><?php echo number_format($donepayment->invoice->amount-$donepayment->invoice->received,2);?></td>
                         </tr>
                         </tbody>
                       </table>
