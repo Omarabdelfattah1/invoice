@@ -146,7 +146,14 @@
       <td colspan="2">&nbsp;</td>
       <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>
       <td style="color:white;background-color:{{$model->color_sheme}};" align="{{$model->wtotal_alignment}}">Total : </td>
-      <td align="{{$model->total_alignment}}"><?php echo number_format($total,2)?></td>
+      <td align="{{$model->total_alignment}}"><?php
+        $inv_date=strtotime($invoice->to_date);
+        if($inv_date < strtotime('now')){
+          echo "0";
+        }else{
+          echo number_format($total - $invoice->received,2);          
+        }
+      ?></td>
     </tr>
     
   </tbody>

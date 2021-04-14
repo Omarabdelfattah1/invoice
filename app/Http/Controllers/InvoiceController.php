@@ -167,7 +167,7 @@ class InvoiceController extends Controller
         $previous=Invoice::where('client_id','=',$invoice->client_id)
         ->whereraw('received < amount')
         ->whereraw('id !='.$invoice->id)
-        ->whereraw('STR_TO_DATE(invoice_date,"%d%m%Y") <' .$inv_date)
+        ->whereraw('STR_TO_DATE(invoice_date,"%Y%m%d") <' .$inv_date)
         ->get();
         // dd($previous);
         $view=View::make('client.invoice.download',[
