@@ -200,7 +200,7 @@ class InvoiceController extends Controller
         }
         $bg=asset('imgs/'.$invoice->background.'.jpg');
 
-        PDF::Image($bg, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
+        PDF::Image($bg, 40, 0, 105, 145, '', '', '', false, 300, '', false, false, 0);
         PDF::setPageMark();
         PDF::writeHTML($html_content,true,false,true,false,'');
         PDF::Output($invoice->client->name.$invoice->inv_number.'.pdf');
