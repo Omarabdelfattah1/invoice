@@ -20,6 +20,7 @@ class Invoice extends Model
         'type',
         'recurring',
         'howmany',
+        'background'
     ];
     public function invoice_items(){
         return $this->hasMany(InvoiceItem::class);

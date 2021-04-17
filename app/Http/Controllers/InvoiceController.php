@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Company;
+use App\Models\ReceivedPayment;
 use App\Models\CModel;
 use App\Models\Client;
 use App\Models\Item;
@@ -155,33 +156,43 @@ class InvoiceController extends Controller
             ->with('model',$model);
     }
     public function download(Invoice $invoice){
+        $inv_date=date('Ymd',strtotime($invoice->invoice_date));
         
         $model=CModel::where('default',1)->first();
+        $time = strtotime($invoice->invoice_date);
+        $to_date = $invoice->type == 'month' ? date('Ymd', strtotime("+1 months", $time)): date('Ymd', strtotime("+1 week", $time));
+        // dd($to_date);
+        $payments = ReceivedPayment::where('client_id',$invoice->client_id)
+        ->where(DB::raw('STR_TO_DATE(payment_date,"%Y%m%d") BETWEEN ' .$inv_date.' AND '. $to_date))->get();
         if($invoice->client->model_id){
             $model=CModel::findOrFail($invoice->client->model_id);
         }
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }
-        $inv_date=strtotime($invoice->invoice_date);
-        $previous=Invoice::where('client_id','=',$invoice->client_id)
-        ->whereraw('received < amount')
-        ->whereraw('id !='.$invoice->id)
-        ->whereraw('STR_TO_DATE(invoice_date,"%Y%m%d") <' .$inv_date)
+        $previous=Invoice::where('client_id',$invoice->client_id)
+        ->whereraw('(invoices.received is NULL AND invoices.amount is NOT NULL) OR invoices.received < invoices.amount')
+        ->whereraw('invoices.id <> '. $invoice->id)
+        ->whereraw('STR_TO_DATE(invoices.invoice_date,"%Y%m%d") < '.$inv_date)
         ->get();
         // dd($previous);
         $view=View::make('client.invoice.download',[
                                             'invoice' => $invoice,
                                             'previous'=>$previous,
+                                            'payments'=>$payments,
                                             'model'=>$model
                                         ]);
         $html_content=$view->render();
+        // dd($html_content);
         PDF::SetTitle('Invoice');
         PDF::AddPage();
         if($model->pdf_ml && $model->pdf_mt && $model->pdf_mr){
             PDF::SetMargins($model->pdf_ml,$model->pdf_mt,$model->pdf_mr);
         }
+        $bg=asset('imgs/'.$invoice->background.'.jpg');
 
+        PDF::Image($bg, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
+        PDF::setPageMark();
         PDF::writeHTML($html_content,true,false,true,false,'');
         PDF::Output($invoice->client->name.$invoice->inv_number.'.pdf');
         // return $html_content;
@@ -288,6 +299,7 @@ class InvoiceController extends Controller
             'to_date'         =>  $to_date,
             'type'         =>  $request->type,
             'recurring'         =>  $request->recurring,
+            'background'         =>  $request->background,
         );
         $invoice->update($form_data);
 

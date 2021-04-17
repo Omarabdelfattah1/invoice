@@ -113,6 +113,7 @@
   </thead>
   <tbody>
     <?php
+      $received = 0;
       $time = strtotime($invoice->invoice_date);
 
       $newformat = date('M',$time);
@@ -147,15 +148,28 @@
       <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>
       <td style="color:white;background-color:{{$model->color_sheme}};" align="{{$model->wtotal_alignment}}">Total : </td>
       <td align="{{$model->total_alignment}}"><?php
-        $inv_date=strtotime($invoice->to_date);
-        if($inv_date < strtotime(date('d-m-Y'))){
-          echo "0";
-        }else{
-          echo number_format($total - $invoice->received,2);          
-        }
+        // $inv_date=strtotime($invoice->to_date);
+        // if($inv_date < strtotime(date('d-m-Y'))){
+        //   echo "0";
+        // }else{
+          echo number_format($total,2);          
+        // }
       ?></td>
     </tr>
-    
+    @foreach($payments as $p)
+      <tr>
+        <td>&nbsp;</td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}" style="color:white;background-color:green;">{{$p->payment_date}}:</td>
+        <td colspan="2"></td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}"><?php echo number_format($p->amount_paid/$p->exchange_rate,2);?></td>
+        <?php $received -= $p->amount_paid/$p->exchange_rate;?>
+      </tr>
+    @endforeach
+    <tr>
+        <td colspan="3">&nbsp;</td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}" style="background-color:yellow;">Balance:</td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}"><?php echo number_format($total - $received,2);?></td>
+      </tr>
   </tbody>
   
 </table>

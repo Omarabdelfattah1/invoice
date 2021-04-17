@@ -91,7 +91,7 @@
                 </div>
                 <div class="col">
                 @if(isset($_GET['invoice_id']))
-                    <?php $invoice=App\Models\VInvoic::find($_GET['invoice_id'])?>
+                    <?php $invoice=App\Models\Invoice::find($_GET['invoice_id'])?>
 
                     <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
                   

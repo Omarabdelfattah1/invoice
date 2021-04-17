@@ -92,24 +92,36 @@
               </table>
             </div>
             <div class="col-4">
-              <div class="form-group">
-                <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitch1" <?php if($invoice->recurring != 'none'){ echo 'checked'; }?>>
-                  <label class="custom-control-label" for="customSwitch1">Recurring</label>
+              <div class="row">
+                <div class="form-group">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" <?php if($invoice->recurring != 'none'){ echo 'checked'; }?>>
+                    <label class="custom-control-label" for="customSwitch1">Recurring</label>
+                  </div>
+                </div>
+                <div id="showRec"  style="display:<?php if($invoice->recurring == 'none'){ echo 'none'; }?>" class="row">
+                  <div class="col form-group">
+                    <label for="how-often"><small class="form-text text-muted">How often?</small></label>
+                    <select id="how-often" class="form-control form-control-sm" name="recurring">
+                      <option value="none" {{$invoice->recurring=='none'?'selected':''}}>No Recurring</option>
+                      <option value="weekly" {{$invoice->recurring=='weekly'?'selected':''}}>Weekly</option>
+                      <option value="monthly" {{$invoice->recurring=='monthly'?'selected':''}}>Monthly</option>
+                    </select>
+                  </div>
+                  <div class="col form-group">
+                    <label for="how-many"><small class="form-text text-muted">How many?</small></label>
+                    <input id="how-many" value="{{$invoice->howmany}}" name="howmany" class="form-control form-control-sm" type="number" min="0">
+                  </div>
                 </div>
               </div>
-              <div id="showRec"  style="display:<?php if($invoice->recurring == 'none'){ echo 'none'; }?>" class="row">
-                <div class="col form-group">
-                  <label for="how-often"><small class="form-text text-muted">How often?</small></label>
-                  <select id="how-often" class="form-control form-control-sm" name="recurring">
-                    <option value="none" {{$invoice->recurring=='none'?'selected':''}}>No Recurring</option>
-                    <option value="weekly" {{$invoice->recurring=='weekly'?'selected':''}}>Weekly</option>
-                    <option value="monthly" {{$invoice->recurring=='monthly'?'selected':''}}>Monthly</option>
+              <div class="row">
+                <div class="form-group">
+                  <label for="background">Choose Watermark</label>
+                  <select name="background" id="background" class="form-control form-control-sm">
+                    <option>__Choose watermark__</option>
+                    <option value="cancelled">Cancelled</option>
+                    <option value="paid">Paid</option>
                   </select>
-                </div>
-                <div class="col form-group">
-                  <label for="how-many"><small class="form-text text-muted">How many?</small></label>
-                  <input id="how-many" value="{{$invoice->howmany}}" name="howmany" class="form-control form-control-sm" type="number" min="0">
                 </div>
               </div>
               

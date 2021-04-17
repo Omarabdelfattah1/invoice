@@ -112,6 +112,7 @@ class VInvoiceController extends Controller
             'type'         =>  $request->type,
             'model_id'         =>  0,
             'amount'         =>  0,
+            'recurring'         =>  $request->recurring,
         );
         $vinvoic=VInvoic::create($form_data);
         return redirect(route('vinvoices.add_items',$vinvoic));
@@ -251,6 +252,8 @@ class VInvoiceController extends Controller
             'from_date'         =>  $from_date,
             'to_date'         =>  $to_date,
             'type'         =>  $request->type,
+            'recurring'         =>  $request->recurring,
+            'background'         =>  $request->background,
         );
         $vinvoic->update($form_data);
 

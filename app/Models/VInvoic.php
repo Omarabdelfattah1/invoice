@@ -20,6 +20,7 @@ class VInvoic extends Model
         'type',
         'recurring',
         'howmany',
+        'background'
     ];
     
     public function invoice_items(){
