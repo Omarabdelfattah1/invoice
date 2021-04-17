@@ -163,7 +163,7 @@ class InvoiceController extends Controller
         $to_date = $invoice->type == 'month' ? date('Ymd', strtotime("+1 months", $time)): date('Ymd', strtotime("+1 week", $time));
         // dd($to_date);
         $payments = ReceivedPayment::where('client_id',$invoice->client_id)
-        ->whereraw('STR_TO_DATE(payment_date,"%Y%m%d") BETWEEN ' .$inv_date.' AND '. $to_date)->get();
+        ->whereBetween(DB::raw('STR_TO_DATE(payment_date,"%Y%m%d")'), [$inv_date, $to_date])->get();
         if($invoice->client->model_id){
             $model=CModel::findOrFail($invoice->client->model_id);
         }
