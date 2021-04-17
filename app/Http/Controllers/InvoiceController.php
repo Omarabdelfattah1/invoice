@@ -182,9 +182,9 @@ class InvoiceController extends Controller
         $previous=Invoice::where('client_id',$invoice->client_id)
         ->whereraw('(invoices.received is NULL AND invoices.amount is NOT NULL) OR invoices.received < invoices.amount')
         ->whereraw('invoices.id <> '. $invoice->id)
-        ->whereraw('STR_TO_DATE(invoices.invoice_date,"%d-%m-%Y") < '.$inv_date)
+        ->whereraw('STR_TO_DATE(invoice_date,"%d-%m-%Y") < '.$inv_date)
         ->get();
-        // dd($payments);
+        // dd($previous);
         $view=View::make('client.invoice.download',[
                                             'invoice' => $invoice,
                                             'previous'=>$previous,

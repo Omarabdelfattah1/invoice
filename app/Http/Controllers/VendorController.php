@@ -87,7 +87,7 @@ class VendorController extends Controller
     public function edit(Vendor $vendor)
     {
 
-        return view('vendor.edit')->with('Vendor',$vendor)->with('models',VModel::all());
+        return view('vendor.edit')->with('vendor',$vendor)->with('models',VModel::all());
     }
 
     /**

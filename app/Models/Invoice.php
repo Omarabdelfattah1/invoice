@@ -22,6 +22,9 @@ class Invoice extends Model
         'howmany',
         'background'
     ];
+    protected $attributes = array(
+        'background' => ''
+      );
     public function invoice_items(){
         return $this->hasMany(InvoiceItem::class);
     }
