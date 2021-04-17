@@ -162,7 +162,7 @@
         <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}" style="color:white;background-color:green;">{{$p->payment_date}}:</td>
         <td colspan="2"></td>
         <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}"><?php echo number_format($p->amount_paid/$p->exchange_rate,2);?></td>
-        <?php $received -= $p->amount_paid/$p->exchange_rate;?>
+        <?php $received += $p->amount_paid/$p->exchange_rate;?>
       </tr>
     @endforeach
     <tr>
