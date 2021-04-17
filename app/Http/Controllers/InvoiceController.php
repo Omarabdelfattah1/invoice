@@ -156,14 +156,23 @@ class InvoiceController extends Controller
             ->with('model',$model);
     }
     public function download(Invoice $invoice){
-        $inv_date=date('Ymd',strtotime($invoice->invoice_date));
+        $paydate_raw = DB::raw("STR_TO_DATE(`payment_date`, '%d-%m-%Y')");
+
+        $start_raw = DB::raw("STR_TO_DATE(?, '%d-%m-%Y')");
+        $end_raw = DB::raw("STR_TO_DATE(?, '%d-%m-%Y')");
+        
+        $inv_date=date('d-m-Y',strtotime($invoice->invoice_date));
+        $time = strtotime($invoice->invoice_date);
+        $to_date = $invoice->type == 'month' ? date('d-m-Y', strtotime("+1 months", $time)): date('d-m-Y', strtotime("+1 week", $time));
         
         $model=CModel::where('default',1)->first();
-        $time = strtotime($invoice->invoice_date);
-        $to_date = $invoice->type == 'month' ? date('Ymd', strtotime("+1 months", $time)): date('Ymd', strtotime("+1 week", $time));
         // dd($to_date);
         $payments = ReceivedPayment::where('client_id',$invoice->client_id)
-        ->whereBetween(DB::raw('STR_TO_DATE(payment_date,"%Y%m%d")'), [$inv_date, $to_date])->get();
+                    ->where($paydate_raw, '>', $start_raw)
+                    ->where($paydate_raw, "<", $end_raw)
+                    ->setBindings([$invoice->client_id,$inv_date, $to_date])
+                    ->get();
+
         if($invoice->client->model_id){
             $model=CModel::findOrFail($invoice->client->model_id);
         }
@@ -173,9 +182,9 @@ class InvoiceController extends Controller
         $previous=Invoice::where('client_id',$invoice->client_id)
         ->whereraw('(invoices.received is NULL AND invoices.amount is NOT NULL) OR invoices.received < invoices.amount')
         ->whereraw('invoices.id <> '. $invoice->id)
-        ->whereraw('STR_TO_DATE(invoices.invoice_date,"%Y%m%d") < '.$inv_date)
+        ->whereraw('STR_TO_DATE(invoices.invoice_date,"%d-%m-%Y") < '.$inv_date)
         ->get();
-        // dd($previous);
+        // dd($payments);
         $view=View::make('client.invoice.download',[
                                             'invoice' => $invoice,
                                             'previous'=>$previous,
