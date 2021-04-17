@@ -20,7 +20,8 @@ class Invoice extends Model
         'type',
         'recurring',
         'howmany',
-        'background'
+        'background',
+        'received'
     ];
     protected $attributes = array(
         'background' => ''

@@ -309,6 +309,7 @@ class InvoiceController extends Controller
             'type'         =>  $request->type,
             'recurring'         =>  $request->recurring,
             'background'         =>  $request->background,
+            'received'         =>  $request->received,
         );
         $invoice->update($form_data);
 
