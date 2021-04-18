@@ -170,7 +170,6 @@ class InvoiceController extends Controller
         $payments = ReceivedPayment::where('client_id',$invoice->client_id)
                     ->where($paydate_raw, '>', $start_raw)
                     ->where($paydate_raw, '>', $start_raw)
-                    ->where('background', "<>", 'cancelled')
                     ->setBindings([$invoice->client_id,$inv_date, $to_date,'cancelled'])
                     ->get();
 
@@ -181,6 +180,7 @@ class InvoiceController extends Controller
             $model=CModel::findOrFail($invoice->model_id);
         }
         $previous=Invoice::where('client_id',$invoice->client_id)
+        ->where('background', "<>", 'cancelled')
         ->whereraw('(invoices.received is NULL AND invoices.amount is NOT NULL) OR invoices.received < invoices.amount')
         ->whereraw('invoices.id <> '. $invoice->id)
         ->whereraw('STR_TO_DATE(invoice_date,"%d-%m-%Y") < '.$inv_date)
