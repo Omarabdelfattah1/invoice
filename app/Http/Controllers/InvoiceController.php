@@ -169,7 +169,7 @@ class InvoiceController extends Controller
         // dd($to_date);
         $payments = ReceivedPayment::where('client_id',$invoice->client_id)
                     ->where($paydate_raw, '>', $start_raw)
-                    ->where($paydate_raw, '>', $start_raw)
+                    ->where($paydate_raw, '<=', $end_raw)
                     ->setBindings([$invoice->client_id,$inv_date, $to_date])
                     ->get();
 
