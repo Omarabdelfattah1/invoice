@@ -179,13 +179,16 @@ class InvoiceController extends Controller
         if($invoice->model_id){
             $model=CModel::findOrFail($invoice->model_id);
         }
+        $invoice_date=DB::raw('STR_TO_DATE(`invoice_date`,"%d-%m-%Y")');
+
         $previous=Invoice::where('client_id',$invoice->client_id)
         ->where('background', '<>', 'cancelled')
         ->where('id', '<>',$invoice->id)
-        ->whereraw('invoices.received < invoices.amount')
-        ->where(DB::raw('STR_TO_DATE(`invoice_date`,"%d-%m-%Y")'),'<', DB::raw('STR_TO_DATE('.$inv_date.',"%d-%m-%Y")'))
+        ->where(DB::raw('invoices.received'), '<', DB::raw('invoices.amount'))
+        ->where($invoice_date,'<', $start_raw)
+        ->setBindings([$invoice->client_id,'cancelled',$invoice->id,$inv_date])
         ->get();
-        // dd(DB::raw('STR_TO_DATE('.$inv_date.',"%d-%m-%Y")'));
+        // dd($previous);
         $view=View::make('client.invoice.download',[
                                             'invoice' => $invoice,
                                             'previous'=>$previous,
