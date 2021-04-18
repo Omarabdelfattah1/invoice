@@ -127,7 +127,7 @@
               <div class="row">
                 <div class="form-group">
                   <label for="received">Received</label>
-                  <input type="number" name="received" value="{{$invoice->received}}"  class="form-control form-control-sm">
+                  <input type="number" name="received" value="{{$invoice->received}}"  class="form-control form-control-sm" step="any" >
                 </div>
               </div>
               
