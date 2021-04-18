@@ -170,7 +170,7 @@ class InvoiceController extends Controller
         $payments = ReceivedPayment::where('client_id',$invoice->client_id)
                     ->where($paydate_raw, '>', $start_raw)
                     ->where($paydate_raw, '>', $start_raw)
-                    ->where('backgrounf', "<>", 'cancelled')
+                    ->where('background', "<>", 'cancelled')
                     ->setBindings([$invoice->client_id,$inv_date, $to_date,'cancelled'])
                     ->get();
 
