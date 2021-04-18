@@ -153,7 +153,7 @@
         <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}"></td>
         <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};" >Balance</td>
         <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}"><?php echo number_format($p->amount-$p->received,2)?></td>
-        <?php $p_total+=$p->amount-$p->received;?>
+        <?php $p_total+=$p->amount-$p->received;$total+=$p_total?>
       </tr>
       @endforeach
     @if($p_total)
