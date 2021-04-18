@@ -115,7 +115,7 @@
     <?php
       $received = 0;
       $time = strtotime($invoice->invoice_date);
-
+      $p_total=0;
       $newformat = date('M',$time);
       $month=$invoice->type=='month'? '_'.$newformat:'';
       $total=0;$q=0;
@@ -133,16 +133,6 @@
     <tr>
       <td colspan="5" style="border-bottom:2px solid {{$model->color_border}};">&nbsp;</td>
     </tr>
-      @foreach($previous as $p)
-      <tr>
-        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}"></td>
-        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};">{{$p->inv_number}}</td>
-        <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}"></td>
-        <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};" >Balance</td>
-        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}"><?php echo number_format($p->amount-$p->received,2)?></td>
-        <?php $total+=$p->amount-$p->received;?>
-      </tr>
-      @endforeach
     <tr>
       <td colspan="2">&nbsp;</td>
       <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>
@@ -156,6 +146,31 @@
         // }
       ?></td>
     </tr>
+      @foreach($previous as $p)
+      <tr>
+        <td align="{{$model->item_code_alignment_d != null?$model->item_code_alignment_d:'center'}}"></td>
+        <td align="{{$model->description_alignment_d != null?$model->description_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};">{{$p->inv_number}}</td>
+        <td align="{{$model->quantity_alignment_d != null?$model->quantity_alignment_d:'center'}}"></td>
+        <td align="{{$model->price_alignment_d != null?$model->price_alignment_d:'center'}}" style="color:white;background-color:{{$model->color_sheme}};" >Balance</td>
+        <td align="{{$model->amount_alignment_d != null?$model->amount_alignment_d:'center'}}"><?php echo number_format($p->amount-$p->received,2)?></td>
+        <?php $p_total+=$p->amount-$p->received;?>
+      </tr>
+      @endforeach
+    @if($p_total)
+    <tr>
+      <td colspan="2">&nbsp;</td>
+      <td style="text-align:'center'">{{$model->wtotal_quantity}}</td>
+      <td style="color:white;background-color:{{$model->color_sheme}};" align="{{$model->wtotal_alignment}}">Grand Total : </td>
+      <td align="{{$model->total_alignment}}"><?php
+        // $inv_date=strtotime($invoice->to_date);
+        // if($inv_date < strtotime(date('d-m-Y'))){
+        //   echo "0";
+        // }else{
+          echo number_format($total+$p_total,2);          
+        // }
+      ?></td>
+    </tr>
+    @endif
     @foreach($payments as $p)
       <tr>
         <td>&nbsp;</td>
